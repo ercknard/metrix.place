@@ -1,0 +1,53 @@
+html,
+body {
+  max-width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'VT323', sans-serif !important;
+  font-weight: normal !important;
+}
+
+.footer-bar {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding-top: 1px !important;
+  backdrop-filter: blur(11px);
+  
+}
+
+.footerNavBar {
+  bottom: 0 !important;
+  text-align: center;
+  font-size: 14px !important;
+  padding: 2px 0px !important;
+}
+
+
+.footer-nav-col {
+  vertical-align: bottom !important;
+  bottom: 0 !important;
+  position: fixed !important;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nav-footer {
+  vertical-align: bottom !important;
+  bottom: 0 !important;
+  position: fixed !important;
+  width: 100%;
+  overflow: hidden;
+  z-index: 11 !important;
+}
+
+.nav-footer .center.aligned.row {
+  padding: 0px;
+}
+
+.footer {
+  bottom: 0;
+}
+

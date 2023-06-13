@@ -1,0 +1,8 @@
+dist
+build
+cache
+artifacts
+node_modules
+.vscode
+.next
+.env

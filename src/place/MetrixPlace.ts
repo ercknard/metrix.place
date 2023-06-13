@@ -49,17 +49,19 @@ export default class MetrixPlace extends MetrixContract {
       `0x${startX.toString(16)}`,
       `0x${startY.toString(16)}`,
     ]);
-    return pixels
-      ? pixels.map((pxls) => {
-          const arr = [];
-          for (const pixel of pxls) {
-            let hex = BigInt(pixel ? pixel.toString() : 0).toString(16);
-            hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
-            arr.push(`#${hex}`);
-          }
-          return arr;
-        })
-      : [];
+    const colors: string[][] = [];
+    if (pixels && pixels.toArray().length > 0) {
+      for (const pixls of pixels[0]) {
+        const arr: string[] = [];
+        for (const pix of pixls) {
+          let hex = BigInt(pix ? pix.toString() : 0).toString(16);
+          hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
+          arr.push(`#${hex}`);
+        }
+        colors.push(arr);
+      }
+    }
+    return colors;
   }
   /**
    * Get the color of a specific pixel

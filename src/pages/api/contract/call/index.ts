@@ -1,7 +1,8 @@
 import {RPCProvider, MetrixRPC, NetworkType} from '@metrixcoin/metrilib';
-import {RpcCredentials} from '../config/RpcCredentials';
-import {bnToHex} from '../utils/Parsers';
+
 import {NextApiRequest, NextApiResponse} from 'next';
+import {bnToHex} from '../../../../utils/Parsers';
+import {RpcCredentials} from '../../../../config/RpcCredentials';
 
 const getValues = (obj: any /* eslint-disable-line */) => {
   let values: any;

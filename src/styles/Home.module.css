@@ -1,3 +1,178 @@
+.html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1em;
+  --primary: rgb(204, 0, 204);
+}
+
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
   min-height: 100vh;
+  background: url("/images/metrix-bg-black.png"), url("/images/metrix-bg.png"),
+    linear-gradient(to bottom, rgb(28, 5, 41), rgb(48, 48, 48));
+  background-position: center center;
+  background-size: cover;
+}
+
+.h1 {
+  color: rgb(147, 50, 158);
+  font-size: 5em;
+  text-transform: lowercase;
+  text-shadow: 5px 5px 5px rgb(0, 0, 0);
+  font-family: "VT323";
+}
+
+.main_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 3rem;
+  row-gap: 3rem;
+}
+
+.sample_box {
+  min-width: 50vh;
+  min-height: 50vh;
+  background-color: black;
+  border: 2.5px solid;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.secondary_box {
+  min-width: 25vh;
+  min-height: 25vh;
+  background-color: black;
+  border: 2.5px solid;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.to_flex {
+  display: flex;
+  flex-direction: column;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+}
+
+.eye_box {
+  width: 100%;
+  float: right;
+  background-color: rgb(76, 69, 92);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.eye_icon {
+  display: flex;
+  /* width: 3vh;
+  height: 3vh; */
+  float: right;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.color_pallete {
+  min-width: 25vh;
+  min-height: 5vh;
+  background-color: rgb(76, 69, 92);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.color_list {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+  gap: 1rem;
+}
+
+.color_preset {
+  list-style: none;
+  justify-content: space-between;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.5px solid white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.color_preset:nth-child(1) {
+  background-color: violet;
+}
+
+.color_preset:nth-child(2) {
+  background-color: indigo;
+}
+
+.color_preset:nth-child(3) {
+  background-color: blue;
+}
+
+.color_preset:nth-child(4) {
+  background-color: green;
+}
+
+.color_preset:nth-child(5) {
+  background-color: yellow;
+}
+
+.color_preset:nth-child(6) {
+  background-color: orange;
+}
+
+.gear_box {
+  list-style: none;
+}
+
+.gear_icon {
+  /* width: 2.5vh;
+  height: 2.5vh; */
+  cursor: pointer;
+}
+
+.color_input {
+  width: 42.5%;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.5em;
+  float: left;
+  color: rgb(32, 13, 42);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  cursor: text;
+}
+
+.color_submit {
+  width: 42.5%;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.5em;
+  float: right;
+  color: rgb(255, 255, 255);
+  background-color: rgb(32, 13, 42);
+  border: 1px solid;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.lavanderLink {
+  font-size: 1.5em;
 }

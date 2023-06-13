@@ -12,9 +12,10 @@ export default function Footer(): JSX.Element {
             target='_blank'
             className='lavenderLink'
             style={{
+              color: 'rgb(147, 50, 158)',
               wordSpacing: '-4px',
               fontWeight: 'normal !important',
-              fontSize: '1.1em !important',
+              fontSize: '1.5em !important',
             }}
           >
             <Icon name='bolt' />
@@ -26,9 +27,10 @@ export default function Footer(): JSX.Element {
           <a
             className='lavenderLink'
             style={{
+              color: 'rgb(147, 50, 158)',
               wordSpacing: '-4px',
               fontWeight: 'normal !important',
-              fontSize: '1.1em !important',
+              fontSize: '1.5em !important',
             }}
           >
             ©{`2023`}

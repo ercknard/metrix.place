@@ -22,7 +22,7 @@
   "devDependencies": {
     "@metrixcoin/metrilib": "^1.5.17-beta",
     "@types/mocha": "^10.0.1",
-    "@types/node": "18.14.2",
+    "@types/node": "20.3.1",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",

@@ -1,6 +1,6 @@
-import { APIProvider, NetworkType } from '@metrixcoin/metrilib';
-import { callContractRPC } from '@/utils/ContractUtils';
-import { Result } from 'ethers';
+import {APIProvider, NetworkType} from '@metrixcoin/metrilib';
+import {callContractRPC} from '../utils/ContractUtils';
+import {Result} from 'ethers';
 
 export default class LocalProvider extends APIProvider {
   constructor(network: NetworkType) {

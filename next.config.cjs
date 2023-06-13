@@ -14,6 +14,7 @@ const nextConfig = {
 
     return config;
   },
+  experimental: {esmExternals: true},
 };
 
 module.exports = nextConfig;

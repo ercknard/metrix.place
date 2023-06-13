@@ -1,5 +1,6 @@
 {
   "name": "metrix.place",
+  "type": "module",
   "version": "1.0.0",
   "description": "A communal graffiti board which any address can set a single pixel per MetrixCoin block by paying the gas fee for the transaction.",
   "scripts": {
@@ -7,7 +8,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "mocha --config mocharc.json",
+    "format": "prettier --write \"**/*.+(js|ts|json)\""
   },
   "author": "Cryptech Services",
   "license": "MIT",
@@ -18,18 +21,22 @@
   },
   "devDependencies": {
     "@metrixcoin/metrilib": "^1.5.17-beta",
-    "@types/node": "18.14.2",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.3.1",
     "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
+    "@types/react-dom": "18.2.5",
+    "eslint": "8.42.0",
+    "eslint-config-next": "13.4.5",
     "ethers": "^6.4.1",
     "hardhat": "^2.14.0",
+    "mocha": "^10.2.0",
     "next": "13.2.3",
+    "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
+    "ts-node": "^10.9.1",
     "typescript": "4.9.5"
   }
 }

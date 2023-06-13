@@ -1,4 +1,4 @@
-import { bnToHex } from '@/utils/Parsers';
+import {bnToHex} from '../utils/Parsers';
 
 /**
  * @deprecated Use axiosWrapper instead.
@@ -7,12 +7,12 @@ export const fetchWrapper = {
   get,
   post,
   put,
-  delete: _delete
+  delete: _delete,
 };
 
 async function get(url: RequestInfo) {
   const requestOptions = {
-    method: 'GET'
+    method: 'GET',
   };
   const response = await fetch(url, requestOptions);
   if (process.env.NODE_ENV != 'production')
@@ -23,8 +23,8 @@ async function get(url: RequestInfo) {
 async function post(url: RequestInfo, body: any) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
   };
   const response = await fetch(url, requestOptions);
   if (process.env.NODE_ENV != 'production')
@@ -35,8 +35,8 @@ async function post(url: RequestInfo, body: any) {
 async function put(url: RequestInfo, body: any) {
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
   };
   const response = await fetch(url, requestOptions);
   if (process.env.NODE_ENV != 'production')
@@ -47,7 +47,7 @@ async function put(url: RequestInfo, body: any) {
 // prefixed with underscored because delete is a reserved word in javascript
 async function _delete(url: RequestInfo) {
   const requestOptions = {
-    method: 'DELETE'
+    method: 'DELETE',
   };
   const response = await fetch(url, requestOptions);
   return handleResponse(response);

@@ -1,7 +1,7 @@
-import { RPCProvider, MetrixRPC, NetworkType } from '@metrixcoin/metrilib';
-import { RpcCredentials } from '@/config/RpcCredentials';
-import { bnToHex } from '@/utils/Parsers';
-import { NextApiRequest, NextApiResponse } from 'next';
+import {RPCProvider, MetrixRPC, NetworkType} from '@metrixcoin/metrilib';
+import {RpcCredentials} from '../config/RpcCredentials';
+import {bnToHex} from '../utils/Parsers';
+import {NextApiRequest, NextApiResponse} from 'next';
 
 const getValues = (obj: any /* eslint-disable-line */) => {
   let values: any;
@@ -49,11 +49,7 @@ export default async function handler(
           RpcCredentials.username,
           RpcCredentials.password
         );
-        const provider = new RPCProvider(
-          network,
-          mrpc,
-          RpcCredentials.sender
-        );
+        const provider = new RPCProvider(network, mrpc, RpcCredentials.sender);
 
         try {
           const response = await provider.callContract(

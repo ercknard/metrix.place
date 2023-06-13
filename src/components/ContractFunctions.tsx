@@ -3,9 +3,9 @@ import {ethers} from 'ethers';
 import React from 'react';
 import {Grid, Header, Segment} from 'semantic-ui-react';
 
-import {contracts as MainNet} from '@/network/MainNet/1.0.0';
-import {contracts as TestNet} from '@/network/TestNet/1.0.0';
-import Deployment from '@/interfaces/Deployment';
+import {contracts as MainNet} from '../network/MainNet/1.0.0';
+import {contracts as TestNet} from '../network/TestNet/1.0.0';
+import Deployment from '../interfaces/Deployment';
 
 interface ContractProps {
   network: NetworkType;

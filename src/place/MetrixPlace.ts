@@ -1,5 +1,5 @@
 import {MetrixContract, Provider, Transaction} from '@metrixcoin/metrilib';
-import ABI from '@/abi';
+import ABI from '../abi';
 
 export default class MetrixPlace extends MetrixContract {
   constructor(address: string, provider: Provider) {

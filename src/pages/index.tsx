@@ -10,17 +10,17 @@ import {
   Segment,
 } from 'semantic-ui-react';
 import React from 'react';
-import styles from '@/styles/Home.module.css';
-import Footer from '@/components/Footer';
+import styles from '../styles/Home.module.css';
+import Footer from '../components/Footer';
 import {NetworkType, Web3Provider} from '@metrixcoin/metrilib';
-import DebugContracts from '@/components/DebugContracts';
-import {getMetrixPlace, getMetrixPlaceAddress} from '@/place';
-import Web3TransactionModal from '@/modals/Web3TransactionModal';
+import DebugContracts from '../components/DebugContracts';
+import {getMetrixPlace, getMetrixPlaceAddress} from '../place';
+import Web3TransactionModal from '../modals/Web3TransactionModal';
 import {ZeroHash} from 'ethers';
-import HandleProviderType from '@/helpers/HandleProviderType';
-import ContractFunctions from '@/components/ContractFunctions';
+import HandleProviderType from '../helpers/HandleProviderType';
+import ContractFunctions from '../components/ContractFunctions';
 import {toHexAddress} from '@metrixcoin/metrilib/lib/utils/AddressUtils';
-import ABI from '@/abi';
+import ABI from '../abi';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);

@@ -1,4 +1,4 @@
-import RpcCredentialProvider from '@/interfaces/RpcCredentialProvider';
+import RpcCredentialProvider from '../interfaces/RpcCredentialProvider';
 
 export const RpcCredentials: RpcCredentialProvider = {
   username: process.env.RPC_USER as string,
@@ -7,6 +7,8 @@ export const RpcCredentials: RpcCredentialProvider = {
   port: process.env.RPC_PORT as string,
   sender: process.env.RPC_SENDER as string,
   uri: () => {
-    return `${process.env.RPC_HOST as string}:${process.env.RPC_PORT as string}`;
-  }
+    return `${process.env.RPC_HOST as string}:${
+      process.env.RPC_PORT as string
+    }`;
+  },
 };

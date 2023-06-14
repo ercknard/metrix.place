@@ -1,9 +1,9 @@
-html,
+/* html,
 body {
   max-width: 100vw;
   height: 100vh;
   overflow-x: hidden;
-}
+} */
 
 body {
   font-family: 'VT323', sans-serif !important;
@@ -15,7 +15,6 @@ body {
   padding: 0px !important;
   padding-top: 1px !important;
   backdrop-filter: blur(11px);
-  
 }
 
 .footerNavBar {
@@ -24,7 +23,6 @@ body {
   font-size: 14px !important;
   padding: 2px 0px !important;
 }
-
 
 .footer-nav-col {
   vertical-align: bottom !important;
@@ -50,4 +48,3 @@ body {
 .footer {
   bottom: 0;
 }
-

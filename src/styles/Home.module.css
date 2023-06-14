@@ -13,10 +13,18 @@
   align-items: center;
   min-width: 100vw;
   min-height: 100vh;
-  background: url("/images/metrix-bg.png"), url("/images/metrix-bg-black.png"),
+  background: url('/images/metrix-bg-pixelated.png'),
+    url('/images/metrix-bg-black-pixelated.png'),
+    url('/images/metrix-stars.png'),
     linear-gradient(to bottom, rgb(28, 5, 41), rgb(48, 48, 48));
   background-position: center center;
   background-size: cover;
+}
+
+@media (max-width: 1920px) {
+  .main {
+    font-size: 0.8em;
+  }
 }
 
 .h1 {
@@ -24,21 +32,27 @@
   font-size: 5em;
   text-transform: lowercase;
   text-shadow: 5px 5px 5px rgb(0, 0, 0);
-  font-family: "VT323";
+  font-family: 'VT323';
 }
 
 .main_box {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   column-gap: 3rem;
   row-gap: 3rem;
 }
 
+@media (max-width: 768px) {
+  .main_box {
+    flex-direction: column;
+  }
+}
+
 .sample_box {
-  min-width: 50vh;
-  min-height: 50vh;
+  min-width: 64rem;
+  min-height: 64rem;
+  justify-content: center;
   background-color: black;
   border: 2.5px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
@@ -176,10 +190,9 @@
   cursor: pointer;
 }
 
-
 .grid {
-  width: 100%;
-  height: 100%;
+  margin-top: -0.7rem;
+  margin-left: -0.7rem;
 }
 
 .pixel {

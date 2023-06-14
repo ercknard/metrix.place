@@ -11,14 +11,14 @@ export default function MapGrid(props: MapGridProps): JSX.Element {
     const grid: typeof sectors = [];
 
     for (let x = 1; x <= 16; x++) {
-      console.log(x);
-
       for (let y = 1; y <= 16; y++) {
-        console.log(y);
-        grid.push(<MapSector x={x} y={y} color="#fff" />);
+        let color = '#000000';
+        // TODO: get the chunk of the sector from the db cache and fit it into the sector
+        grid.push(
+          <MapSector x={x} y={y} color={color} key={`${x}sector${y}`} />
+        );
       }
     }
-    console.log(grid.length);
     // set the grid
     setSectors(grid);
   }, []);

@@ -35,8 +35,6 @@ export default function Home() {
   const [message, setMessage] = React.useState('' as string | JSX.Element);
   const [debug, setDebug] = React.useState([] as JSX.Element[]);
 
-  const [hodler, setHodler] = React.useState(false);
-
   const [modalMessage, setModalMessage] = React.useState(
     undefined as string | JSX.Element | undefined
   );
@@ -154,7 +152,7 @@ export default function Home() {
         <h1 className={styles.h1}> metrix.place </h1>
         <div className={styles.main_box}>
           <div className={styles.sample_box}>
-            <EditGrid />
+            <EditGrid x={0} y={0} />
           </div>
           <div className={styles.to_flex}>
             <div className={styles.eye_box}>

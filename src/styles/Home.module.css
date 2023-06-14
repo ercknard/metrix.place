@@ -50,8 +50,8 @@
 }
 
 .sample_box {
-  min-width: 64rem;
-  min-height: 64rem;
+  min-width: 65rem;
+  min-height: 65rem;
   justify-content: center;
   background-color: black;
   border: 2.5px solid;
@@ -61,8 +61,9 @@
 }
 
 .secondary_box {
-  width: 30vh;
-  height: 30vh;
+  width: 17rem;
+  height: 17rem;
+  margin-left: auto;
   background-color: black;
   border: 2.5px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
@@ -190,12 +191,12 @@
   cursor: pointer;
 }
 
-
-
 .pixel {
   position: absolute;
   width: 1rem;
   height: 1rem;
+  margin-left: -0.7rem;
+  margin-top: -0.7rem;
   cursor: crosshair !important;
 }
 
@@ -203,5 +204,7 @@
   position: absolute;
   width: 1rem;
   height: 1rem;
+  margin-left: -0.7rem;
+  margin-top: -0.7rem;
   cursor: crosshair !important;
 }

@@ -154,9 +154,7 @@ export default function Home() {
           <div className={styles.sample_box} />
           <div className={styles.to_flex} >
                       <div className={styles.eye_box} >
-                    <Icon name="eye"
-          className={styles.eye_icon}
-              />
+              <Icon className={styles.eye_icon} name="eye" />
               </div>
           <div className={styles.secondary_box} />
             <div className={styles.color_pallete}>
@@ -168,9 +166,8 @@ export default function Home() {
                 <li className={styles.color_preset}></li>
                 <li className={styles.color_preset}></li>
                 <li className={styles.gear_box}>
-                  <Icon name="cog"
-          className={styles.gear_icon}
-              /></li>
+                  <Icon className={styles.gear_icon} name="cog" />
+                </li>
               </ul>
                             <div className={styles.color_input}> #000000 </div>
               <div className={styles.color_submit}> Submit </div>

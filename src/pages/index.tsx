@@ -7,20 +7,21 @@ import {
   Message,
   Image,
   Header,
-  Segment,
+  Segment
 } from 'semantic-ui-react';
 import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
-import {NetworkType, Web3Provider} from '@metrixcoin/metrilib';
+import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
 import DebugContracts from '../components/DebugContracts';
-import {getMetrixPlace, getMetrixPlaceAddress} from '../place';
+import { getMetrixPlace, getMetrixPlaceAddress } from '../place';
 import Web3TransactionModal from '../modals/Web3TransactionModal';
-import {ZeroHash} from 'ethers';
+import { ZeroHash } from 'ethers';
 import HandleProviderType from '../helpers/HandleProviderType';
 import ContractFunctions from '../components/ContractFunctions';
-import {toHexAddress} from '@metrixcoin/metrilib/lib/utils/AddressUtils';
+import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
+import EditGrid from '../components/EditGrid';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -106,7 +107,7 @@ export default function Home() {
             abi={ABI.MetrixPlace}
             key={0}
           />
-        </Segment>,
+        </Segment>
       ]);
     } else {
       setNetwork(undefined);
@@ -133,7 +134,7 @@ export default function Home() {
       }
 
       window.addEventListener('message', doHandleMessage, false);
-      window.postMessage({message: {type: 'CONNECT_METRIMASK'}}, '*');
+      window.postMessage({ message: { type: 'CONNECT_METRIMASK' } }, '*');
     }
   }, []);
 
@@ -142,38 +143,40 @@ export default function Home() {
       <Head>
         <title>metrix.place</title>
         <meta
-          name='description'
-          content='A communal graffiti board which any address can set a single pixel per MetrixCoin block by paying the gas fee for the transaction.'
+          name="description"
+          content="A communal graffiti board which any address can set a single pixel per MetrixCoin block by paying the gas fee for the transaction."
         />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='favicon.png' />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="favicon.png" />
       </Head>
       <main className={styles.main}>
         <h1 className={styles.h1}> metrix.place </h1>
         <div className={styles.main_box}>
-          <div className={styles.sample_box} />
-          <div className={styles.to_flex} >
-                      <div className={styles.eye_box} >
+          <div className={styles.sample_box}>
+            <EditGrid />
+          </div>
+          <div className={styles.to_flex}>
+            <div className={styles.eye_box}>
               <Icon className={styles.eye_icon} name="eye" />
-              </div>
-          <div className={styles.secondary_box} />
+            </div>
+            <div className={styles.secondary_box} />
             <div className={styles.color_pallete}>
-            <ul className={styles.color_list}>
-              <li className={styles.color_preset}></li>
-              <li className={styles.color_preset}></li>
-              <li className={styles.color_preset}></li>
-              <li className={styles.color_preset}></li>
+              <ul className={styles.color_list}>
+                <li className={styles.color_preset}></li>
+                <li className={styles.color_preset}></li>
+                <li className={styles.color_preset}></li>
+                <li className={styles.color_preset}></li>
                 <li className={styles.color_preset}></li>
                 <li className={styles.color_preset}></li>
                 <li className={styles.gear_box}>
                   <Icon className={styles.gear_icon} name="cog" />
                 </li>
               </ul>
-                            <div className={styles.color_input}> #000000 </div>
+              <div className={styles.color_input}> #000000 </div>
               <div className={styles.color_submit}> Submit </div>
-              </div>
             </div>
           </div>
+        </div>
         <Container>
           <Grid padded stackable stretched container>
             <Grid.Row stretched>

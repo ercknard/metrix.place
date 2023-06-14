@@ -178,6 +178,7 @@ export default function Home() {
               <div className={styles.color_input}> #FFFFFF </div>
               <div className={styles.color_submit}> Submit </div>
             </div>
+            <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div>
           </div>
         </div>
         <Container>

@@ -1,5 +1,12 @@
 node_modules/
 lib/
+.eslintrc.json
+next-env.d.ts
+mocharc.json
 package.json
 package-lock.json
 tsconfig.json
+mocharc.json
+.next/
+cache/
+artifacts/

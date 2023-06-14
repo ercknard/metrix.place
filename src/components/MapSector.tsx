@@ -31,6 +31,7 @@ export default function MapSector(props: MapSector): JSX.Element {
   // when click, set the color
   const onClick = (e: any) => {
     //setColor();
+    console.log(`click ${e.target.id}`);
     e.preventDefault();
   };
 
@@ -44,6 +45,7 @@ export default function MapSector(props: MapSector): JSX.Element {
   // if mouse is over while pressing the mouse button, set opacity to 1
   // if mouse is over while pressing the right mouse button, set opacity to 0
   const onMouseOver = (e: any) => {
+    console.log(e.target.id);
     if (e.buttons === 0 && opacity === 0) {
       //setOpacity(0.18);
     } else if (e.buttons === 1) {
@@ -66,25 +68,27 @@ export default function MapSector(props: MapSector): JSX.Element {
         style={{
           boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${props.color}`
         }}
-      />
-      <div
-        className={styles.pixel}
-        style={{
-          top: `${props.y}rem`,
-          left: `${props.x}rem`,
-          backgroundColor: ownColor,
-          opacity: opacity
-        }}
-        onMouseOver={onMouseOver}
-        onMouseLeave={onMouseLeave}
-        onClick={onClick}
-        onContextMenu={onContextMenu}
-        // prevent drag events
-        onDragStart={(e) => e.preventDefault()}
-        onDragEnd={(e) => e.preventDefault()}
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => e.preventDefault()}
-      />
+      >
+        <div
+          id={`sector_${props.x - 1}_${props.y - 1}`}
+          className={styles.sector}
+          style={{
+            top: `${props.y}rem`,
+            left: `${props.x}rem`,
+            backgroundColor: ownColor,
+            opacity: opacity
+          }}
+          onMouseOver={onMouseOver}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+          onContextMenu={onContextMenu}
+          // prevent drag events
+          onDragStart={(e) => e.preventDefault()}
+          onDragEnd={(e) => e.preventDefault()}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => e.preventDefault()}
+        />
+      </div>
     </>
   );
 }

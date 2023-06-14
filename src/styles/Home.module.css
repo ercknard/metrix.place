@@ -61,8 +61,8 @@
 }
 
 .secondary_box {
-  min-width: 25vh;
-  min-height: 25vh;
+  width: 30vh;
+  height: 30vh;
   background-color: black;
   border: 2.5px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))

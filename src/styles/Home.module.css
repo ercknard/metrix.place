@@ -60,6 +60,18 @@
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
+@media (max-width: 900px) {
+  .main_box {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 768px) {
+  .main_box {
+    transform: scale(0.44);
+  }
+}
+
 .secondary_box {
   width: 32rem;
   height: 32rem;

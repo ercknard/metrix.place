@@ -149,6 +149,31 @@ export default function Home() {
         <link rel='icon' href='favicon.png' />
       </Head>
       <main className={styles.main}>
+        <h1 className={styles.h1}> metrix.place </h1>
+        <div className={styles.main_box}>
+          <div className={styles.sample_box} />
+          <div className={styles.to_flex} >
+                      <div className={styles.eye_box} >
+              <Icon className={styles.eye_icon} name="eye" />
+              </div>
+          <div className={styles.secondary_box} />
+            <div className={styles.color_pallete}>
+            <ul className={styles.color_list}>
+              <li className={styles.color_preset}></li>
+              <li className={styles.color_preset}></li>
+              <li className={styles.color_preset}></li>
+              <li className={styles.color_preset}></li>
+                <li className={styles.color_preset}></li>
+                <li className={styles.color_preset}></li>
+                <li className={styles.gear_box}>
+                  <Icon className={styles.gear_icon} name="cog" />
+                </li>
+              </ul>
+                            <div className={styles.color_input}> #000000 </div>
+              <div className={styles.color_submit}> Submit </div>
+              </div>
+            </div>
+          </div>
         <Container>
           <Grid padded stackable stretched container>
             <Grid.Row stretched>

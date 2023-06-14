@@ -1,7 +1,7 @@
-import {APIProvider} from '@metrixcoin/metrilib';
-import {getMetrixPlace} from './index';
-import {equal} from 'assert';
-import {ZeroAddress} from 'ethers';
+import { APIProvider } from '@metrixcoin/metrilib';
+import { getMetrixPlace } from './index';
+import { equal } from 'assert';
+import { ZeroAddress } from 'ethers';
 
 describe('MetrixPlace tests', () => {
   const network = 'TestNet';

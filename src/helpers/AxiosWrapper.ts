@@ -1,6 +1,6 @@
 import isJson from '../utils/isJson';
-import {bnToHex} from '../utils/Parsers';
-import axios, {AxiosRequestConfig, AxiosResponse} from 'axios';
+import { bnToHex } from '../utils/Parsers';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export interface HttpResponse {
   /* eslint-disable */
@@ -19,14 +19,14 @@ export const axiosWrapper = {
   get,
   post,
   put,
-  delete: _delete,
+  delete: _delete
 };
 
 async function get(url: string): Promise<HttpResponse> {
   const requestOptions: AxiosRequestConfig = {
     url,
     method: 'GET',
-    timeout: 7000,
+    timeout: 7000
   };
   return handleRequest(requestOptions);
 }
@@ -36,8 +36,8 @@ async function post(url: string, body: any): Promise<HttpResponse> {
     url,
     method: 'POST',
     timeout: 8000,
-    headers: {'Content-Type': 'application/json'},
-    data: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+    data: JSON.stringify(body)
   };
   return handleRequest(requestOptions);
 }
@@ -47,8 +47,8 @@ async function put(url: string, body: any): Promise<HttpResponse> {
     url,
     method: 'PUT',
     timeout: 7000,
-    headers: {'Content-Type': 'application/json'},
-    data: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+    data: JSON.stringify(body)
   };
   return handleRequest(requestOptions);
 }
@@ -57,7 +57,7 @@ async function _delete(url: string): Promise<HttpResponse> {
   const requestOptions: AxiosRequestConfig = {
     method: 'DELETE',
     timeout: 5000,
-    url,
+    url
   };
   return handleRequest(requestOptions);
 }
@@ -80,7 +80,7 @@ async function handleRequest(requestOptions: AxiosRequestConfig) {
       },
       data: (err as any).message ? (err as any).message : `Unknown Error!`,
       status: 500,
-      error: true,
+      error: true
     };
   }
 }
@@ -97,7 +97,7 @@ async function handleResponse(response: AxiosResponse): Promise<HttpResponse> {
         },
         data: e,
         status: s,
-        error: true,
+        error: true
       };
     }
     if (d.length == 0) {
@@ -107,7 +107,7 @@ async function handleResponse(response: AxiosResponse): Promise<HttpResponse> {
         },
         data: e,
         status: s,
-        error: true,
+        error: true
       };
     }
     let data = !!d && !isJson(d) && JSON.parse(d);
@@ -125,7 +125,7 @@ async function handleResponse(response: AxiosResponse): Promise<HttpResponse> {
         return d;
       },
       data: d,
-      status: s,
+      status: s
     };
   } catch (err) {
     console.log(err);
@@ -135,7 +135,7 @@ async function handleResponse(response: AxiosResponse): Promise<HttpResponse> {
       },
       data: (err as any).message ? (err as any).message : `Unknown Error: ${e}`,
       status: s,
-      error: e,
+      error: e
     };
   }
 }

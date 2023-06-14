@@ -1,7 +1,7 @@
 import MetrixPlace from './MetrixPlace';
 
 const ABI = {
-  MetrixPlace,
+  MetrixPlace
 };
 
 export default ABI;

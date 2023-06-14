@@ -1,4 +1,4 @@
-import {getMetrixPlace, getMetrixPlaceAddress} from '../utils/ContractUtils';
+import { getMetrixPlace, getMetrixPlaceAddress } from '../utils/ContractUtils';
 import MetrixPlace from './MetrixPlace';
 
-export {MetrixPlace, getMetrixPlace, getMetrixPlaceAddress};
+export { MetrixPlace, getMetrixPlace, getMetrixPlaceAddress };

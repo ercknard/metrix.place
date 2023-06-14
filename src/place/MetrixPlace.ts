@@ -1,4 +1,4 @@
-import {MetrixContract, Provider, Transaction} from '@metrixcoin/metrilib';
+import { MetrixContract, Provider, Transaction } from '@metrixcoin/metrilib';
 import ABI from '../abi';
 
 export default class MetrixPlace extends MetrixContract {
@@ -33,7 +33,7 @@ export default class MetrixPlace extends MetrixContract {
   async encodeKey(x: bigint, y: bigint): Promise<bigint> {
     const size = await this.call(`encodeKey(uint16,uint16)`, [
       `0x${x.toString(16)}`,
-      `0x${y.toString(16)}`,
+      `0x${y.toString(16)}`
     ]);
     return size ? BigInt(size.toString()) : BigInt(0);
   }
@@ -47,7 +47,7 @@ export default class MetrixPlace extends MetrixContract {
   async getChunkColors(startX: bigint, startY: bigint): Promise<string[][]> {
     const pixels = await this.call(`getChunkColors(uint16,uint16)`, [
       `0x${startX.toString(16)}`,
-      `0x${startY.toString(16)}`,
+      `0x${startY.toString(16)}`
     ]);
     const colors: string[][] = [];
     if (pixels && pixels.toArray().length > 0) {
@@ -72,7 +72,7 @@ export default class MetrixPlace extends MetrixContract {
   async getPixelColor(x: bigint, y: bigint) {
     const pixel = await this.call(`getPixelColor(uint16,uint16)`, [
       `0x${x.toString(16)}`,
-      `0x${y.toString(16)}`,
+      `0x${y.toString(16)}`
     ]);
     let hex = BigInt(pixel ? pixel.toString() : 0).toString(16);
     hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
@@ -96,7 +96,7 @@ export default class MetrixPlace extends MetrixContract {
    */
   async pixels(pixelIndex: bigint): Promise<string> {
     const pixel = await this.call(`pixels(uint32)`, [
-      `0x${pixelIndex.toString(16)}`,
+      `0x${pixelIndex.toString(16)}`
     ]);
     let hex = BigInt(pixel ? pixel.toString() : 0).toString(16);
     hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
@@ -120,12 +120,12 @@ export default class MetrixPlace extends MetrixContract {
     const tx = await this.send('setPixelColor(uint16,uint16,uint32)', [
       `0x${x.toString(16)}`,
       `0x${y.toString(16)}`,
-      `0x${color.replace('#', '0x')}`,
+      `0x${color.replace('#', '0x')}`
     ]);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
     return {
       txid: tx.txid,
-      getReceipts,
+      getReceipts
     };
   }
 }

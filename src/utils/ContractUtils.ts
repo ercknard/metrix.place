@@ -1,10 +1,10 @@
-import {Result, ZeroAddress} from 'ethers';
+import { Result, ZeroAddress } from 'ethers';
 
-import {fetchWrapper} from '../helpers/FetchWrapper';
-import {NetworkType, Provider} from '@metrixcoin/metrilib';
-import {MetrixPlace} from '../place';
-import {Version} from '../types/Version';
-import {CONTRACTS} from '../constants';
+import { fetchWrapper } from '../helpers/FetchWrapper';
+import { NetworkType, Provider } from '@metrixcoin/metrilib';
+import { MetrixPlace } from '../place';
+import { Version } from '../types/Version';
+import { CONTRACTS } from '../constants';
 
 const getMetrixPlace = (
   network: NetworkType,
@@ -74,7 +74,7 @@ const callContractRPC: (
       method,
       content: data,
       abi,
-      network,
+      network
     });
     if (result && !result.error) {
       return result;
@@ -90,4 +90,4 @@ const callContractRPC: (
   return undefined;
 };
 
-export {callContractRPC, getMetrixPlace, getMetrixPlaceAddress};
+export { callContractRPC, getMetrixPlace, getMetrixPlaceAddress };

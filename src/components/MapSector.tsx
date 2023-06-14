@@ -5,12 +5,12 @@ export const paintContext = React.createContext({
   paintColor: '#000',
   setPaintColor: (value: string) => {}
 });
-interface PixelProps {
+interface MapSector {
   x: number;
   y: number;
   color: string;
 }
-export default function Pixel(props: PixelProps): JSX.Element {
+export default function MapSector(props: MapSector): JSX.Element {
   // wether the pixel is painted or not
 
   const [opacity, setOpacity] = React.useState(0);
@@ -62,7 +62,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
   return (
     <>
       <div
-        className={styles.pixel}
+        className={styles.sector}
         style={{
           boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${props.color}`
         }}

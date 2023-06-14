@@ -11,10 +11,10 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
     // create a two dimensional array of Pixel components
     const grid: typeof pixels = [];
 
-    for (let x = 1; x < 64; x++) {
+    for (let x = 1; x <= 64; x++) {
       console.log(x);
 
-      for (let y = 1; y < 64; y++) {
+      for (let y = 1; y <= 64; y++) {
         console.log(y);
         grid.push(<Pixel x={x} y={y} color="#fff" />);
       }

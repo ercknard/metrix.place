@@ -190,12 +190,16 @@
   cursor: pointer;
 }
 
-.grid {
-  margin-top: -0.7rem;
-  margin-left: -0.7rem;
-}
+
 
 .pixel {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  cursor: crosshair !important;
+}
+
+.sector {
   position: absolute;
   width: 1rem;
   height: 1rem;

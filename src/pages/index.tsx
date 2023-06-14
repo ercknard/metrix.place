@@ -22,6 +22,7 @@ import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
+import MapGrid from '../components/MapGrid';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -159,7 +160,9 @@ export default function Home() {
             <div className={styles.eye_box}>
               <Icon className={styles.eye_icon} name="eye" />
             </div>
-            <div className={styles.secondary_box} />
+            <div className={styles.secondary_box}>
+              <MapGrid />
+            </div>
             <div className={styles.color_pallete}>
               <ul className={styles.color_list}>
                 <li className={styles.color_preset}></li>
@@ -172,7 +175,7 @@ export default function Home() {
                   <Icon className={styles.gear_icon} name="cog" />
                 </li>
               </ul>
-              <div className={styles.color_input}> #000000 </div>
+              <div className={styles.color_input}> #FFFFFF </div>
               <div className={styles.color_submit}> Submit </div>
             </div>
           </div>

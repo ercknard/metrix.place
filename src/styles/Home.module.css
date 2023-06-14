@@ -43,7 +43,7 @@
   row-gap: 3rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1366px) {
   .main_box {
     flex-direction: column;
   }
@@ -61,8 +61,8 @@
 }
 
 .secondary_box {
-  width: 17rem;
-  height: 17rem;
+  width: 32rem;
+  height: 32rem;
   margin-left: auto;
   background-color: black;
   border: 2.5px solid;
@@ -97,8 +97,6 @@
 }
 
 .color_pallete {
-  min-width: 25vh;
-  min-height: 5vh;
   background-color: rgb(76, 69, 92);
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
@@ -158,13 +156,14 @@
 }
 
 .color_input {
-  width: 42.5%;
+  width: 40%;
   text-align: center;
   padding: 0.5rem;
   font-size: 1.5em;
   float: left;
   color: rgb(32, 13, 42);
   background-color: rgb(255, 255, 255);
+  border-radius: 5px;
   border: 1px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
     10;
@@ -175,13 +174,14 @@
 }
 
 .color_submit {
-  width: 42.5%;
+  width: 40%;
   text-align: center;
   padding: 0.5rem;
   font-size: 1.5em;
   float: right;
   color: rgb(255, 255, 255);
   background-color: rgb(32, 13, 42);
+  border-radius: 5px;
   border: 1px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
     10;
@@ -204,7 +204,8 @@
   position: absolute;
   width: 1rem;
   height: 1rem;
-  margin-left: -0.7rem;
-  margin-top: -0.7rem;
+  margin-left: -0.8rem;
+  margin-top: -0.8rem;
   cursor: crosshair !important;
+  transform: scale(1.9);
 }

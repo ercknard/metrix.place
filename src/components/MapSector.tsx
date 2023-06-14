@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/Home.module.css';
 
 export const paintContext = React.createContext({
-  paintColor: '#000',
+  paintColor: '#000000',
   setPaintColor: (value: string) => {}
 });
 interface MapSector {

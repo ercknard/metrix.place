@@ -159,8 +159,10 @@ export default function Home() {
               <Icon className={styles.eye_icon} name="eye" />
             </div>
             <div className={styles.secondary_box}>
+              <div className={styles.tertiary_box}>
               <MapGrid />
-            </div>
+              </div>
+              </div>
             <div className={styles.color_pallete}>
               <ul className={styles.color_list}>
                 <li className={styles.color_preset}></li>

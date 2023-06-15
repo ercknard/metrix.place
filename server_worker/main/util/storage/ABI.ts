@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { ethers } from 'ethers';
+import { ZeroAddress, ethers } from 'ethers';
 
 export const getABI = async (contract: string) => {
   let abi: any[] = [];
@@ -27,7 +27,7 @@ export const getABIloc = async (contract: 'MRC20' | 'MRC721' | string) => {
   return abi;
 };
 
-export const AddressZero = ethers.constants.AddressZero.replace('0x', '');
+export const AddressZero = ZeroAddress.replace('0x', '');
 
 export const getContractAddress = (network: string, contract: string) => {
   const ContractAddresses = require(`../../../../networks/${process.env.NEXT_PUBLIC_APP_VERSION}/${network}.json`);

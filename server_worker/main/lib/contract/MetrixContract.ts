@@ -1,19 +1,19 @@
-import { ethers, utils } from 'ethers';
+import { Interface, Result, ZeroAddress, ZeroHash } from 'ethers';
 import ContractResponse from '../interface/ContractResponse';
 import TransactionReceipt from '../interface/TransactionReceipt';
-import { MetrixRPCNode } from '../MetrixRPC/MetrixRPC';
+import { MetrixRPC } from'@metrixcoin/metrilib';
 
-const AddressZero = ethers.constants.AddressZero.replace('0x', '');
+const AddressZero = ZeroAddress.replace('0x', '');
 
 export default class MetrixContract {
-  mrpc: MetrixRPCNode;
+  mrpc: MetrixRPC.MetrixRPCNode;
   name: string;
   address: string;
   abi?: any[];
   bytecode: string;
 
   constructor(
-    mrpc: MetrixRPCNode,
+    mrpc: MetrixRPC.MetrixRPCNode,
     name: string,
     address: string,
     abi: any[] | undefined,
@@ -58,7 +58,7 @@ export default class MetrixContract {
         console.log(`Failed, transaction orphaned`);
         return [];
       }
-      const iface = new utils.Interface(this.abi);
+      const iface = new Interface(this.abi);
 
       const eventMap = new Map();
       for (const receipt of transactionReceipt) {
@@ -72,7 +72,7 @@ export default class MetrixContract {
             console.log(`topics: ${JSON.stringify(topics)}`);
             const data = `0x${log.data}`;
             const description = iface.parseLog({ data, topics });
-            const event = description.eventFragment;
+            const event = description?.fragment;
             if (description && event) {
               const name = event.name;
               const events = eventMap.get(name) ? eventMap.get(name) : [];
@@ -115,7 +115,7 @@ export default class MetrixContract {
     let contract;
 
     if (this.abi && this.bytecode) {
-      const iface: utils.Interface = new utils.Interface(this.abi);
+      const iface: Interface = new Interface(this.abi);
       const data =
         constructorArgs && constructorArgs.length > 0
           ? iface.encodeDeploy([...constructorArgs]).replace('0x', '')
@@ -163,11 +163,11 @@ export default class MetrixContract {
    * @public
    */
   public async call(method: string, args?: string[]): Promise<any> {
-    let result: utils.Result | undefined = undefined;
+    let result: Result | undefined = undefined;
     if (!this.abi) {
       return result;
     }
-    const iface = new utils.Interface(this.abi);
+    const iface = new Interface(this.abi);
     const encoded = iface.encodeFunctionData(method, args).replace('0x', '');
     const response: ContractResponse = (await this.mrpc.promiseCallContract(
       this.address,
@@ -219,14 +219,14 @@ export default class MetrixContract {
     hash160: string;
   }> {
     let result = {
-      txid: ethers.constants.HashZero.replace('0x', ''),
+      txid: ZeroHash.replace('0x', ''),
       sender: AddressZero,
       hash160: AddressZero
     };
     if (!this.abi) {
       return result;
     }
-    const iface = new utils.Interface(this.abi);
+    const iface = new Interface(this.abi);
     const encoded = method
       ? iface.encodeFunctionData(method, args).replace('0x', '')
       : '';
@@ -266,7 +266,7 @@ export default class MetrixContract {
     hash160: string;
   }> {
     let result = {
-      txid: ethers.constants.HashZero.replace('0x', ''),
+      txid: ZeroHash.replace('0x', ''),
       sender: AddressZero,
       hash160: AddressZero
     };

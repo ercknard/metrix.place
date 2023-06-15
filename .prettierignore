@@ -2,11 +2,13 @@ node_modules/
 lib/
 .eslintrc.json
 next-env.d.ts
+nodemon.json
 mocharc.json
 package.json
 package-lock.json
 tsconfig.json
 mocharc.json
+.build/
 .next/
 cache/
 artifacts/

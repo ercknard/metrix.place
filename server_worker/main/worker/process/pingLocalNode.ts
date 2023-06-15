@@ -1,11 +1,11 @@
 import { parentPort } from 'worker_threads';
-import { MetrixRPCNode } from '../../lib/MetrixRPC/MetrixRPC';
+import { MetrixRPC } from '@metrixcoin/metrilib';
 import xMessageInterface from '../../util/interface/xMessageInterface';
 
 import Logger from '../../util/logger';
 
 export const pingLocal = async (
-  rpc: MetrixRPCNode,
+  rpc: MetrixRPC.MetrixRPCNode,
   logger: Logger
 ): Promise<boolean> => {
   const loggerRunPing = logger.createSubLogger('ping', 'red');

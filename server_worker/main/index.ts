@@ -1,4 +1,4 @@
-import { MetrixRPCNode } from './lib/MetrixRPC/MetrixRPC';
+import { MetrixRPC } from '@metrixcoin/metrilib';
 
 import { parentPort, workerData } from 'worker_threads';
 import xMessageInterface, {
@@ -24,7 +24,7 @@ const worker = async () => {
   let _run = true;
 
   // Start metrix RPC..
-  const rpc = new MetrixRPCNode(
+  const rpc = new MetrixRPC.MetrixRPCNode(
     null,
     workerData.rpc.host,
     workerData.rpc.user,

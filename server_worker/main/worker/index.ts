@@ -1,4 +1,4 @@
-import { MetrixRPCNode } from '../lib/MetrixRPC/MetrixRPC';
+import { MetrixRPC } from '@metrixcoin/metrilib';
 import { pingLocal } from './process/pingLocalNode';
 
 import Logger from '../util/logger';
@@ -24,7 +24,7 @@ export const setup = async (): Promise<boolean> => {
 };
 
 // Start runner
-export const run = async (rpc: MetrixRPCNode): Promise<boolean> => {
+export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
   if (!rpc) {
     loggerRunSetup.error('Unable to connect to local RPC instance!');
     loggerRunSetup.warn('>> Worker will now abort start <<');

@@ -21,7 +21,7 @@
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
     "compile": "npx hardhat compile",
-    "test": "cross-env TS_NODE_PROJECT=./src mocha --config mocharc.json",
+    "test": "mocha --config mocharc.json",
     "format": "prettier --write \"**/*.+(js|ts|json)\""
   },
   "author": "Cryptech Services",

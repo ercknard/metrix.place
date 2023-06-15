@@ -18,10 +18,11 @@
     "@fontsource/vt323": "^5.0.2",
     "@openzeppelin/contracts": "^4.8.3",
     "axios": "^1.4.0",
+    "dotenv": "^16.1.4",
     "sharp": "^0.32.1"
   },
   "devDependencies": {
-    "@metrixcoin/metrilib": "^1.5.17-beta",
+    "@metrixcoin/metrilib": "^1.5.20-beta",
     "@types/mocha": "^10.0.1",
     "@types/node": "20.3.1",
     "@types/react": "18.0.28",

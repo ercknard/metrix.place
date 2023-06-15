@@ -1,25 +1,62 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "downlevelIteration": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "composite": true,
+    "noEmit": false,
     "jsx": "preserve",
+    "target": "es6",
+    "module": "CommonJS",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": ".build",
+    "paths": {
+      "@src/*": [
+        "./src/*"
+      ],
+      "@server/*": [
+        "./server/*"
+      ],
+      "@worker/*": [
+        "./server_worker/*"
+      ]
+    },
     "incremental": true,
+    "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": [],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "dist",
+    ".build",
+    ".next",
+    "**/*.spec.ts"
+  ],
+  "references": [
+    {
+      "path": "./src"
+    },
+    {
+      "path": "./server"
+    },
+    {
+      "path": "./server_worker"
+    }
+  ],
   "ts-node": {
     "esm": true,
-    "experimentalSpecifierResolution": "node",
+    "experimentalSpecifierResolution": "node"
   }
 }

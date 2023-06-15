@@ -1,0 +1,21 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "es6",
+    "isolatedModules": false,
+    "moduleResolution": "node",
+    "noEmit": false,
+    "outDir": "../.build",
+    "baseUrl": "../",
+    "paths": {}
+  },
+  "include": [
+    "*.ts",
+    "**/*.ts",
+    "../server_worker/index.ts",
+    "../server_worker/main/util/**/*",
+    "db/config/config.ts"
+  ],
+  "exclude": [".build"]
+}

@@ -1,0 +1,25 @@
+// example seeder
+import { QueryInterface, Sequelize } from 'sequelize';
+
+export default {
+  async up(queryInterface: QueryInterface, sequelize: Sequelize) {
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+     */
+  },
+
+  async down(queryInterface: QueryInterface, sequelize: Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  }
+};

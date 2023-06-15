@@ -42,21 +42,19 @@ export default class MetrixPlace extends MetrixContract {
    * Gets 64x64 pixel chunks of pixels
    * @param startX the leftmost x coordinate of the chunk
    * @param startY the topmost y coordinate of the chunk
-   * @returns a 2d string array of hex colors
+   * @returns a 2d number array of hex colors (32 bit unsigned integer )
    */
-  async getChunkColors(startX: bigint, startY: bigint): Promise<string[][]> {
+  async getChunkColors(startX: bigint, startY: bigint): Promise<number[][]> {
     const pixels = await this.call(`getChunkColors(uint16,uint16)`, [
       `0x${startX.toString(16)}`,
       `0x${startY.toString(16)}`
     ]);
-    const colors: string[][] = [];
+    const colors: number[][] = [];
     if (pixels && pixels.toArray().length > 0) {
       for (const pixls of pixels[0]) {
-        const arr: string[] = [];
+        const arr: number[] = [];
         for (const pix of pixls) {
-          let hex = BigInt(pix ? pix.toString() : 0).toString(16);
-          hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
-          arr.push(`#${hex}`);
+          arr.push(Number(pix ? pix.toString() : 0));
         }
         colors.push(arr);
       }
@@ -67,16 +65,14 @@ export default class MetrixPlace extends MetrixContract {
    * Get the color of a specific pixel
    * @param x the x coordinate of the pixel
    * @param y the y coordinate of the pixel
-   * @returns hex color of the pixel
+   * @returns color of the pixel as 32 bit unsigned integer
    */
-  async getPixelColor(x: bigint, y: bigint) {
+  async getPixelColor(x: bigint, y: bigint): Promise<number> {
     const pixel = await this.call(`getPixelColor(uint16,uint16)`, [
       `0x${x.toString(16)}`,
       `0x${y.toString(16)}`
     ]);
-    let hex = BigInt(pixel ? pixel.toString() : 0).toString(16);
-    hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
-    return `#${hex}`;
+    return Number(pixel ? pixel.toString() : 0);
   }
 
   /**
@@ -92,15 +88,13 @@ export default class MetrixPlace extends MetrixContract {
   /**
    * Get the color of a specific pixel
    * @param pixelIndex pixel index ((uint32(x) << 16) | uint32(y))
-   * @returns hex color of the pixel
+   * @returns color of the pixel as 32 bit unsigned integer
    */
-  async pixels(pixelIndex: bigint): Promise<string> {
+  async pixels(pixelIndex: bigint): Promise<number> {
     const pixel = await this.call(`pixels(uint32)`, [
       `0x${pixelIndex.toString(16)}`
     ]);
-    let hex = BigInt(pixel ? pixel.toString() : 0).toString(16);
-    hex = `${hex}${hex.length < 6 ? `0`.repeat(6 - hex.length) : ''}`;
-    return `#${hex}`;
+    return Number(pixel ? pixel.toString() : 0);
   }
 
   /**

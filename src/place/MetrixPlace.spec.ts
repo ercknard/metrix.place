@@ -17,14 +17,12 @@ describe('MetrixPlace tests', () => {
   }).timeout(60000);
   it('Can get a pixel color by x and y', async () => {
     const color = await place.getPixelColor(BigInt(0), BigInt(0));
-    equal(color.length, 7);
-    equal(/^#[0-9A-Fa-f]{6}$/.test(color), true);
+    equal(typeof color, 'number');
   }).timeout(60000);
 
   it('Can get a pixel color by pixelIndex', async () => {
     const color = await place.pixels(BigInt(0));
-    equal(color.length, 7);
-    equal(/^#[0-9A-Fa-f]{6}$/.test(color), true);
+    equal(typeof color, 'number');
   }).timeout(60000);
 
   it('Can get a chunk of pixel colors', async () => {

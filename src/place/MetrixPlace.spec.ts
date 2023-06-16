@@ -1,5 +1,5 @@
 import { APIProvider } from '@metrixcoin/metrilib';
-import { getMetrixPlace } from './index';
+import { getMetrixPlace } from './';
 import { equal } from 'assert';
 import { ZeroAddress } from 'ethers';
 

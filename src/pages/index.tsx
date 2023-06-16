@@ -23,6 +23,7 @@ import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
+import { TwitterPicker } from 'react-color';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -155,28 +156,35 @@ export default function Home() {
             <EditGrid x={0} y={0} />
           </div>
           <div className={styles.to_flex}>
+            <div className={styles.to_flex_icons}>
             <div className={styles.eye_box}>
+              <Icon className={styles.eye_icon} name="file code outline" />
+            </div>
+                        <div className={styles.eye_box}>
               <Icon className={styles.eye_icon} name="eye" />
             </div>
+                        <div className={styles.eye_box}>
+              <Icon className={styles.eye_icon} name="cog" />
+              </div>
+              </div>
             <div className={styles.secondary_box}>
               <div className={styles.tertiary_box}>
-              <MapGrid />
+                <MapGrid />
               </div>
-              </div>
+            </div>
             <div className={styles.color_pallete}>
-              <ul className={styles.color_list}>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.gear_box}>
-                  <Icon className={styles.gear_icon} name="cog" />
-                </li>
-              </ul>
-              <div className={styles.color_input}> #FFFFFF </div>
-              <div className={styles.color_submit}> Submit </div>
+              <TwitterPicker   styles={{
+    default: {
+                  card: {
+        justifyContent: 'center',
+        background: '#4c455c',
+         border: 'none',
+        boxShadow: 'none',
+
+      }
+    }
+              }} triangle="hide" ></TwitterPicker>
+              <div className={styles.color_submit}> Submit </div> 
             </div>
             {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
           </div>

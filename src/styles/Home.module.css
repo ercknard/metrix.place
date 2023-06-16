@@ -53,7 +53,7 @@
   min-width: 66.5rem;
   min-height: 66.5rem;
   justify-content: center;
-  background: linear-gradient(to bottom, #202020, #17081f);
+  background: #202020;
   border: 2.5px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
     10;
@@ -76,7 +76,7 @@
   width: 32rem;
   height: 32rem;
   margin-left: auto;
-  background: linear-gradient(to bottom, #202020, #17081f);
+  background: #202020;
   border: 2.5px solid;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
     10;

@@ -23,6 +23,7 @@ import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
+import { TwitterPicker } from 'react-color';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -160,22 +161,11 @@ export default function Home() {
             </div>
             <div className={styles.secondary_box}>
               <div className={styles.tertiary_box}>
-              <MapGrid />
+                <MapGrid />
               </div>
-              </div>
+            </div>
             <div className={styles.color_pallete}>
-              <ul className={styles.color_list}>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.color_preset}></li>
-                <li className={styles.gear_box}>
-                  <Icon className={styles.gear_icon} name="cog" />
-                </li>
-              </ul>
-              <div className={styles.color_input}> #FFFFFF </div>
+              <TwitterPicker triangle="hide" />
               <div className={styles.color_submit}> Submit </div>
             </div>
             {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}

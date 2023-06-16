@@ -24,12 +24,14 @@ export const cacheFullPlace = async (
 
         for (const row of chunk) {
           for (const col of row) {
-            const r = col << 16;
-            const g = (col - r) << 8;
-            const b = col - r - g;
+            const r = (col >> 24) & 0xff;
+            const g = (col >> 16) & 0xff;
+            const b = (col >> 8) & 0xff;
+            const a = col & 0xff;
             pixels.push(r);
             pixels.push(g);
             pixels.push(b);
+            pixels.push(a);
           }
         }
       }

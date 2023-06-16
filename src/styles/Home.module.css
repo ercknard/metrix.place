@@ -98,6 +98,13 @@
   row-gap: 1.5rem;
 }
 
+.to_flex_icons {
+  display: flex;
+  width: 18rem;
+  margin-left: auto;
+  justify-content: space-evenly;
+}
+
 .eye_box {
   display: flex;
   width: 4rem;
@@ -120,6 +127,7 @@
 /*---------------------------------COLOR PALLETE-------------------------------*/
 
 .color_pallete {
+  display: flex;
   background-color: rgb(76, 69, 92);
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
@@ -197,20 +205,22 @@
 }
 
 .color_submit {
-  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
   text-align: center;
   padding: 0.5rem;
-  font-size: 1.5em;
+  font-size: 2em;
   float: right;
   color: rgb(255, 255, 255);
   background-color: rgb(32, 13, 42);
-  border-radius: 5px;
-  border: 1px solid;
-  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
-    10;
+  border-radius: 10px;
+  border: 1px solid #92319d;
+  /* border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10; */
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  margin-bottom: 1rem;
-  margin-right: 1rem;
+  margin: 1rem auto;
   cursor: pointer;
 }
 

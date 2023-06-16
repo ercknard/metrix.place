@@ -156,17 +156,35 @@ export default function Home() {
             <EditGrid x={0} y={0} />
           </div>
           <div className={styles.to_flex}>
+            <div className={styles.to_flex_icons}>
             <div className={styles.eye_box}>
+              <Icon className={styles.eye_icon} name="file code outline" />
+            </div>
+                        <div className={styles.eye_box}>
               <Icon className={styles.eye_icon} name="eye" />
             </div>
+                        <div className={styles.eye_box}>
+              <Icon className={styles.eye_icon} name="cog" />
+              </div>
+              </div>
             <div className={styles.secondary_box}>
               <div className={styles.tertiary_box}>
                 <MapGrid />
               </div>
             </div>
             <div className={styles.color_pallete}>
-              <TwitterPicker triangle="hide" />
-              <div className={styles.color_submit}> Submit </div>
+              <TwitterPicker   styles={{
+    default: {
+                  card: {
+        justifyContent: 'center',
+        background: '#4c455c',
+         border: 'none',
+        boxShadow: 'none',
+
+      }
+    }
+              }} triangle="hide" ></TwitterPicker>
+              <div className={styles.color_submit}> Submit </div> 
             </div>
             {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
           </div>

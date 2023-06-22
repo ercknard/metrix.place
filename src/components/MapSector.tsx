@@ -11,7 +11,7 @@ interface MapSectoProps {
 export default function MapSector(props: MapSectoProps): JSX.Element {
   // wether the pixel is painted or not
 
-  const [opacity, setOpacity] = React.useState(0.15);
+  const [opacity, setOpacity] = React.useState(0.33);
   const [ownColor, setOwnColor] = React.useState(props.color);
 
   React.useEffect(() => {
@@ -47,7 +47,7 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
       <div
         className={styles.sector}
         style={{
-          boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${ownColor}`
+          boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem`
         }}
       >
         <div

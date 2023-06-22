@@ -34,6 +34,10 @@ export default function Pixel(props: PixelProps): JSX.Element {
     const pixel = e.target.id.replace('pixel_', '').split('_');
     const x = Number(pixel[0]);
     const y = Number(pixel[1]);
+
+    // This is our pixel just return
+    if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) return;
+
     props.setPixel([x, y]);
     e.preventDefault();
   };

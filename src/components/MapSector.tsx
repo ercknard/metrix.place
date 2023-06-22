@@ -1,37 +1,32 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
 
-export const paintContext = React.createContext({
-  paintColor: '#000000',
-  setPaintColor: (value: string) => {}
-});
-interface MapSector {
+interface MapSectoProps {
   x: number;
   y: number;
   color: string;
+  sector: number[];
+  setSector(sector: number[]): void;
 }
-export default function MapSector(props: MapSector): JSX.Element {
+export default function MapSector(props: MapSectoProps): JSX.Element {
   // wether the pixel is painted or not
 
-  const [opacity, setOpacity] = React.useState(0);
-  const { paintColor } = React.useContext(paintContext);
-  const [ownColor, setOwnColor] = React.useState(paintColor);
+  const [opacity, setOpacity] = React.useState(0.15);
+  const [ownColor, setOwnColor] = React.useState(props.color);
 
-  const setColor = () => {
-    setOwnColor(paintColor);
-
-    // set the opacity
-    setOpacity(1);
-  };
-
-  const eraseColor = () => {
-    setOpacity(0);
-  };
+  React.useEffect(() => {
+    if (props.sector[0] === props.x && props.sector[1] === props.y)
+      setOwnColor('#92319d');
+    else setOwnColor('#000000');
+  }, [props.sector]);
 
   // when click, set the color
   const onClick = (e: any) => {
     //setColor();
-    console.log(`click ${e.target.id}`);
+    const sector = e.target.id.replace('sector_', '').split('_');
+    const x = Number(sector[0]);
+    const y = Number(sector[1]);
+    props.setSector([x, y]);
     e.preventDefault();
   };
 
@@ -39,20 +34,6 @@ export default function MapSector(props: MapSector): JSX.Element {
   const onContextMenu = (e: any) => {
     //eraseColor();
     e.preventDefault();
-  };
-
-  // if mouse is over while not pressing the mouse button and opacity is 0, set opacity to 0.18
-  // if mouse is over while pressing the mouse button, set opacity to 1
-  // if mouse is over while pressing the right mouse button, set opacity to 0
-  const onMouseOver = (e: any) => {
-    console.log(e.target.id);
-    if (e.buttons === 0 && opacity === 0) {
-      //setOpacity(0.18);
-    } else if (e.buttons === 1) {
-      //setColor();
-    } else if (e.buttons === 2) {
-      //eraseColor();
-    }
   };
 
   // when mouse leave while opacity is 0.18, set opacity to 0
@@ -66,11 +47,11 @@ export default function MapSector(props: MapSector): JSX.Element {
       <div
         className={styles.sector}
         style={{
-          boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${props.color}`
+          boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${ownColor}`
         }}
       >
         <div
-          id={`sector_${props.x - 1}_${props.y - 1}`}
+          id={`sector_${props.x}_${props.y}`}
           className={styles.sector}
           style={{
             top: `${props.y}rem`,
@@ -78,7 +59,6 @@ export default function MapSector(props: MapSector): JSX.Element {
             backgroundColor: ownColor,
             opacity: opacity
           }}
-          onMouseOver={onMouseOver}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
           onContextMenu={onContextMenu}

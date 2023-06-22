@@ -185,7 +185,7 @@ export default function Home() {
                   }
                 }}
                 triangle="hide"
-              ></TwitterPicker>
+              />
               <div className={styles.color_submit}> Submit </div>
             </div>
             {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}

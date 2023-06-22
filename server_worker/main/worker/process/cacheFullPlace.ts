@@ -1,6 +1,6 @@
 import { parentPort } from 'worker_threads';
 import { MetrixRPC, NetworkType, RPCProvider } from '@metrixcoin/metrilib';
-import { getMetrixPlace } from '../../../../src/utils/ContractUtils';
+//import { getMetrixPlace } from '../../../../src/utils/ContractUtils';
 import xMessageInterface from '../../util/interface/xMessageInterface';
 
 import Logger from '../../util/logger';
@@ -12,15 +12,15 @@ export const cacheFullPlace = async (
 ): Promise<boolean> => {
   const sublogger = logger.createSubLogger('cache', 'red');
   try {
-    const provider = new RPCProvider(network, rpc, '');
-    const place = getMetrixPlace(network, provider);
+    //const provider = new RPCProvider(network, rpc, '');
+    //const place = getMetrixPlace(network, provider);
     const pixels = [];
     for (let y = 0; y < 16; y++) {
       for (let x = 0; x < 16; x++) {
-        const chunk = await place.getChunkColors(
+        const chunk = /*await place.getChunkColors(
           BigInt(y * 64),
           BigInt(x * 64)
-        );
+        );*/ [];
 
         for (const row of chunk) {
           for (const col of row) {

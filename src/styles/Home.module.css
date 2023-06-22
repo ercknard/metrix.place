@@ -91,6 +91,8 @@
 
 @media (max-width: 300px) {
   .main_box {
+    margin-top: -55rem;
+    margin-bottom: -55rem;
     transform: scale(0.31);
   }
 }

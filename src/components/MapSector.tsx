@@ -10,8 +10,8 @@ interface MapSectoProps {
   setPixel(pixel: number[] | undefined): void;
 }
 export default function MapSector(props: MapSectoProps): JSX.Element {
-  const [opacity, setOpacity] = React.useState(0.33);
-  const [ownColor, setOwnColor] = React.useState(props.color);
+  const [opacity, setOpacity] = React.useState(0.18);
+  const [ownColor, setOwnColor] = React.useState([props.color, '#f6a1ff']);
 
   React.useEffect(() => {
     if (
@@ -19,17 +19,21 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
       props.sector[0] === props.x &&
       props.sector[1] === props.y
     )
-      setOwnColor('#92319d');
-    else setOwnColor('#000000');
+      setOwnColor(['#92319d', '#f6a1ff']);
+    else setOwnColor(['#000000', '#000000']);
   }, [props.sector]);
 
   const onClick = (e: any) => {
+    e.preventDefault();
     const sector = e.target.id.replace('sector_', '').split('_');
     const x = Number(sector[0]);
     const y = Number(sector[1]);
+
+    // This is our sector just return
+    if (props.sector && x === props.sector[0] && y === props.sector[1]) return;
+
     props.setSector([x, y]);
     props.setPixel(undefined);
-    e.preventDefault();
   };
 
   const onContextMenu = (e: any) => {
@@ -50,7 +54,8 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            backgroundColor: ownColor,
+            backgroundColor: ownColor[0],
+            border: `solid 2px ${ownColor[1]}`,
             opacity: opacity
           }}
           onClick={onClick}

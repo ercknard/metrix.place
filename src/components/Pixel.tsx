@@ -5,12 +5,11 @@ interface PixelProps {
   x: number;
   y: number;
   color: string;
+  sector: [x: number, y: number];
   pixel: number[] | undefined;
-  setPixel(pixel: number[] | undefined): void;
+  setPixel(pixel: [x: number, y: number] | undefined): void;
 }
 export default function Pixel(props: PixelProps): JSX.Element {
-  // wether the pixel is painted or not
-
   const [opacity, setOpacity] = React.useState(0.33);
   const [ownColor, setOwnColor] = React.useState(props.color);
 
@@ -34,7 +33,9 @@ export default function Pixel(props: PixelProps): JSX.Element {
     const pixel = e.target.id.replace('pixel_', '').split('_');
     const x = Number(pixel[0]);
     const y = Number(pixel[1]);
-
+    console.log(
+      `actualPixel: [${x + 64 * props.sector[0]}, ${y + 64 * props.sector[1]}]`
+    );
     // This is our pixel just return
     if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) return;
 

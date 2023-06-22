@@ -10,6 +10,6 @@
     "baseUrl": "../",
     "paths": {}
   },
-  "include": ["**/*.ts", "../src/abi/**/*"],
+  "include": ["**/*.ts", "../src/abi/**/*","../src/utils/**/*"],
   "exclude": [".build"]
 }

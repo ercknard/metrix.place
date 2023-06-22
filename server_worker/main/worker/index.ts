@@ -1,7 +1,8 @@
-import { MetrixRPC } from '@metrixcoin/metrilib';
+import { MetrixRPC, NetworkType } from '@metrixcoin/metrilib';
 import { pingLocal } from './process/pingLocalNode';
 
 import Logger from '../util/logger';
+import { cacheFullPlace } from './process/cacheFullPlace';
 const logger = new Logger('worker', 'magenta');
 const loggerWorker = logger.createSubLogger('main', 'blue');
 const loggerRun = loggerWorker.createSubLogger('run', 'yellow');
@@ -63,6 +64,14 @@ export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
     }
 
     // TODO: Do work here..
+    const cache = await cacheFullPlace(
+      process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType,
+      rpc,
+      loggerRun
+    );
+    if (!cache) {
+      return;
+    }
   }
 
   /************************ */

@@ -1,22 +1,10 @@
 import Head from 'next/head';
-import {
-  Button,
-  Container,
-  Grid,
-  Icon,
-  Message,
-  Image,
-  Header,
-  Segment
-} from 'semantic-ui-react';
+import { Container, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
-import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
-import DebugContracts from '../components/DebugContracts';
+import { NetworkType } from '@metrixcoin/metrilib';
 import { getMetrixPlace, getMetrixPlaceAddress } from '../place';
-import Web3TransactionModal from '../modals/Web3TransactionModal';
-import { ZeroHash } from 'ethers';
 import HandleProviderType from '../helpers/HandleProviderType';
 import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
@@ -39,12 +27,19 @@ export default function Home() {
   const [modalMessage, setModalMessage] = React.useState(
     undefined as string | JSX.Element | undefined
   );
-  const [sector, setSector] = React.useState([0, 0] as undefined | number[]);
-  const [pixel, setPixel] = React.useState(undefined as undefined | number[]);
+  const [sector, setSector] = React.useState([0, 0] as [x: number, y: number]);
+  const [pixel, setPixel] = React.useState(
+    undefined as undefined | [x: number, y: number]
+  );
 
   const setup = async () => {
-    const provider = HandleProviderType(network ? network : 'MainNet');
-    const place = getMetrixPlace(network ? network : 'MainNet', provider);
+    const provider = HandleProviderType(
+      network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
+    );
+    const place = getMetrixPlace(
+      network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType),
+      provider
+    );
   };
 
   const handleMessage = async (
@@ -93,7 +88,11 @@ export default function Home() {
     const account = data.account;
     if (account && account.loggedIn) {
       setAddress(toHexAddress(account.address));
-      setNetwork(account.network ? account.network : 'MainNet');
+      setNetwork(
+        account.network
+          ? account.network
+          : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
+      );
       setConnected(true);
       setError(false);
       setup();
@@ -101,10 +100,16 @@ export default function Home() {
       setDebug([
         <Segment inverted key={'SegmentTokenBuyback'}>
           <ContractFunctions
-            network={account.network ? account.network : 'MainNet'}
+            network={
+              account.network
+                ? account.network
+                : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
+            }
             contract={'TokenBuyback'}
             address={getMetrixPlaceAddress(
-              account.network ? account.network : 'MainNet'
+              account.network
+                ? account.network
+                : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
             )}
             abi={ABI.MetrixPlace}
             key={0}
@@ -153,50 +158,72 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.h1}> metrix.place </h1>
-        <div className={styles.main_box}>
-          <div className={styles.sample_box}>
-            <EditGrid x={0} y={0} pixel={pixel} setPixel={setPixel} />
-          </div>
-          <div className={styles.to_flex}>
-            <div className={styles.to_flex_icons}>
-              <div className={styles.eye_box}>
-                <Icon className={styles.eye_icon} name="file code outline" />
-              </div>
-              <div className={styles.eye_box}>
-                <Icon className={styles.eye_icon} name="eye" />
-              </div>
-              <div className={styles.eye_box}>
-                <Icon className={styles.eye_icon} name="cog" />
-              </div>
-            </div>
-            <div className={styles.secondary_box}>
-              <div className={styles.tertiary_box}>
-                <MapGrid
+        {network && connected && address ? (
+          <>
+            <div className={styles.main_box}>
+              <div className={styles.sample_box}>
+                <EditGrid
                   sector={sector}
-                  setSector={setSector}
+                  x={0}
+                  y={0}
+                  pixel={pixel}
                   setPixel={setPixel}
                 />
               </div>
+              <div className={styles.to_flex}>
+                <div className={styles.to_flex_icons}>
+                  <div className={styles.eye_box}>
+                    <Icon
+                      className={styles.eye_icon}
+                      name="file code outline"
+                    />
+                  </div>
+                  <div className={styles.eye_box}>
+                    <Icon className={styles.eye_icon} name="eye" />
+                  </div>
+                  <div className={styles.eye_box}>
+                    <Icon className={styles.eye_icon} name="cog" />
+                  </div>
+                </div>
+                <div className={styles.secondary_box}>
+                  <div className={styles.tertiary_box}>
+                    <MapGrid
+                      sector={sector}
+                      setSector={setSector}
+                      setPixel={setPixel}
+                    />
+                  </div>
+                </div>
+                <div className={styles.color_pallete}>
+                  <TwitterPicker
+                    styles={{
+                      default: {
+                        card: {
+                          justifyContent: 'center',
+                          background: '#4c455c',
+                          border: 'none',
+                          boxShadow: 'none'
+                        }
+                      }
+                    }}
+                    triangle="hide"
+                  />
+                  <div className={styles.color_submit}> Submit </div>
+                </div>
+                {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
+              </div>
             </div>
-            <div className={styles.color_pallete}>
-              <TwitterPicker
-                styles={{
-                  default: {
-                    card: {
-                      justifyContent: 'center',
-                      background: '#4c455c',
-                      border: 'none',
-                      boxShadow: 'none'
-                    }
-                  }
-                }}
-                triangle="hide"
-              />
-              <div className={styles.color_submit}> Submit </div>
-            </div>
-            {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
-          </div>
-        </div>
+          </>
+        ) : (
+          <>
+            <Image
+              style={{ width: '70vh', height: '70vh' }}
+              src="/images/default.png"
+              alt="logo"
+            />
+          </>
+        )}
+
         <Container>
           <Grid padded stackable stretched container>
             <Grid.Row stretched>

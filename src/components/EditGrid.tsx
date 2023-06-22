@@ -5,8 +5,9 @@ import styles from '../styles/Home.module.css';
 interface EditGridProps {
   x: number;
   y: number;
-  pixel: number[] | undefined;
-  setPixel(pixel: number[] | undefined): void;
+  sector: [x: number, y: number];
+  pixel: [x: number, y: number] | undefined;
+  setPixel(pixel: [x: number, y: number] | undefined): void;
 }
 export default function EditGrid(props: EditGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -26,6 +27,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
         // TODO: get the color of the pixel from the db cache
         grid.push(
           <Pixel
+            sector={props.sector}
             pixel={props.pixel}
             setPixel={props.setPixel}
             x={x}

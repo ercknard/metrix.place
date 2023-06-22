@@ -3,9 +3,9 @@ import styles from '../styles/Home.module.css';
 import MapSector from './MapSector';
 
 interface MapGridProps {
-  sector: number[] | undefined;
-  setSector(sector: number[] | undefined): void;
-  setPixel(pixel: number[] | undefined): void;
+  sector: [x: number, y: number] | undefined;
+  setSector(sector: [x: number, y: number]): void;
+  setPixel(pixel: [x: number, y: number] | undefined): void;
 }
 export default function MapGrid(props: MapGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);

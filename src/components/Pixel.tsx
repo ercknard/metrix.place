@@ -1,37 +1,40 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
 
-export const paintContext = React.createContext({
-  paintColor: '#000',
-  setPaintColor: (value: string) => {}
-});
 interface PixelProps {
   x: number;
   y: number;
   color: string;
+  pixel: number[] | undefined;
+  setPixel(pixel: number[] | undefined): void;
 }
 export default function Pixel(props: PixelProps): JSX.Element {
   // wether the pixel is painted or not
 
-  const [opacity, setOpacity] = React.useState(0);
-  const { paintColor } = React.useContext(paintContext);
-  const [ownColor, setOwnColor] = React.useState(paintColor);
+  const [opacity, setOpacity] = React.useState(0.33);
+  const [ownColor, setOwnColor] = React.useState(props.color);
 
-  const setColor = () => {
-    setOwnColor(paintColor);
-
-    // set the opacity
-    setOpacity(1);
-  };
-
-  const eraseColor = () => {
-    setOpacity(0);
-  };
+  React.useEffect(() => {
+    if (
+      props.pixel &&
+      props.pixel[0] === props.x &&
+      props.pixel[1] === props.y
+    ) {
+      setOwnColor('#f6a1ff');
+      setOpacity(0.33);
+    } else {
+      setOwnColor('#000000');
+      setOpacity(0);
+    }
+  }, [props.pixel]);
 
   // when click, set the color
   const onClick = (e: any) => {
-    console.log(`click ${e.target.id}`);
     //setColor();
+    const pixel = e.target.id.replace('pixel_', '').split('_');
+    const x = Number(pixel[0]);
+    const y = Number(pixel[1]);
+    props.setPixel([x, y]);
     e.preventDefault();
   };
 
@@ -41,45 +44,23 @@ export default function Pixel(props: PixelProps): JSX.Element {
     e.preventDefault();
   };
 
-  // if mouse is over while not pressing the mouse button and opacity is 0, set opacity to 0.18
-  // if mouse is over while pressing the mouse button, set opacity to 1
-  // if mouse is over while pressing the right mouse button, set opacity to 0
-  const onMouseOver = (e: any) => {
-    console.log(e.target.id);
-    if (e.buttons === 0 && opacity === 0) {
-      //setOpacity(0.18);
-    } else if (e.buttons === 1) {
-      //setColor();
-    } else if (e.buttons === 2) {
-      //eraseColor();
-    }
-  };
-
-  // when mouse leave while opacity is 0.18, set opacity to 0
-  const onMouseLeave = () => {
-    if (opacity === 0.18) {
-      //eraseColor();
-    }
-  };
   return (
     <>
       <div
         className={styles.pixel}
         style={{
-          boxShadow: `${props.x}rem ${props.y}rem 0 -0.05rem ${props.color}`
+          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.05rem`
         }}
       >
         <div
-          id={`pixel_${props.x - 1}_${props.y - 1}`}
+          id={`pixel_${props.x}_${props.y}`}
           className={styles.pixel}
           style={{
-            top: `${props.y}rem`,
-            left: `${props.x}rem`,
-            backgroundColor: ownColor,
+            top: `${props.y + 1}rem`,
+            left: `${props.x + 1}rem`,
+            border: `solid 2px ${ownColor}`,
             opacity: opacity
           }}
-          onMouseOver={onMouseOver}
-          onMouseLeave={onMouseLeave}
           onClick={onClick}
           onContextMenu={onContextMenu}
           // prevent drag events

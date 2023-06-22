@@ -39,6 +39,8 @@ export default function Home() {
   const [modalMessage, setModalMessage] = React.useState(
     undefined as string | JSX.Element | undefined
   );
+  const [sector, setSector] = React.useState([0, 0] as undefined | number[]);
+  const [pixel, setPixel] = React.useState(undefined as undefined | number[]);
 
   const setup = async () => {
     const provider = HandleProviderType(network ? network : 'MainNet');
@@ -153,7 +155,7 @@ export default function Home() {
         <h1 className={styles.h1}> metrix.place </h1>
         <div className={styles.main_box}>
           <div className={styles.sample_box}>
-            <EditGrid x={0} y={0} />
+            <EditGrid x={0} y={0} pixel={pixel} setPixel={setPixel} />
           </div>
           <div className={styles.to_flex}>
             <div className={styles.to_flex_icons}>
@@ -169,7 +171,11 @@ export default function Home() {
             </div>
             <div className={styles.secondary_box}>
               <div className={styles.tertiary_box}>
-                <MapGrid />
+                <MapGrid
+                  sector={sector}
+                  setSector={setSector}
+                  setPixel={setPixel}
+                />
               </div>
             </div>
             <div className={styles.color_pallete}>

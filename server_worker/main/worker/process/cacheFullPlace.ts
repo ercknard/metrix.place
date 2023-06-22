@@ -17,7 +17,7 @@ export const cacheFullPlace = async (
     const pixels = [];
     for (let y = 0; y < 16; y++) {
       for (let x = 0; x < 16; x++) {
-        const chunk = /*await place.getChunkColors(
+        const chunk: number[][] = /*await place.getChunkColors(
           BigInt(y * 64),
           BigInt(x * 64)
         );*/ [];

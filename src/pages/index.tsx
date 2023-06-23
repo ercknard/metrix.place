@@ -219,6 +219,9 @@ export default function Home() {
                             fontFamily: 'vt323',
                             fontSize: '1.8em',
                             color: '#000000',
+                          },
+                          swatch: {
+                            boxShadow: '1px 1px 2px rgba(0, 0, 0, .25) inset, 1px 1px 2px rgba(0, 0, 0, 1)'
                           }
 
                         }

@@ -459,4 +459,5 @@
   margin-bottom: 1rem !important;
   margin-left: auto;
   margin-right: auto;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1));
 }

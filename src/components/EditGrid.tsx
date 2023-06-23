@@ -17,7 +17,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
   const [pixels, setPixels] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updatePixels();
-  }, [props.pixel]);
+  }, [props.pixel, props.color]);
 
   const updatePixels = () => {
     // create a two dimensional array of Pixel components
@@ -29,10 +29,14 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
         const r = `${BigInt(x * 4).toString(16)}`;
         const g = `${(BigInt(y * 2) + BigInt(y * 2)).toString(16)}`;
         const b = `${BigInt(x * 4).toString(16)}`;
-        let color = `#${r.length == 2 ? r : `0${r}`}${
+        let color: string | RGBColor = `#${r.length == 2 ? r : `0${r}`}${
           g.length == 2 ? g : `0${g}`
         }${b.length == 2 ? b : `0${b}`}`;
-        console.log(color);
+        if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) {
+          color = props.color;
+          props.setColor(props.color);
+        }
+
         // TODO: get the color of the pixel from the db cache
         grid.push(
           <Pixel

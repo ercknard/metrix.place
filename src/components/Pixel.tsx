@@ -41,6 +41,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
     if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) return;
 
     props.setPixel([x, y]);
+    props.setColor(props.color);
     e.preventDefault();
   };
 

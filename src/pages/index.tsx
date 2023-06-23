@@ -32,7 +32,9 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
-  const [color, setColor] = React.useState({ a: 1 } as RGBColor | string);
+  const [color, setColor] = React.useState({ r: 0, g: 0, b: 0, a: 0 } as
+    | RGBColor
+    | string);
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -150,6 +152,35 @@ export default function Home() {
     color: ColorResult,
     event: React.ChangeEvent<HTMLInputElement>
   ) => setColor(color.rgb);
+
+  const getOffColor = (color: string | RGBColor): string => {
+    const offWhite = '#F8F8F8';
+    const offBlack = '#080808';
+
+    const calculateIntensity = (color: RGBColor): number => {
+      // Calculate the intensity of the color based on the RGB values
+      return (color.r + color.g + color.b) / 3;
+    };
+
+    const isCloseToWhite = (color: RGBColor): boolean => {
+      const threshold = 200; // Adjust the threshold as needed
+      const intensity = calculateIntensity(color);
+      return intensity > threshold;
+    };
+
+    if (typeof color === 'string') {
+      const parsedColor = parseInt(color.slice(1), 16);
+      const r = (parsedColor >> 16) & 0xff;
+      const g = (parsedColor >> 8) & 0xff;
+      const b = parsedColor & 0xff;
+
+      const rgbColor: RGBColor = { r, g, b };
+
+      return isCloseToWhite(rgbColor) ? offBlack : offWhite;
+    } else {
+      return isCloseToWhite(color) ? offBlack : offWhite;
+    }
+  };
   return (
     <>
       <Head>
@@ -204,34 +235,53 @@ export default function Home() {
                   </div>
                   <div className={styles.color_pallete}>
                     <div>
-                    <TwitterPicker
-                      color={color}
-                      onChangeComplete={handleChange}
-                      styles={{
-                        default: {
-                          card: {
-                            justifyContent: 'center',
-                            background: '#4c455c',
-                            border: 'none',
-                            boxShadow: 'none'
-                          },
-                          input: {
-                            fontFamily: 'vt323',
-                            fontSize: '1.8em',
-                            color: '#000000',
-                          },
-                          swatch: {
-                            boxShadow: '1px 1px 2px rgba(0, 0, 0, .25) inset, 1px 1px 2px rgba(0, 0, 0, 1)'
+                      <TwitterPicker
+                        color={color}
+                        onChangeComplete={handleChange}
+                        styles={{
+                          default: {
+                            card: {
+                              justifyContent: 'center',
+                              background: '#4c455c',
+                              border: 'none',
+                              boxShadow: 'none'
+                            },
+                            input: {
+                              fontFamily: 'vt323',
+                              fontSize: '1.8em',
+                              color: getOffColor(color),
+                              background:
+                                typeof color === 'string'
+                                  ? color
+                                  : `#${
+                                      BigInt(color.r).toString(16).length == 2
+                                        ? BigInt(color.r).toString(16)
+                                        : `0${BigInt(color.r).toString(16)}`
+                                    },${
+                                      BigInt(color.g).toString(16).length == 2
+                                        ? BigInt(color.g).toString(16)
+                                        : `0${BigInt(color.g).toString(16)}`
+                                    },${
+                                      BigInt(color.b).toString(16).length == 2
+                                        ? BigInt(color.b).toString(16)
+                                        : `0${BigInt(color.b).toString(16)}`
+                                    }`
+                            },
+                            swatch: {
+                              boxShadow:
+                                '1px 1px 2px rgba(0, 0, 0, .25) inset, 1px 1px 2px rgba(0, 0, 0, 1)'
+                            }
                           }
-
-                        }
-                      }}
-                      triangle="hide"
+                        }}
+                        triangle="hide"
                       />
-                      
-                        <AlphaPicker className={styles.alpha} color={color} onChangeComplete={handleChange} />
-                      
-                      </div>
+
+                      <AlphaPicker
+                        className={styles.alpha}
+                        color={color}
+                        onChangeComplete={handleChange}
+                      />
+                    </div>
 
                     <div className={styles.color_submit}> Submit </div>
                   </div>

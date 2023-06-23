@@ -11,7 +11,7 @@ const getValues = (obj: any /* eslint-disable-line */) => {
     values.message = (obj as Error).message;
     values.stack = (obj as Error).stack;
   } else if (obj instanceof Function) {
-    values = `function: ${(obj as Function).name}` /* eslint-disable-line */;
+    values = `function: ${(obj as Function).name}` /* eslint-le-line */;
   } else if (typeof obj === 'bigint') {
     values = bnToHex(obj as bigint);
   } else if (typeof obj === 'object' && obj !== null) {

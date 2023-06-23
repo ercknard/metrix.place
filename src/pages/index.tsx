@@ -214,7 +214,13 @@ export default function Home() {
                             background: '#4c455c',
                             border: 'none',
                             boxShadow: 'none'
+                          },
+                          input: {
+                            fontFamily: 'vt323',
+                            fontSize: '1.8em',
+                            color: '#000000',
                           }
+
                         }
                       }}
                       triangle="hide"

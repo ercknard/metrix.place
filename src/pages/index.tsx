@@ -11,7 +11,7 @@ import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
-import { AlphaPicker, ColorResult, TwitterPicker } from 'react-color';
+import { AlphaPicker, ColorResult, RGBColor, TwitterPicker } from 'react-color';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -32,7 +32,7 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
-  const [color, setColor] = React.useState(undefined as undefined | string);
+  const [color, setColor] = React.useState({ a: 1 } as RGBColor);
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -149,7 +149,7 @@ export default function Home() {
   const handleChange = (
     color: ColorResult,
     event: React.ChangeEvent<HTMLInputElement>
-  ) => setColor(color.hex);
+  ) => setColor(color.rgb);
   return (
     <>
       <Head>

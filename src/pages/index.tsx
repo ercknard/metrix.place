@@ -202,9 +202,8 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                  <AlphaPicker color={color} onChangeComplete={handleChange} />
-                  <label>Alpha</label>
                   <div className={styles.color_pallete}>
+                    <div>
                     <TwitterPicker
                       color={color}
                       onChangeComplete={handleChange}
@@ -219,7 +218,11 @@ export default function Home() {
                         }
                       }}
                       triangle="hide"
-                    />
+                      />
+                      
+                        <AlphaPicker className={styles.alpha} color={color} onChangeComplete={handleChange} />
+                      
+                      </div>
 
                     <div className={styles.color_submit}> Submit </div>
                   </div>

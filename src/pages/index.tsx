@@ -11,7 +11,7 @@ import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
-import { TwitterPicker } from 'react-color';
+import { AlphaPicker, ColorResult, TwitterPicker } from 'react-color';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -31,6 +31,8 @@ export default function Home() {
   const [pixel, setPixel] = React.useState(
     undefined as undefined | [x: number, y: number]
   );
+
+  const [color, setColor] = React.useState(undefined as undefined | string);
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -144,7 +146,10 @@ export default function Home() {
       window.postMessage({ message: { type: 'CONNECT_METRIMASK' } }, '*');
     }
   }, []);
-
+  const handleChange = (
+    color: ColorResult,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => setColor(color.hex);
   return (
     <>
       <Head>
@@ -194,8 +199,12 @@ export default function Home() {
                     />
                   </div>
                 </div>
+                <AlphaPicker color={color} onChangeComplete={handleChange} />
+                <label>Alpha</label>
                 <div className={styles.color_pallete}>
                   <TwitterPicker
+                    color={color}
+                    onChangeComplete={handleChange}
                     styles={{
                       default: {
                         card: {
@@ -208,6 +217,7 @@ export default function Home() {
                     }}
                     triangle="hide"
                   />
+
                   <div className={styles.color_submit}> Submit </div>
                 </div>
                 {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}

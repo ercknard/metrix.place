@@ -245,6 +245,7 @@
 .eye_box:active {
   background-color: rgb(117, 103, 147);
   color: #00000075;
+  transform: translateY(0px);
 }
 
 /*---------------------------------COLOR PALLETE-------------------------------*/
@@ -378,6 +379,7 @@
 }
 
 .color_submit:active {
+  transform: translateY(0px);
   background-color: rgb(81, 34, 107);
 }
 

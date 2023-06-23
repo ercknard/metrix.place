@@ -163,78 +163,80 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.h1}> metrix.place </h1>
-        {network && connected && address ? (
-          <>
-            <div className={styles.main_box}>
-              <div className={styles.sample_box}>
-                <EditGrid
-                  sector={sector}
-                  x={0}
-                  y={0}
-                  pixel={pixel}
-                  setPixel={setPixel}
-                  setColor={setColor}
-                  color={color}
-                />
-              </div>
-              <div className={styles.to_flex}>
-                <div className={styles.to_flex_icons}>
-                  <div className={styles.eye_box}>
-                    <Icon
-                      className={styles.eye_icon}
-                      name="file code outline"
-                    />
-                  </div>
-                  <div className={styles.eye_box}>
-                    <Icon className={styles.eye_icon} name="eye" />
-                  </div>
-                  <div className={styles.eye_box}>
-                    <Icon className={styles.eye_icon} name="cog" />
-                  </div>
-                </div>
-                <div className={styles.secondary_box}>
-                  <div className={styles.tertiary_box}>
-                    <MapGrid
-                      sector={sector}
-                      setSector={setSector}
-                      setPixel={setPixel}
-                    />
-                  </div>
-                </div>
-                <AlphaPicker color={color} onChangeComplete={handleChange} />
-                <label>Alpha</label>
-                <div className={styles.color_pallete}>
-                  <TwitterPicker
+        {
+          /* network && connected && address */ true ? (
+            <>
+              <div className={styles.main_box}>
+                <div className={styles.sample_box}>
+                  <EditGrid
+                    sector={sector}
+                    x={0}
+                    y={0}
+                    pixel={pixel}
+                    setPixel={setPixel}
+                    setColor={setColor}
                     color={color}
-                    onChangeComplete={handleChange}
-                    styles={{
-                      default: {
-                        card: {
-                          justifyContent: 'center',
-                          background: '#4c455c',
-                          border: 'none',
-                          boxShadow: 'none'
-                        }
-                      }
-                    }}
-                    triangle="hide"
                   />
-
-                  <div className={styles.color_submit}> Submit </div>
                 </div>
-                {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
+                <div className={styles.to_flex}>
+                  <div className={styles.to_flex_icons}>
+                    <div className={styles.eye_box}>
+                      <Icon
+                        className={styles.eye_icon}
+                        name="file code outline"
+                      />
+                    </div>
+                    <div className={styles.eye_box}>
+                      <Icon className={styles.eye_icon} name="eye" />
+                    </div>
+                    <div className={styles.eye_box}>
+                      <Icon className={styles.eye_icon} name="cog" />
+                    </div>
+                  </div>
+                  <div className={styles.secondary_box}>
+                    <div className={styles.tertiary_box}>
+                      <MapGrid
+                        sector={sector}
+                        setSector={setSector}
+                        setPixel={setPixel}
+                      />
+                    </div>
+                  </div>
+                  <AlphaPicker color={color} onChangeComplete={handleChange} />
+                  <label>Alpha</label>
+                  <div className={styles.color_pallete}>
+                    <TwitterPicker
+                      color={color}
+                      onChangeComplete={handleChange}
+                      styles={{
+                        default: {
+                          card: {
+                            justifyContent: 'center',
+                            background: '#4c455c',
+                            border: 'none',
+                            boxShadow: 'none'
+                          }
+                        }
+                      }}
+                      triangle="hide"
+                    />
+
+                    <div className={styles.color_submit}> Submit </div>
+                  </div>
+                  {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <Image
-              style={{ width: '70vh', height: '70vh' }}
-              src="/images/default.png"
-              alt="logo"
-            />
-          </>
-        )}
+            </>
+          ) : (
+            <>
+              <Image
+                style={{ width: '70vh', height: '70vh' }}
+                src="/images/default.png"
+                alt="logo"
+              />
+            </>
+          )
+        }
 
         <Container>
           <Grid padded stackable stretched container>

@@ -32,7 +32,7 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
-  const [color, setColor] = React.useState({ a: 1 } as RGBColor);
+  const [color, setColor] = React.useState({ a: 1 } as RGBColor | string);
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -173,6 +173,8 @@ export default function Home() {
                   y={0}
                   pixel={pixel}
                   setPixel={setPixel}
+                  setColor={setColor}
+                  color={color}
                 />
               </div>
               <div className={styles.to_flex}>

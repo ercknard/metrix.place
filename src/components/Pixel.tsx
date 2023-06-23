@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
+import { Color, RGBColor } from 'react-color';
 
 interface PixelProps {
   x: number;
   y: number;
-  color: string;
+  color: string | RGBColor;
+  setColor(color: Color): void;
   sector: [x: number, y: number];
   pixel: number[] | undefined;
   setPixel(pixel: [x: number, y: number] | undefined): void;
 }
 export default function Pixel(props: PixelProps): JSX.Element {
   const [opacity, setOpacity] = React.useState(1);
-  const [ownColor, setOwnColor] = React.useState(props.color);
+  const [ownColor, setOwnColor] = React.useState(props.color as Color);
 
   React.useEffect(() => {
     if (
@@ -20,6 +22,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
       props.pixel[1] === props.y
     ) {
       setOwnColor(props.color);
+      props.setColor(props.color);
     } else {
       setOwnColor('#000000');
     }
@@ -69,7 +72,12 @@ export default function Pixel(props: PixelProps): JSX.Element {
                 : ownColor
             }`,
             opacity: opacity,
-            backgroundColor: props.color
+            backgroundColor:
+              typeof props.color === 'string'
+                ? props.color
+                : `rgba(${props.color.r},${props.color.g},${props.color.b},${
+                    props.color.a ? props.color.a : 0
+                  })`
           }}
           onClick={onClick}
           onContextMenu={onContextMenu}

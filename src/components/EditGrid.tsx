@@ -1,6 +1,7 @@
 import React from 'react';
 import Pixel from './Pixel';
 import styles from '../styles/Home.module.css';
+import { RGBColor } from 'react-color';
 
 interface EditGridProps {
   x: number;
@@ -8,6 +9,8 @@ interface EditGridProps {
   sector: [x: number, y: number];
   pixel: [x: number, y: number] | undefined;
   setPixel(pixel: [x: number, y: number] | undefined): void;
+  color: string | RGBColor;
+  setColor(color: string | RGBColor): void;
 }
 export default function EditGrid(props: EditGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -39,6 +42,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
             x={x}
             y={y}
             color={color}
+            setColor={props.setColor}
             key={`${x}pixel${y}`}
           />
         );

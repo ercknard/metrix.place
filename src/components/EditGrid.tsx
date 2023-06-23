@@ -23,7 +23,13 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        let color = '#000000';
+        const r = `${BigInt(x * 4).toString(16)}`;
+        const g = `${(BigInt(y * 2) + BigInt(y * 2)).toString(16)}`;
+        const b = `${BigInt(x * 4).toString(16)}`;
+        let color = `#${r.length == 2 ? r : `0${r}`}${
+          g.length == 2 ? g : `0${g}`
+        }${b.length == 2 ? b : `0${b}`}`;
+        console.log(color);
         // TODO: get the color of the pixel from the db cache
         grid.push(
           <Pixel

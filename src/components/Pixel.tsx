@@ -10,7 +10,7 @@ interface PixelProps {
   setPixel(pixel: [x: number, y: number] | undefined): void;
 }
 export default function Pixel(props: PixelProps): JSX.Element {
-  const [opacity, setOpacity] = React.useState(0.33);
+  const [opacity, setOpacity] = React.useState(1);
   const [ownColor, setOwnColor] = React.useState(props.color);
 
   React.useEffect(() => {
@@ -19,11 +19,9 @@ export default function Pixel(props: PixelProps): JSX.Element {
       props.pixel[0] === props.x &&
       props.pixel[1] === props.y
     ) {
-      setOwnColor('#f6a1ff');
-      setOpacity(0.33);
+      setOwnColor(props.color);
     } else {
       setOwnColor('#000000');
-      setOpacity(0);
     }
   }, [props.pixel]);
 
@@ -54,7 +52,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
       <div
         className={styles.pixel}
         style={{
-          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.05rem`
+          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.1rem ${ownColor}`
         }}
       >
         <div
@@ -63,8 +61,15 @@ export default function Pixel(props: PixelProps): JSX.Element {
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            border: `solid 2px ${ownColor}`,
-            opacity: opacity
+            border: `solid 0.05rem ${
+              props.pixel &&
+              props.x === props.pixel[0] &&
+              props.y === props.pixel[1]
+                ? `#feefee`
+                : ownColor
+            }`,
+            opacity: opacity,
+            backgroundColor: props.color
           }}
           onClick={onClick}
           onContextMenu={onContextMenu}

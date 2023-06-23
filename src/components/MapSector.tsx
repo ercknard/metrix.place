@@ -20,7 +20,7 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
       props.sector[1] === props.y
     )
       setOwnColor(['#92319d', '#f6a1ff']);
-    else setOwnColor(['#000000', '#000000']);
+    else setOwnColor([props.color, '#000000']);
   }, [props.sector]);
 
   const onClick = (e: any) => {

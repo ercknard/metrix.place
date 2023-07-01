@@ -9,8 +9,8 @@ const conf = config[
   ? config[process.env.NODE_ENV as 'development' | 'test' | 'production']
   : {};
 
-export const _sequelize = new Sequelize(conf as Options);
+export const sequelize = new Sequelize(conf as Options);
 
-_sequelize.authenticate();
+sequelize.authenticate();
 
-//export * from './models';
+export * from './models';

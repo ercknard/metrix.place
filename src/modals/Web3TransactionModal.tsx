@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Header, Icon, Message, Modal} from 'semantic-ui-react';
+import { Container, Header, Icon, Message, Modal } from 'semantic-ui-react';
 
 interface Web3TransactionModalProps {
   trigger: JSX.Element;
@@ -14,22 +14,29 @@ export default function Web3TransactionModal(props: Web3TransactionModalProps) {
     <Modal
       closeIcon={props.message != undefined}
       basic
-      dimmer='blurring'
+      dimmer="blurring"
       onClose={() => {
         props.setMessage(undefined);
         setOpen(false);
       }}
       onOpen={() => setOpen(true)}
       open={open}
-      size='small'
+      size="small"
       trigger={props.trigger}
     >
-      <Header icon>
+      <Header
+        style={{
+          fontFamily: 'vt323',
+          fontWeight: 'normal',
+          fontSize: '1.8em'
+        }}
+        icon
+      >
         {!!props.message ? (
           ''
         ) : (
           <>
-            <Icon name='cog' loading />
+            <Icon name="cog" loading />
             Complete the transaction through MetriMask
           </>
         )}
@@ -39,7 +46,7 @@ export default function Web3TransactionModal(props: Web3TransactionModalProps) {
           hidden={!!!props.message}
           error={typeof props.message === 'string'}
           success={typeof props.message === 'object'}
-          content={<Container textAlign='center'>{props.message}</Container>}
+          content={<Container textAlign="center">{props.message}</Container>}
         />
       </Modal.Content>
     </Modal>

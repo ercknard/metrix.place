@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { Container, Grid, Icon, Segment, Image } from 'semantic-ui-react';
+import { Icon, Segment, Image, Container, Grid } from 'semantic-ui-react';
 import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
-import { NetworkType } from '@metrixcoin/metrilib';
+import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
 import HandleProviderType from '../helpers/HandleProviderType';
 import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
@@ -12,6 +12,8 @@ import MapGrid from '../components/MapGrid';
 import { AlphaPicker, ColorResult, RGBColor, TwitterPicker } from 'react-color';
 import { getMetrixPlace, getMetrixPlaceAddress } from '@place/index';
 import ABI from '@place/abi';
+import { ZeroHash } from 'ethers';
+import Web3TransactionModal from '@src/modals/Web3TransactionModal';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -38,6 +40,39 @@ export default function Home() {
     b: 0,
     a: 0
   } as RGBColor);
+
+  const doSetPixel = async () => {
+    if (network && pixel) {
+      const r = BigInt(color.r).toString(16);
+      const g = BigInt(color.g).toString(16);
+      const b = BigInt(color.g).toString(16);
+      const a = BigInt(Math.floor((color.a ? color.a : 0) * 255)).toString(16);
+      const provider = new Web3Provider(network);
+      const place = getMetrixPlace(network, provider);
+      const tx = await place.setPixelColor(
+        BigInt(pixel[0]),
+        BigInt(pixel[1]),
+        `${r.length == 2 ? r : `0${r}`}${g.length == 2 ? g : `0${g}`}${
+          b.length == 2 ? b : `0${b}`
+        }${a.length == 2 ? a : `0${a}`}`
+      );
+      if (tx.txid && tx.txid != ZeroHash.replace('0x', '')) {
+        setModalMessage(
+          <a
+            style={{ color: '#9627ba !important' }}
+            href={`https://${
+              (network ? network : 'MainNet') === 'TestNet' ? 'testnet-' : ''
+            }explorer.metrixcoin.com/tx/${tx.txid}`}
+            target="_blank"
+          >
+            {tx.txid}
+          </a>
+        );
+      } else {
+        setModalMessage('Tranaction failed');
+      }
+    }
+  };
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -242,8 +277,21 @@ export default function Home() {
                         onChangeComplete={handleChange}
                       />
                     </div>
-
-                    <div className={styles.color_submit}> Submit </div>
+                    <Web3TransactionModal
+                      message={modalMessage}
+                      setMessage={setModalMessage}
+                      trigger={
+                        <div
+                          className={styles.color_submit}
+                          onClick={() => {
+                            if (network && address) doSetPixel();
+                          }}
+                        >
+                          {' '}
+                          Submit{' '}
+                        </div>
+                      }
+                    />
                   </div>
                   {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
                 </div>
@@ -259,7 +307,6 @@ export default function Home() {
             </>
           )
         }
-
         <Container>
           <Grid padded stackable stretched container>
             <Grid.Row stretched>

@@ -149,9 +149,11 @@ export default function Home() {
     }
   }, []);
   const handleChange = (
-    color: ColorResult,
+    newColor: ColorResult,
     event: React.ChangeEvent<HTMLInputElement>
-  ) => setColor(color.rgb);
+  ) => {
+    setColor(newColor.rgb);
+  };
 
   const getOffColor = (color: string | RGBColor): string => {
     const offWhite = '#F8F8F8';
@@ -248,24 +250,7 @@ export default function Home() {
                             },
                             input: {
                               fontFamily: 'vt323',
-                              fontSize: '1.8em',
-                              color: getOffColor(color),
-                              background:
-                                typeof color === 'string'
-                                  ? color
-                                  : `#${
-                                      BigInt(color.r).toString(16).length == 2
-                                        ? BigInt(color.r).toString(16)
-                                        : `0${BigInt(color.r).toString(16)}`
-                                    },${
-                                      BigInt(color.g).toString(16).length == 2
-                                        ? BigInt(color.g).toString(16)
-                                        : `0${BigInt(color.g).toString(16)}`
-                                    },${
-                                      BigInt(color.b).toString(16).length == 2
-                                        ? BigInt(color.b).toString(16)
-                                        : `0${BigInt(color.b).toString(16)}`
-                                    }`
+                              fontSize: '1.8em'
                             },
                             swatch: {
                               boxShadow:

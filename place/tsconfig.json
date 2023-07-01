@@ -11,10 +11,5 @@
     "paths": {}
   },
   "include": ["**/*.ts"],
-  "exclude": [".build"],
-  "references": [
-    {
-      "path": "../place"
-    }
-  ]
+  "exclude": [".build"]
 }

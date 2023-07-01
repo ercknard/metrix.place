@@ -4,14 +4,14 @@ import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
 import { NetworkType } from '@metrixcoin/metrilib';
-import { getMetrixPlace, getMetrixPlaceAddress } from '../place';
 import HandleProviderType from '../helpers/HandleProviderType';
 import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
-import ABI from '../abi';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
 import { AlphaPicker, ColorResult, RGBColor, TwitterPicker } from 'react-color';
+import { getMetrixPlace, getMetrixPlaceAddress } from '@place/index';
+import ABI from '@place/abi';
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);

@@ -22,6 +22,9 @@
     "baseUrl": "./",
     "outDir": ".build",
     "paths": {
+      "@place/*": [
+        "./place/*"
+      ],
       "@src/*": [
         "./src/*"
       ],
@@ -45,6 +48,9 @@
     "**/*.spec.ts"
   ],
   "references": [
+    {
+      "path": "./place"
+    },
     {
       "path": "./src"
     },

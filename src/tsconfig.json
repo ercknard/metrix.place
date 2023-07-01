@@ -25,6 +25,9 @@
   },
   "references": [
     {
+      "path": "../place"
+    },
+    {
       "path": "../server_worker"
     },
     {

@@ -1,7 +1,7 @@
 import { parentPort } from 'worker_threads';
 import { MetrixRPC, NetworkType, RPCProvider } from '@metrixcoin/metrilib';
-import { getMetrixPlace } from '../../../../src/utils/ContractUtils';
 import xMessageInterface from '../../util/interface/xMessageInterface';
+import { getMetrixPlace } from '../../../../place';
 
 import Logger from '../../util/logger';
 

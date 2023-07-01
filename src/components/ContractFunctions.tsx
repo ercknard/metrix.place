@@ -1,11 +1,10 @@
-import {NetworkType} from '@metrixcoin/metrilib';
-import {ethers} from 'ethers';
+import { NetworkType } from '@metrixcoin/metrilib';
+import Deployment from '@place/interfaces/Deployment';
+import { contracts as MainNet } from '@place/network/MainNet/1.0.0';
+import { contracts as TestNet } from '@place/network/TestNet/1.0.0';
+import { ethers } from 'ethers';
 import React from 'react';
-import {Grid, Header, Segment} from 'semantic-ui-react';
-
-import {contracts as MainNet} from '../network/MainNet/1.0.0';
-import {contracts as TestNet} from '../network/TestNet/1.0.0';
-import Deployment from '../interfaces/Deployment';
+import { Grid, Header, Segment } from 'semantic-ui-react';
 
 interface ContractProps {
   network: NetworkType;
@@ -14,9 +13,9 @@ interface ContractProps {
   abi: any[];
 }
 
-const contracts: {MainNet: Deployment; TestNet: Deployment} = {
+const contracts: { MainNet: Deployment; TestNet: Deployment } = {
   MainNet: MainNet,
-  TestNet: TestNet,
+  TestNet: TestNet
 };
 
 export default function ContractFunctions(props: ContractProps): JSX.Element {
@@ -109,7 +108,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           window as any
                         ).metrimask.rpcProvider.rawCall('callcontract', [
                           getDeployedContract(props.network, props.contract),
-                          encoded.replace('0x', ''),
+                          encoded.replace('0x', '')
                         ]);
                         const result = call.executionResult;
                         let decoded;
@@ -144,7 +143,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           encoded.replace('0x', ''),
                           tmp.get(`${key}value`),
                           250000,
-                          5000,
+                          5000
                         ]);
 
                         const response = JSON.parse(JSON.stringify(call));
@@ -234,7 +233,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
     <Grid>
       <Grid.Row>
         <Segment inverted>
-          <Header style={{color: 'whitesmoke'}}>
+          <Header style={{ color: 'whitesmoke' }}>
             {`${props.contract}`}.sol
           </Header>
         </Segment>

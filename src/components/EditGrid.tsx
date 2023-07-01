@@ -9,8 +9,8 @@ interface EditGridProps {
   sector: [x: number, y: number];
   pixel: [x: number, y: number] | undefined;
   setPixel(pixel: [x: number, y: number] | undefined): void;
-  color: string | RGBColor;
-  setColor(color: string | RGBColor): void;
+  color: RGBColor;
+  setColor(color: RGBColor): void;
 }
 export default function EditGrid(props: EditGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -26,18 +26,17 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        const r = `${BigInt(x * 4).toString(16)}`;
-        const g = `${(BigInt(y * 2) + BigInt(y * 2)).toString(16)}`;
-        const b = `${BigInt(x * 4).toString(16)}`;
-        let color: string | RGBColor = `#${r.length == 2 ? r : `0${r}`}${
-          g.length == 2 ? g : `0${g}`
-        }${b.length == 2 ? b : `0${b}`}`;
+        const r = 0;
+        const g = 0;
+        const b = 0;
+        const a = 0;
+        // TODO: get the color of the pixel from the db cache
+        let color: RGBColor = { r, g, b, a };
         if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) {
           color = props.color;
           props.setColor(props.color);
         }
 
-        // TODO: get the color of the pixel from the db cache
         grid.push(
           <Pixel
             sector={props.sector}

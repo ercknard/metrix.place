@@ -32,9 +32,12 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
-  const [color, setColor] = React.useState({ r: 0, g: 0, b: 0, a: 0 } as
-    | RGBColor
-    | string);
+  const [color, setColor] = React.useState({
+    r: 0,
+    g: 0,
+    b: 0,
+    a: 0
+  } as RGBColor);
 
   const setup = async () => {
     const provider = HandleProviderType(
@@ -155,34 +158,6 @@ export default function Home() {
     setColor(newColor.rgb);
   };
 
-  const getOffColor = (color: string | RGBColor): string => {
-    const offWhite = '#F8F8F8';
-    const offBlack = '#080808';
-
-    const calculateIntensity = (color: RGBColor): number => {
-      // Calculate the intensity of the color based on the RGB values
-      return (color.r + color.g + color.b) / 3;
-    };
-
-    const isCloseToWhite = (color: RGBColor): boolean => {
-      const threshold = 200; // Adjust the threshold as needed
-      const intensity = calculateIntensity(color);
-      return intensity > threshold;
-    };
-
-    if (typeof color === 'string') {
-      const parsedColor = parseInt(color.slice(1), 16);
-      const r = (parsedColor >> 16) & 0xff;
-      const g = (parsedColor >> 8) & 0xff;
-      const b = parsedColor & 0xff;
-
-      const rgbColor: RGBColor = { r, g, b };
-
-      return isCloseToWhite(rgbColor) ? offBlack : offWhite;
-    } else {
-      return isCloseToWhite(color) ? offBlack : offWhite;
-    }
-  };
   return (
     <>
       <Head>

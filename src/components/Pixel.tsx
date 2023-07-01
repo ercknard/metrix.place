@@ -5,8 +5,8 @@ import { Color, RGBColor } from 'react-color';
 interface PixelProps {
   x: number;
   y: number;
-  color: string | RGBColor;
-  setColor(color: Color): void;
+  color: RGBColor;
+  setColor(color: RGBColor): void;
   sector: [x: number, y: number];
   pixel: number[] | undefined;
   setPixel(pixel: [x: number, y: number] | undefined): void;
@@ -56,7 +56,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
       <div
         className={styles.pixel}
         style={{
-          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.1rem ${ownColor}`
+          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.1rem 202020`
         }}
       >
         <div

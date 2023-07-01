@@ -5,9 +5,9 @@ import { jwtPayload, verifyToken } from './Jwt';
 export default (
   req: {
     method: string;
-    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable-next-line */
     query: any;
-    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable-next-line */
     body: any;
     headers: IncomingHttpHeaders;
   },

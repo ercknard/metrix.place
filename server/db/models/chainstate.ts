@@ -7,46 +7,44 @@ import {
 } from 'sequelize';
 import { sequelize } from '..';
 
-class Account extends Model<
-  InferAttributes<Account>,
-  InferCreationAttributes<Account>
+class ChainState extends Model<
+  InferAttributes<ChainState>,
+  InferCreationAttributes<ChainState>
 > {
   declare id: CreationOptional<number>;
-  declare isAdmin: boolean;
-  declare mrx: string | null;
-  declare nonce: string | null;
+  declare blockHash: string;
+  declare blockNumber: number;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
 
-Account.init(
+ChainState.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true
     },
-    isAdmin: DataTypes.BOOLEAN,
-    mrx: {
-      type: new DataTypes.STRING(40),
-      allowNull: true,
-      unique: true,
+    blockHash: {
+      type: new DataTypes.STRING(64),
+      allowNull: false,
+      unique: false,
       validate: {
-        is: /^[a-fA-F0-9]{40,40}$/
+        is: /^[a-fA-F0-9]{64,64}$/
       }
     },
-    nonce: {
-      type: new DataTypes.STRING(256),
-      allowNull: true,
+    blockNumber: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
       unique: false
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   },
   {
-    tableName: 'accounts',
+    tableName: 'chainstate',
     sequelize: sequelize
   }
 );
 
-export { Account };
+export { ChainState };

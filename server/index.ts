@@ -6,7 +6,7 @@ import Logger from './util/logger';
 import dotenv from 'dotenv';
 
 dotenv.config();
-import { _sequelize } from './db';
+import { sequelize } from './db';
 import { Account } from './db/models';
 
 const logger = new Logger('server', 'purple');
@@ -48,8 +48,8 @@ async function init() {
   }
 
   try {
-    await _sequelize.sync();
-    _sequelize.modelManager.addModel(Account);
+    await sequelize.sync();
+    sequelize.modelManager.addModel(Account);
 
     loggerInit.succ(`>> ${appName} Server has started successfully <<`);
   } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ err: any) {

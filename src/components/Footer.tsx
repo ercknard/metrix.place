@@ -20,6 +20,8 @@ export default function Footer(): JSX.Element {
 
         <Grid.Column style={{ padding: '0px 4px' }}>
           <a
+            href="https://cryptech.services"
+            target="_blank"
             className={styles.lavenderLink_css}
           >
             ©{`2023`}

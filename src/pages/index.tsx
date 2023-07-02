@@ -61,7 +61,7 @@ export default function Home() {
       if (tx.txid && tx.txid != ZeroHash.replace('0x', '')) {
         setModalMessage(
           <a
-            style={{ color: '#9627ba !important' }}
+            className={styles.lavenderLink_css}
             href={`https://${
               (network ? network : 'MainNet') === 'TestNet' ? 'testnet-' : ''
             }explorer.metrixcoin.com/tx/${tx.txid}`}
@@ -77,13 +77,14 @@ export default function Home() {
   };
 
   const setup = async () => {
+    /*
     const provider = HandleProviderType(
       network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
     );
     const place = getMetrixPlace(
       network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType),
       provider
-    );
+    );*/
   };
 
   const handleMessage = async (
@@ -226,10 +227,16 @@ export default function Home() {
                 <div className={styles.to_flex}>
                   <div className={styles.to_flex_icons}>
                     <div className={styles.eye_box}>
-                      <Icon
-                        className={styles.eye_icon}
-                        name="file code outline"
-                      />
+                      <a
+                        style={{ color: '#000000' }}
+                        href="https://github.com/SeqSEE/metrix.place"
+                        target="_blank"
+                      >
+                        <Icon
+                          className={styles.eye_icon}
+                          name="file code outline"
+                        />
+                      </a>
                     </div>
                     <div className={styles.eye_box}>
                       <Icon className={styles.eye_icon} name="eye" />

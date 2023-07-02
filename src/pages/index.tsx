@@ -4,7 +4,6 @@ import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
 import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
-import HandleProviderType from '../helpers/HandleProviderType';
 import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import EditGrid from '../components/EditGrid';

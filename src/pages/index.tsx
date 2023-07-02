@@ -49,9 +49,11 @@ export default function Home() {
       const a = BigInt(Math.floor((color.a ? color.a : 0) * 255)).toString(16);
       const provider = new Web3Provider(network);
       const place = getMetrixPlace(network, provider);
+      const x = Number(pixel[0] + 64 * sector[0]);
+      const y = Number(pixel[1] + 64 * sector[1]);
       const tx = await place.setPixelColor(
-        BigInt(pixel[0]),
-        BigInt(pixel[1]),
+        BigInt(x),
+        BigInt(y),
         `${r.length == 2 ? r : `0${r}`}${g.length == 2 ? g : `0${g}`}${
           b.length == 2 ? b : `0${b}`
         }${a.length == 2 ? a : `0${a}`}`

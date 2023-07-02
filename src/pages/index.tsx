@@ -229,7 +229,7 @@ export default function Home() {
                     <div className={styles.eye_box}>
                       <a
                         style={{ color: '#000000' }}
-                        href="https://github.com/SeqSEE/metrix.place"
+                        href="https://github.com/Cryptech-Services/metrix.place"
                         target="_blank"
                       >
                         <Icon

@@ -10,9 +10,12 @@ import { getMetrixPlace } from 'place';
 
 dotenv.config();
 
-const cacheImages = async (network: NetworkType, provider: RPCProvider) => {
+const cacheImages = async (
+  network: NetworkType,
+  provider: RPCProvider,
+  lastBlock: number
+) => {
   const place = getMetrixPlace(network, provider);
-  const lastBlock = 900000; // TODO: this needs to be replaced with the actual last block
   const allLogs = (await place.getEventLogs()) as RPCEventLogs;
   const logs = allLogs.filter((log) => {
     return log.blockNumber > lastBlock;
@@ -60,6 +63,7 @@ const cacheImages = async (network: NetworkType, provider: RPCProvider) => {
         .toFile(`${__dirname}/../../public/images/chunks/${y}-${x}.jpg`); // TODO: this needs to be replaced with the chunk storage location.
     }
   }
+  return logs[0].blockNumber;
 };
 
 const mrpc: MetrixRPC.MetrixRPCNode = new MetrixRPC.MetrixRPCNode(
@@ -74,4 +78,13 @@ const provider = new RPCProvider(
   process.env.RPC_SENDER as string
 );
 
-cacheImages('TestNet', provider);
+const doTest = async () => {
+  const lastBlock = await cacheImages('TestNet', provider, 900000);
+
+  // TODO: save lastblock
+
+  // last block storage
+  // const chainstate = await ChainState.findOne();
+};
+
+doTest();

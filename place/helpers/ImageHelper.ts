@@ -6,13 +6,8 @@ import {
 } from '@metrixcoin/metrilib';
 import sharp from 'sharp';
 import dotenv from 'dotenv';
+import { getMetrixPlace } from 'place';
 
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { getMetrixPlace } from '@place/index';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 dotenv.config();
 
 const cacheImages = async (network: NetworkType, provider: RPCProvider) => {

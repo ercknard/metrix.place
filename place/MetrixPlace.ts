@@ -114,7 +114,7 @@ export default class MetrixPlace extends MetrixContract {
     const tx = await this.send('setPixelColor(uint16,uint16,uint32)', [
       `0x${x.toString(16)}`,
       `0x${y.toString(16)}`,
-      `0x${color.replace('#', '0x')}`
+      `0x${color.replace('#', '')}`
     ]);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
     return {

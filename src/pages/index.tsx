@@ -342,11 +342,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            <Image
-              style={{ width: '70vh', height: '70vh' }}
-              src="/plc/latest.png"
-              alt="logo"
-            />
+            <Image size="massive" src="/plc/latest.png" alt="logo" />
           </>
         )}
         <Container>

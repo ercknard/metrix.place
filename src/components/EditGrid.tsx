@@ -26,15 +26,19 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
       x: props.sector[0],
       y: props.sector[1]
     });
-    console.log(res);
     const data: Uint8ClampedArray = res.data.data;
-    console.log(`data: ${data.length}`);
     console.log(`pixel: ${JSON.stringify(props.pixel)}`);
+    if (props.pixel)
+      console.log(
+        `actualPixel: [${props.pixel[0] + 64 * props.sector[0]}, ${
+          props.pixel[1] + 64 * props.sector[1]
+        }]`
+      );
     const grid: typeof pixels = [];
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        const pixelIndex = (y * 64 + x) * 4; // Calculate the index for the desired pixel
+        const pixelIndex = (y + x * 64) * 4; // Calculate the index for the desired pixel
         const r = data[pixelIndex]; // Red value (0-255)
         const g = data[pixelIndex + 1]; // Green value (0-255)
         const b = data[pixelIndex + 2]; // Blue value (0-255)

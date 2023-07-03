@@ -7,6 +7,8 @@ import {
 import sharp from 'sharp';
 import dotenv from 'dotenv';
 import { getMetrixPlace } from '../index';
+import { Interface } from 'ethers';
+import ABI from '../abi/index';
 
 dotenv.config();
 
@@ -15,30 +17,118 @@ const cacheImages = async (
   provider: RPCProvider,
   lastBlock: number
 ) => {
+  let last = lastBlock;
   const place = getMetrixPlace(network, provider);
   const allLogs = (await place.getEventLogs()) as RPCEventLogs;
-  const logs = allLogs.filter((log) => {
-    return log.blockNumber > lastBlock;
-  });
-  console.log(`logs.length: ${logs.length}`);
+  const logs = allLogs
+
+    .filter((log) => {
+      return log.blockNumber > lastBlock;
+    })
+
+    .map((log) => {
+      const iface = new Interface(ABI.MetrixPlace);
+      const encoded = `0x${log.log[0].data.replace('0x', '')}`;
+      const decoded = iface.decodeEventLog('PixelUpdated', encoded);
+
+      const tup: readonly [
+        x: number,
+        y: number,
+        color: string,
+        nBlock: number
+      ] = [
+        Number(decoded[0].toString()),
+        Number(decoded[1].toString()),
+        BigInt(decoded[2].toString()).toString(16),
+        log.blockNumber
+      ];
+      return tup;
+    })
+    .reverse();
+
   const pixels: number[] = [];
-  const { data } = await sharp(`${__dirname}/../../../plc/latest.png`) // TODO: this needs to be replaced with the current latest image.
-    .raw()
-    .toBuffer({ resolveWithObject: true });
+  let d = undefined;
+  try {
+    const { data } = await sharp(`${__dirname}/../../../plc/latest.png`, {
+      raw: {
+        width: 1024,
+        height: 1024,
+        channels: 4
+      }
+    }) // TODO: this needs to be replaced with the current latest image.
+      .raw()
+      .ensureAlpha()
+      .toBuffer({ resolveWithObject: true });
+    d = data;
+  } catch (e) {
+    console.log(e);
+    d = [];
+  }
+
   // TODO: tprocess the logs and set any needed pixels
 
-  if (data.length == 0) {
-    for (let i = 0; i < 1024; i++) {
-      for (let j = 0; j < 1024; j++) {
-        pixels.push(0);
-        pixels.push(0);
-        pixels.push(0);
-        pixels.push(0);
+  if (d.length == 0) {
+    for (let x = 0; x < 1024; x++) {
+      for (let y = 0; y < 1024; y++) {
+        let r = 0; // Red value (0-255)
+        let g = 0; // Green value (0-255)
+        let b = 0; // Blue value (0-255)
+        let a = 0; // Alpha value (0-255)
+        const px = logs.find((log) => {
+          return log[0] === x && log[1] === y;
+        });
+        if (px) {
+          console.log(JSON.stringify(px));
+          const hex =
+            px[2].length === 8
+              ? px[2]
+              : `${'0'.repeat(8 - px[2].length)}${px[2]}`;
+
+          r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
+          g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
+          b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
+          a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+        }
+
+        pixels.push(r);
+        pixels.push(g);
+        pixels.push(b);
+        pixels.push(a);
+      }
+    }
+  } else {
+    for (let x = 0; x < 1024; x++) {
+      for (let y = 0; y < 1024; y++) {
+        const pixelIndex = (x + y * 1024) * 4; // Calculate the index for the desired pixel
+        let r = d[pixelIndex]; // Red value (0-255)
+        let g = d[pixelIndex + 1]; // Green value (0-255)
+        let b = d[pixelIndex + 2]; // Blue value (0-255)
+        let a = d[pixelIndex + 3]; // Alpha value (0-255)
+        const px = logs.find((log) => {
+          return log[0] === x && log[1] === y;
+        });
+        if (px) {
+          console.log(JSON.stringify(px));
+          const hex =
+            px[2].length === 8
+              ? px[2]
+              : `${'0'.repeat(8 - px[2].length)}${px[2]}`;
+
+          r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
+          g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
+          b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
+          a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+        }
+
+        pixels.push(r);
+        pixels.push(g);
+        pixels.push(b);
+        pixels.push(a);
       }
     }
   }
 
-  const input = Uint8Array.from(data.length > 0 ? data : pixels); // or Uint8ClampedArray
+  const input = Uint8Array.from(pixels); // or Uint8ClampedArray
   const image = sharp(input, {
     // because the input does not contain its dimensions or how many channels it has
     // we need to specify it in the constructor options
@@ -64,7 +154,7 @@ const cacheImages = async (
         .toFile(`${__dirname}/../../../plc/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
     }
   }
-  return logs[0].blockNumber;
+  return last;
 };
 
 const mrpc: MetrixRPC.MetrixRPCNode = new MetrixRPC.MetrixRPCNode(

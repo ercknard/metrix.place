@@ -17,7 +17,7 @@ import PlaceViewModal from '@src/modals/PlaceViewModal';
 import UserSettingsModal from '@src/modals/UserSettingsModal';
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);

@@ -2,6 +2,7 @@ import React from 'react';
 import Pixel from './Pixel';
 import styles from '../styles/Home.module.css';
 import { RGBColor } from 'react-color';
+import sharp from 'sharp';
 
 interface EditGridProps {
   x: number;
@@ -19,17 +20,22 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
     updatePixels();
   }, [props.pixel, props.color]);
 
-  const updatePixels = () => {
+  const updatePixels = async () => {
     // create a two dimensional array of Pixel components
+    const { data } = await sharp(
+      `${__dirname}/../../public/images/chunks/${props.sector[0]}-${props.sector[1]}.png`
+    )
+      .raw()
+      .toBuffer({ resolveWithObject: true });
     console.log(`pixel: ${JSON.stringify(props.pixel)}`);
     const grid: typeof pixels = [];
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        const r = 0;
-        const g = 0;
-        const b = 0;
-        const a = 0;
+        const r = data[x + y * 64];
+        const g = data[x + y * 64 + 1];
+        const b = data[x + y * 64 + 2];
+        const a = data[x + y * 64 + 3];
         // TODO: get the color of the pixel from the db cache
         let color: RGBColor = { r, g, b, a };
         if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) {

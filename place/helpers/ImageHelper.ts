@@ -22,10 +22,7 @@ const cacheImages = async (
   });
   console.log(`logs.length: ${logs.length}`);
   const pixels: number[] = [];
-  console.log(__dirname);
-  const { data } = await sharp(
-    `${__dirname}/../../../public/images/default.png`
-  ) // TODO: this needs to be replaced with the current latest image.
+  const { data } = await sharp(`${__dirname}/../../../public/images/latest.png`) // TODO: this needs to be replaced with the current latest image.
     .raw()
     .toBuffer({ resolveWithObject: true });
   // TODO: tprocess the logs and set any needed pixels

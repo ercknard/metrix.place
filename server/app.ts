@@ -1,6 +1,8 @@
 import express from 'express';
 import next from 'next';
 import cors from 'cors';
+import http from 'http';
+import { Server } from 'socket.io';
 
 import Logger from './util/logger';
 import { staticServe } from './util/StaticServe';
@@ -21,6 +23,19 @@ app.prepare().then(() => {
   loggerApp.info(`>> Running as ${process.env.NODE_ENV} on Port ${port}`);
 
   const server = express();
+  const srv = http.createServer(server);
+  const io = new Server(srv);
+  io.on('connection', (socket) => {
+    console.log('A client connected');
+
+    // Emit update signals or handle events based on your application's logic
+    // For example:
+    // socket.emit('update', { data: 'Some update data' });
+
+    socket.on('disconnect', () => {
+      console.log('A client disconnected');
+    });
+  });
 
   server.use(cors(corsOptions));
   server.use(express.json());

@@ -13,6 +13,11 @@ import { getMetrixPlace, getMetrixPlaceAddress } from '@place/index';
 import ABI from '@place/abi';
 import { ZeroHash } from 'ethers';
 import Web3TransactionModal from '@src/modals/Web3TransactionModal';
+import PlaceViewModal from '@src/modals/PlaceViewModal';
+import UserSettingsModal from '@src/modals/UserSettingsModal';
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
 
 export default function Home() {
   const [debugging, setDebugging] = React.useState(false);
@@ -39,6 +44,24 @@ export default function Home() {
     b: 0,
     a: 0
   } as RGBColor);
+  const reloadImages = () => {
+    const images = document.getElementsByTagName('img');
+    for (let i = 0; i < images.length; i++) {
+      const imageUrl = images[i].src;
+      images[i].src = '';
+      images[i].src = imageUrl;
+    }
+  };
+
+  React.useEffect(() => {
+    socket.on('update', () => {
+      reloadImages();
+    });
+
+    return () => {
+      socket.off('update');
+    };
+  }, []);
 
   const doSetPixel = async () => {
     console.log(
@@ -213,113 +236,119 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.h1}> metrix.place </h1>
-        {
-          /* network && connected && address */ true ? (
-            <>
-              <div className={styles.main_box}>
-                <div className={styles.sample_box}>
-                  <EditGrid
-                    sector={sector}
-                    x={0}
-                    y={0}
-                    pixel={pixel}
-                    setPixel={setPixel}
-                    setColor={setColor}
-                    color={color}
+        {network && connected && address ? (
+          <>
+            <div className={styles.main_box}>
+              <div className={styles.sample_box}>
+                <EditGrid
+                  sector={sector}
+                  x={0}
+                  y={0}
+                  pixel={pixel}
+                  setPixel={setPixel}
+                  setColor={setColor}
+                  color={color}
+                />
+              </div>
+              <div className={styles.to_flex}>
+                <div className={styles.to_flex_icons}>
+                  <div className={styles.eye_box}>
+                    <a
+                      style={{ color: '#000000' }}
+                      href="https://github.com/Cryptech-Services/metrix.place"
+                      target="_blank"
+                    >
+                      <Icon
+                        className={styles.eye_icon}
+                        name="file code outline"
+                      />
+                    </a>
+                  </div>
+                  <PlaceViewModal
+                    trigger={
+                      <div className={styles.eye_box}>
+                        <Icon className={styles.eye_icon} name="eye" />
+                      </div>
+                    }
+                  />
+                  <UserSettingsModal
+                    trigger={
+                      <div className={styles.eye_box}>
+                        <Icon className={styles.eye_icon} name="cog" />
+                      </div>
+                    }
                   />
                 </div>
-                <div className={styles.to_flex}>
-                  <div className={styles.to_flex_icons}>
-                    <div className={styles.eye_box}>
-                      <a
-                        style={{ color: '#000000' }}
-                        href="https://github.com/Cryptech-Services/metrix.place"
-                        target="_blank"
-                      >
-                        <Icon
-                          className={styles.eye_icon}
-                          name="file code outline"
-                        />
-                      </a>
-                    </div>
-                    <div className={styles.eye_box}>
-                      <Icon className={styles.eye_icon} name="eye" />
-                    </div>
-                    <div className={styles.eye_box}>
-                      <Icon className={styles.eye_icon} name="cog" />
-                    </div>
-                  </div>
-                  <div className={styles.secondary_box}>
-                    <div className={styles.tertiary_box}>
-                      <MapGrid
-                        sector={sector}
-                        setSector={setSector}
-                        setPixel={setPixel}
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.color_pallete}>
-                    <div>
-                      <TwitterPicker
-                        color={color}
-                        onChangeComplete={handleChange}
-                        styles={{
-                          default: {
-                            card: {
-                              justifyContent: 'center',
-                              background: '#4c455c',
-                              border: 'none',
-                              boxShadow: 'none'
-                            },
-                            input: {
-                              fontFamily: 'vt323',
-                              fontSize: '1.8em'
-                            },
-                            swatch: {
-                              boxShadow:
-                                '1px 1px 2px rgba(0, 0, 0, .25) inset, 1px 1px 2px rgba(0, 0, 0, 1)'
-                            }
-                          }
-                        }}
-                        triangle="hide"
-                      />
-
-                      <AlphaPicker
-                        className={styles.alpha}
-                        color={color}
-                        onChangeComplete={handleChange}
-                      />
-                    </div>
-                    <Web3TransactionModal
-                      message={modalMessage}
-                      setMessage={setModalMessage}
-                      trigger={
-                        <div
-                          className={styles.color_submit}
-                          onClick={() => {
-                            if (network && address) doSetPixel();
-                          }}
-                        >
-                          {' '}
-                          Submit{' '}
-                        </div>
-                      }
+                <div className={styles.secondary_box}>
+                  <div className={styles.tertiary_box}>
+                    <MapGrid
+                      sector={sector}
+                      setSector={setSector}
+                      setPixel={setPixel}
                     />
                   </div>
-                  {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
                 </div>
+                <div className={styles.color_pallete}>
+                  <div>
+                    <TwitterPicker
+                      color={color}
+                      onChangeComplete={handleChange}
+                      styles={{
+                        default: {
+                          card: {
+                            justifyContent: 'center',
+                            background: '#4c455c',
+                            border: 'none',
+                            boxShadow: 'none'
+                          },
+                          input: {
+                            fontFamily: 'vt323',
+                            fontSize: '1.8em'
+                          },
+                          swatch: {
+                            boxShadow:
+                              '1px 1px 2px rgba(0, 0, 0, .25) inset, 1px 1px 2px rgba(0, 0, 0, 1)'
+                          }
+                        }
+                      }}
+                      triangle="hide"
+                    />
+
+                    <AlphaPicker
+                      className={styles.alpha}
+                      color={color}
+                      onChangeComplete={handleChange}
+                    />
+                  </div>
+                  <Web3TransactionModal
+                    message={modalMessage}
+                    setMessage={setModalMessage}
+                    trigger={
+                      <div
+                        className={styles.color_submit}
+                        onClick={() => {
+                          if (network && address) doSetPixel();
+                        }}
+                      >
+                        {' '}
+                        Submit{' '}
+                      </div>
+                    }
+                  />
+                </div>
+                {/* <div className={styles.metrix_centri}> <Image alt="metrix" className={styles.metrix_icon} src="/images/2021_Metrix_Icon_Silver.png"/> </div> */}
               </div>
-            </>
-          ) : (
-            <>
-              <Image
-                style={{ width: '70vh', height: '70vh' }}
-                src="/images/default.png"
-                alt="logo"
-              />
-            </>
-          )
-        }
+            </div>
+          </>
+        ) : (
+          <>
+            <Image
+              style={{ width: '70vh', height: '70vh' }}
+              src="/plc/latest.png"
+              alt="logo"
+            />
+          </>
+        )}
         <Container>
           <Grid padded stackable stretched container>
             <Grid.Row stretched>

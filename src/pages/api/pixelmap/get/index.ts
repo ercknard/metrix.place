@@ -1,13 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import {
-  MetrixRPC,
-  NetworkType,
-  RPCEventLogs,
-  RPCProvider
-} from '@metrixcoin/metrilib';
 import sharp from 'sharp';
-import dotenv from 'dotenv';
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +10,10 @@ export default async function handler(
     const body = req.body;
     const { x, y } = body;
     console.log(`./plc/chunks/${x}-${y}.png`);
-    const { data, info } = await sharp(`./plc/chunks/${x}-${y}.png`)
+    const { data, info } = await sharp(`./plc/chunks/${x}-${y}.png`, {
+      raw: { width: 64, height: 64, channels: 4 }
+    })
+      .ensureAlpha()
       // output the raw pixels
       .raw()
       .toBuffer({ resolveWithObject: true });

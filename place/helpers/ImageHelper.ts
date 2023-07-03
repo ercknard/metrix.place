@@ -68,8 +68,8 @@ const cacheImages = async (
   // TODO: tprocess the logs and set any needed pixels
 
   if (d.length == 0) {
-    for (let x = 0; x < 1024; x++) {
-      for (let y = 0; y < 1024; y++) {
+    for (let y = 0; y < 1024; y++) {
+      for (let x = 0; x < 1024; x++) {
         let r = 0; // Red value (0-255)
         let g = 0; // Green value (0-255)
         let b = 0; // Blue value (0-255)
@@ -79,6 +79,7 @@ const cacheImages = async (
         });
         if (px) {
           console.log(JSON.stringify(px));
+          console.log(`x: ${x} y: ${y}`);
           const hex =
             px[2].length === 8
               ? px[2]
@@ -97,8 +98,8 @@ const cacheImages = async (
       }
     }
   } else {
-    for (let x = 0; x < 1024; x++) {
-      for (let y = 0; y < 1024; y++) {
+    for (let y = 0; y < 1024; y++) {
+      for (let x = 0; x < 1024; x++) {
         const pixelIndex = (x + y * 1024) * 4; // Calculate the index for the desired pixel
         let r = d[pixelIndex]; // Red value (0-255)
         let g = d[pixelIndex + 1]; // Green value (0-255)
@@ -109,6 +110,8 @@ const cacheImages = async (
         });
         if (px) {
           console.log(JSON.stringify(px));
+          console.log(`pixelIndex: ${pixelIndex} x: ${x} y: ${y}`);
+
           const hex =
             px[2].length === 8
               ? px[2]

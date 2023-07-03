@@ -9,3 +9,6 @@ node_modules
 .build
 .env
 *.sqlite
+
+public/robots.txt
+public/sitemap.xml

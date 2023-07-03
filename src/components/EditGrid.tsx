@@ -38,7 +38,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        const pixelIndex = (x * 64 + y) * 4; // Calculate the index for the desired pixel
+        const pixelIndex = (x + y * 64) * 4; // Calculate the index for the desired pixel
         const r = data[pixelIndex]; // Red value (0-255)
         const g = data[pixelIndex + 1]; // Green value (0-255)
         const b = data[pixelIndex + 2]; // Blue value (0-255)

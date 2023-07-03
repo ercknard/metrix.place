@@ -53,12 +53,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
 
   return (
     <>
-      <div
-        className={styles.pixel}
-        style={{
-          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.1rem 202020`
-        }}
-      >
+      <div className={styles.pixel}>
         <div
           id={`pixel_${props.x}_${props.y}`}
           className={styles.pixel}
@@ -72,7 +67,6 @@ export default function Pixel(props: PixelProps): JSX.Element {
                 ? `#feefee`
                 : ownColor
             }`,
-            opacity: opacity,
             backgroundColor:
               typeof props.color === 'string'
                 ? props.color

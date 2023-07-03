@@ -22,7 +22,7 @@ const cacheImages = async (
   });
   console.log(`logs.length: ${logs.length}`);
   const pixels: number[] = [];
-  const { data } = await sharp(`${__dirname}/../../../public/images/latest.png`) // TODO: this needs to be replaced with the current latest image.
+  const { data } = await sharp(`${__dirname}/../../../plc/latest.png`) // TODO: this needs to be replaced with the current latest image.
     .raw()
     .toBuffer({ resolveWithObject: true });
   // TODO: tprocess the logs and set any needed pixels
@@ -49,7 +49,7 @@ const cacheImages = async (
     }
   });
   const clone = image.clone().ensureAlpha();
-  await image.toFile(`${__dirname}/../../../public/images/latest.png`); // TODO: this needs to be replaced with the current latest image.
+  await image.toFile(`${__dirname}/../../../plc/latest.png`); // TODO: this needs to be replaced with the current latest image.
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       await clone
@@ -61,7 +61,7 @@ const cacheImages = async (
           width: 64,
           height: 64
         })
-        .toFile(`${__dirname}/../../../public/images/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
+        .toFile(`${__dirname}/../../../plc/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
     }
   }
   return logs[0].blockNumber;

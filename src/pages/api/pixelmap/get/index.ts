@@ -16,13 +16,13 @@ export default async function handler(
   if (req.method === 'POST') {
     const body = req.body;
     const { x, y } = body;
-
-    const { data } = await sharp(
-      `${__dirname}/../../public/images/chunks/${x}-${y}.png`
-    )
+    console.log(`./plc/chunks/${x}-${y}.png`);
+    const { data, info } = await sharp(`./plc/chunks/${x}-${y}.png`)
+      // output the raw pixels
       .raw()
       .toBuffer({ resolveWithObject: true });
 
-    return res.status(200).json({ data });
+    const pixelArray = new Uint8ClampedArray(data.buffer);
+    return res.status(200).json({ data: pixelArray });
   }
 }

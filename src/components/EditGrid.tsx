@@ -3,6 +3,7 @@ import Pixel from './Pixel';
 import styles from '../styles/Home.module.css';
 import { RGBColor } from 'react-color';
 import sharp from 'sharp';
+import axios from 'axios';
 
 interface EditGridProps {
   x: number;
@@ -18,20 +19,29 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
   const [pixels, setPixels] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updatePixels();
-  }, [props.pixel, props.color]);
+  }, [props.pixel, props.color, props.sector]);
 
   const updatePixels = async () => {
     // create a two dimensional array of Pixel components
-    const data: number[] = [];
+    const res = await axios.post('/api/pixelmap/get', {
+      x: props.sector[0],
+      y: props.sector[1]
+    });
+    console.log(res);
+    const data: Uint8ClampedArray = res.data.data;
+    console.log(`data: ${data.length}`);
     console.log(`pixel: ${JSON.stringify(props.pixel)}`);
     const grid: typeof pixels = [];
 
     for (let x = 0; x < 64; x++) {
       for (let y = 0; y < 64; y++) {
-        const r = data[x + y * 64];
-        const g = data[x + y * 64 + 1];
-        const b = data[x + y * 64 + 2];
-        const a = data[x + y * 64 + 3];
+        const pixelIndex = (y * 64 + x) * 4; // Calculate the index for the desired pixel
+        const r = data[pixelIndex]; // Red value (0-255)
+        const g = data[pixelIndex + 1]; // Green value (0-255)
+        const b = data[pixelIndex + 2]; // Blue value (0-255)
+        const a = data[pixelIndex + 3] / 255; // Alpha value (0-255)
+
+        //console.log(`r: ${r} b: ${b} g:${g} a:${a}`);
         // TODO: get the color of the pixel from the db cache
         let color: RGBColor = { r, g, b, a };
         if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) {

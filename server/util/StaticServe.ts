@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { isSupportedFile } from './FileCheck';
 
-const staticBasePath = './stc';
+const staticBasePath = './plc';
 
 export const staticServe = (req: any, res: any /* eslint-disable-line */) => {
   let fileLoc = path.resolve(staticBasePath);

@@ -49,7 +49,7 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            background: `url("/images/chunks/${props.x}-${props.y}.png")`,
+            background: `url("/plc/chunks/${props.x}-${props.y}.png")`,
             backgroundSize: 'cover',
             //backgroundColor: ownColor[0],
             border: `ridge 1px ${ownColor[1]}`,

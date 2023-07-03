@@ -22,11 +22,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
 
   const updatePixels = async () => {
     // create a two dimensional array of Pixel components
-    const { data } = await sharp(
-      `${__dirname}/../../public/images/chunks/${props.sector[0]}-${props.sector[1]}.png`
-    )
-      .raw()
-      .toBuffer({ resolveWithObject: true });
+    const data: number[] = [];
     console.log(`pixel: ${JSON.stringify(props.pixel)}`);
     const grid: typeof pixels = [];
 

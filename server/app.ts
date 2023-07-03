@@ -3,6 +3,7 @@ import next from 'next';
 import cors from 'cors';
 
 import Logger from './util/logger';
+import { staticServe } from './util/StaticServe';
 const logger = new Logger('server', 'purple');
 const loggerApp = logger.createSubLogger('app', 'green');
 
@@ -24,6 +25,8 @@ app.prepare().then(() => {
   server.use(cors(corsOptions));
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
+
+  server.use('/plc', staticServe);
 
   const serve = process.env.SERVE_PATH_ROOT
     ? (process.env.SERVE_PATH_ROOT as string)

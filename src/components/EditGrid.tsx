@@ -2,7 +2,6 @@ import React from 'react';
 import Pixel from './Pixel';
 import styles from '../styles/Home.module.css';
 import { RGBColor } from 'react-color';
-import sharp from 'sharp';
 import axios from 'axios';
 
 interface EditGridProps {

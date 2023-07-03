@@ -6,7 +6,7 @@ import {
 } from '@metrixcoin/metrilib';
 import sharp from 'sharp';
 import dotenv from 'dotenv';
-import { getMetrixPlace } from 'place';
+import { getMetrixPlace } from '../index';
 
 dotenv.config();
 
@@ -20,9 +20,12 @@ const cacheImages = async (
   const logs = allLogs.filter((log) => {
     return log.blockNumber > lastBlock;
   });
+  console.log(`logs.length: ${logs.length}`);
   const pixels: number[] = [];
   console.log(__dirname);
-  const { data } = await sharp(`${__dirname}/../../public/images/default.jpg`) // TODO: this needs to be replaced with the current latest image.
+  const { data } = await sharp(
+    `${__dirname}/../../../public/images/default.png`
+  ) // TODO: this needs to be replaced with the current latest image.
     .raw()
     .toBuffer({ resolveWithObject: true });
   // TODO: tprocess the logs and set any needed pixels
@@ -48,19 +51,20 @@ const cacheImages = async (
       channels: 4
     }
   });
-  const clone = image.clone();
-  await image.toFile(`${__dirname}/../../public/images/default.jpg`); // TODO: this needs to be replaced with the current latest image.
+  const clone = image.clone().ensureAlpha();
+  await image.toFile(`${__dirname}/../../../public/images/latest.png`); // TODO: this needs to be replaced with the current latest image.
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       await clone
         .clone()
+        .ensureAlpha()
         .extract({
           left: x * 64,
           top: y * 64,
           width: 64,
           height: 64
         })
-        .toFile(`${__dirname}/../../public/images/chunks/${y}-${x}.jpg`); // TODO: this needs to be replaced with the chunk storage location.
+        .toFile(`${__dirname}/../../../public/images/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
     }
   }
   return logs[0].blockNumber;

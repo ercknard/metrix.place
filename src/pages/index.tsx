@@ -41,7 +41,10 @@ export default function Home() {
   } as RGBColor);
 
   const doSetPixel = async () => {
-    if (network && pixel) {
+    console.log(
+      `connected: ${connected} network: ${network} address: ${address}`
+    );
+    if (network && pixel && address && connected) {
       const r = BigInt(color.r).toString(16);
       const g = BigInt(color.g).toString(16);
       const b = BigInt(color.g).toString(16);
@@ -72,6 +75,8 @@ export default function Home() {
       } else {
         setModalMessage('Tranaction failed');
       }
+    } else {
+      setModalMessage('Login to a Metrix Web3 wallet to continue');
     }
   };
 

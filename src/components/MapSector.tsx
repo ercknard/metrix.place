@@ -42,21 +42,18 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
 
   return (
     <>
-      <div
-        className={styles.sector}
-        style={{
-          boxShadow: `${props.x + 1}rem ${props.y + 1}rem 0 -0.05rem`
-        }}
-      >
+      <div className={styles.sector}>
         <div
           id={`sector_${props.x}_${props.y}`}
           className={styles.sector}
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            backgroundColor: ownColor[0],
-            border: `solid 2px ${ownColor[1]}`,
-            opacity: opacity
+            background: `url("/images/chunks/${props.x}-${props.y}.png")`,
+            backgroundSize: 'cover',
+            //backgroundColor: ownColor[0],
+            border: `ridge 1px ${ownColor[1]}`,
+            opacity: 1
           }}
           onClick={onClick}
           onContextMenu={onContextMenu}

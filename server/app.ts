@@ -51,7 +51,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(port, () => {
+  srv.listen(port, () => {
     loggerApp.info(`> Ready on http://localhost:${port}`);
   });
 });

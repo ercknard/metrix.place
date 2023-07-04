@@ -66,18 +66,15 @@ export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
     }
 
     // TODO: Do work here..
+    /*
     const cache = await cacheFullPlace(
       process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType,
       rpc,
       loggerRun
-    );
+    );*/
 
     if (!(await localCacheImages(rpc, loggerRun))) {
       loggerRun.error('localCacheImages Failed!');
-    }
-
-    if (!cache) {
-      return;
     }
   }
 

@@ -12,13 +12,14 @@ interface EditGridProps {
   setPixel(pixel: [x: number, y: number] | undefined): void;
   color: RGBColor;
   setColor(color: RGBColor): void;
+  updated: number;
 }
 export default function EditGrid(props: EditGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);
   const [pixels, setPixels] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updatePixels();
-  }, [props.pixel, props.color, props.sector]);
+  }, [props.pixel, props.color, props.sector, props.updated]);
 
   const updatePixels = async () => {
     // create a two dimensional array of Pixel components

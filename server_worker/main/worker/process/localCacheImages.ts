@@ -4,6 +4,8 @@ import { cacheImages } from '../../../../place/helpers/ImageHelper';
 import { ChainState } from '../../../../server/db/';
 
 import Logger from '../../util/logger';
+import { parentPort } from 'worker_threads';
+import xMessageInterface from 'server_worker/main/util/interface/xMessageInterface';
 
 export const localCacheImages = async (
   rpc: MetrixRPC.MetrixRPCNode,
@@ -43,7 +45,10 @@ export const localCacheImages = async (
       { blockNumber: lastBlock, blockHash: blockhash },
       { where: { id: 0 } }
     );
-
+    parentPort?.postMessage({
+      type: { group: 'info' },
+      content: { cmd: 'cache', msg: bestBlockHash }
+    } as xMessageInterface);
     loggerRunCache.succ(`Updated Cached Images. Block Height: ${lastBlock}`);
 
     return true;

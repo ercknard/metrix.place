@@ -2,10 +2,11 @@ import express from 'express';
 import next from 'next';
 import cors from 'cors';
 import http from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 import Logger from './util/logger';
 import { staticServe } from './util/StaticServe';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 const logger = new Logger('server', 'purple');
 const loggerApp = logger.createSubLogger('app', 'green');
 
@@ -14,6 +15,10 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev, dir: process.cwd() });
 
 const handle = app.getRequestHandler();
+
+export let serverSocket:
+  | undefined
+  | Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
 
 const corsOptions = {
   origin: `http://localhost:${port}`
@@ -27,7 +32,7 @@ app.prepare().then(() => {
   const io = new Server(srv);
   io.on('connection', (socket) => {
     console.log('A client connected');
-
+    serverSocket = socket;
     // Emit update signals or handle events based on your application's logic
     // For example:
     // socket.emit('update', { data: 'Some update data' });

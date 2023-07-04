@@ -43,6 +43,8 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
+  const [updated, setUpdated] = React.useState(0);
+
   // ['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF']
   const [palette, setPalette] = React.useState([
     '#FF6900',
@@ -75,8 +77,8 @@ export default function Home() {
 
   React.useEffect(() => {
     socket.on('update', () => {
+      setUpdated(new Date().getTime());
       reloadImages();
-      setPixel(pixel);
     });
 
     return () => {
@@ -265,6 +267,7 @@ export default function Home() {
                   setPixel={setPixel}
                   setColor={setColor}
                   color={color}
+                  updated={updated}
                 />
               </div>
               <div className={styles.to_flex}>

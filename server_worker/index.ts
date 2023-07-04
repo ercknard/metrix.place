@@ -79,6 +79,10 @@ const runWorker = () => {
             loggerMsg.info(`Message from worker: ${cont.msg}`);
             break;
           case 'info':
+            if (msg.content.cmd === 'cache') {
+              console.log('>>>emit update');
+              worker.emit('update');
+            }
             loggerMsg.info(`Info from worker: ${cont.msg}`);
             break;
           case 'error':

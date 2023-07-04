@@ -126,8 +126,6 @@ export default function PalettePicker(props: PalettePickerProps): JSX.Element {
             <Grid.Column style={{ minWidth: '100%' }}>
               <Button
                 content="Save"
-                color="green"
-                inverted
                 style={{
                   width: '10rem',
                   fontFamily: 'VT323',

@@ -102,10 +102,12 @@ export default function Home() {
   }, [cookie]);
 
   const doSetPixel = async () => {
-    console.log(
-      `connected: ${connected} network: ${network} address: ${address}`
-    );
-    if (network && pixel && address && connected) {
+    if (
+      network === (process.env.NEXT_PUBLIC_APP_NETWORK as string) &&
+      pixel &&
+      address &&
+      connected
+    ) {
       const r = BigInt(color.r).toString(16);
       const g = BigInt(color.g).toString(16);
       const b = BigInt(color.b).toString(16);

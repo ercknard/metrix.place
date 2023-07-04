@@ -9,7 +9,6 @@ export default async function handler(
   if (req.method === 'POST') {
     const body = req.body;
     const { x, y } = body;
-    console.log(`./plc/chunks/${x}-${y}.png`);
     const { data, info } = await sharp(`./plc/chunks/${x}-${y}.png`, {
       raw: { width: 64, height: 64, channels: 4 }
     })

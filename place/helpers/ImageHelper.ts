@@ -35,16 +35,25 @@ export const cacheImages = async (
         x: number,
         y: number,
         color: string,
-        nBlock: number
+        nBlock: number,
+        nTransaction: number
       ] = [
         Number(decoded[0].toString()),
         Number(decoded[1].toString()),
         BigInt(decoded[2].toString()).toString(16),
-        log.blockNumber
+        log.blockNumber,
+        log.transactionIndex
       ];
       return tup;
     })
-    .reverse();
+    .sort((a, b) => {
+      if (a[0] !== b[0]) {
+        return a[0] - b[0]; // Sort by lowest block number first
+      }
+
+      // If block numbers are the same, compare transaction indexes
+      return a[1] - b[1]; // Sort by lowest transaction index within the same block
+    });
 
   const pixels: number[] = [];
   let d = undefined;
@@ -101,7 +110,9 @@ export const cacheImages = async (
         let g = d[pixelIndex + 1]; // Green value (0-255)
         let b = d[pixelIndex + 2]; // Blue value (0-255)
         let a = d[pixelIndex + 3]; // Alpha value (0-255)
-        for (const log of logs.filter((log) => log[0] === x && log[1] === y)) {
+        for (const log of logs.filter(
+          (log) => log[0] === x && log[1] === y && log[3] >= last
+        )) {
           if (log[3] > last) last = log[3];
           const hex =
             log[2].length === 8
@@ -163,13 +174,13 @@ const provider = new RPCProvider(
   process.env.RPC_SENDER as string
 );
 
-//const doTest = async () => {
-//const lastBlock = await cacheImages('TestNet', provider, 900000);
+const doTest = async () => {
+  const lastBlock = await cacheImages('TestNet', provider, 900000);
 
-// TODO: save lastblock
+  // TODO: save lastblock
 
-// last block storage
-// const chainstate = await ChainState.findOne();
-//};
+  // last block storage
+  // const chainstate = await ChainState.findOne();
+};
 
-//doTest();
+doTest();

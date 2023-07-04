@@ -21,7 +21,6 @@ import DebugModal from '@src/modals/DebugModal';
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
 
 export default function Home() {
-  const [debugging, setDebugging] = React.useState(false);
   const [connected, setConnected] = React.useState(false);
   const [network, setNetwork] = React.useState(
     undefined as NetworkType | undefined
@@ -29,7 +28,6 @@ export default function Home() {
   const [address, setAddress] = React.useState(undefined as string | undefined);
   const [error, setError] = React.useState(false);
   const [message, setMessage] = React.useState('' as string | JSX.Element);
-  const [debug, setDebug] = React.useState([] as JSX.Element[]);
 
   const [modalMessage, setModalMessage] = React.useState(
     undefined as string | JSX.Element | undefined
@@ -170,25 +168,6 @@ export default function Home() {
       setError(false);
       setup();
       setMessage('');
-      setDebug([
-        <Segment inverted key={'SegmentMetrixPlace'}>
-          <ContractFunctions
-            network={
-              account.network
-                ? account.network
-                : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
-            }
-            contract={'MetrixPlace'}
-            address={getMetrixPlaceAddress(
-              account.network
-                ? account.network
-                : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
-            )}
-            abi={ABI.MetrixPlace}
-            key={0}
-          />
-        </Segment>
-      ]);
     } else {
       setNetwork(undefined);
       setAddress(undefined);
@@ -268,8 +247,6 @@ export default function Home() {
                   <DebugModal
                     connected={connected}
                     network={network}
-                    debugging={debugging}
-                    setDebugging={setDebugging}
                     trigger={
                       <div className={styles.eye_box}>
                         <Icon className={styles.eye_icon} name="terminal" />

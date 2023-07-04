@@ -21,17 +21,10 @@ export default function PlaceViewModal(props: PlaceViewModalProps) {
       open={open}
       size="small"
       trigger={props.trigger}
+      style={{ width: 'fit-content' }}
     >
-      <Modal.Content>
-        <Image
-          style={{
-            minWidth: '75vh',
-            minHeight: '75vh',
-            imageRendering: 'pixelated'
-          }}
-          src="/plc/latest.png"
-          alt="logo"
-        />
+      <Modal.Content className="place-view-image">
+        <Image src="/plc/latest.png" alt="logo" />
       </Modal.Content>
     </Modal>
   );

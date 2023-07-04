@@ -49,6 +49,26 @@ body {
   bottom: 0;
 }
 
+/* view metrix.place image modal */
+.place-view-image {
+  margin: auto;
+  height: 90vh;
+  width: 90vh !important;
+  max-width: 90vw;
+  max-height: 90vw;
+  background-color: rgb(1, 0, 1) !important;
+  border: 2.5px solid !important;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10 !important;
+  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%) !important;
+}
+.place-view-image .image {
+  border: 1px solid rgb(255, 255, 255, 0.02);
+  min-width: '75vh' !important;
+  min-height: '75vh' !important;
+  image-rendering: pixelated !important;
+}
+
 /* color palette picker */
 .palette-section {
   display: flex;

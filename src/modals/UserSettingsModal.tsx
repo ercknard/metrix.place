@@ -1,3 +1,4 @@
+import PalettePicker from '@src/components/PalettePicker';
 import React from 'react';
 import { Modal, Image } from 'semantic-ui-react';
 
@@ -12,6 +13,7 @@ export default function UserSettingsModal(props: UserSettingsModalProps) {
     <Modal
       closeIcon={true}
       closeOnEscape={true}
+      closeOnDimmerClick={false}
       basic
       dimmer="blurring"
       onClose={() => {
@@ -22,7 +24,9 @@ export default function UserSettingsModal(props: UserSettingsModalProps) {
       size="small"
       trigger={props.trigger}
     >
-      <Modal.Content>Settings!</Modal.Content>
+      <Modal.Content>
+        <PalettePicker />
+      </Modal.Content>
     </Modal>
   );
 }

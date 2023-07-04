@@ -12,7 +12,7 @@ import ABI from '../abi/index';
 
 dotenv.config();
 
-const cacheImages = async (
+export const cacheImages = async (
   network: NetworkType,
   provider: RPCProvider,
   lastBlock: number

@@ -74,15 +74,12 @@ export const cacheImages = async (
         let g = 0; // Green value (0-255)
         let b = 0; // Blue value (0-255)
         let a = 0; // Alpha value (0-255)
-        const px = logs.find((log) => {
-          return log[0] === x && log[1] === y;
-        });
-        if (px) {
-          if (px[3] > last) last = px[3];
+        for (const log of logs.filter((log) => log[0] === x && log[1] === y)) {
+          if (log[3] > last) last = log[3];
           const hex =
-            px[2].length === 8
-              ? px[2]
-              : `${'0'.repeat(8 - px[2].length)}${px[2]}`;
+            log[2].length === 8
+              ? log[2]
+              : `${'0'.repeat(8 - log[2].length)}${log[2]}`;
 
           r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
           g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
@@ -104,16 +101,12 @@ export const cacheImages = async (
         let g = d[pixelIndex + 1]; // Green value (0-255)
         let b = d[pixelIndex + 2]; // Blue value (0-255)
         let a = d[pixelIndex + 3]; // Alpha value (0-255)
-        const px = logs.find((log) => {
-          return log[0] === x && log[1] === y;
-        });
-        if (px) {
-          if (px[3] > last) last = px[3];
-
+        for (const log of logs.filter((log) => log[0] === x && log[1] === y)) {
+          if (log[3] > last) last = log[3];
           const hex =
-            px[2].length === 8
-              ? px[2]
-              : `${'0'.repeat(8 - px[2].length)}${px[2]}`;
+            log[2].length === 8
+              ? log[2]
+              : `${'0'.repeat(8 - log[2].length)}${log[2]}`;
 
           r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
           g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)

@@ -3,6 +3,8 @@ dist
 build
 cache
 artifacts
+_cache
+_artifacts
 node_modules
 .vscode
 .next

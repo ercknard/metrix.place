@@ -2,24 +2,9 @@ const abi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: 'uint16',
-        name: 'x',
-        type: 'uint16'
-      },
-      {
-        indexed: false,
-        internalType: 'uint16',
-        name: 'y',
-        type: 'uint16'
-      },
-      {
-        indexed: false,
-        internalType: 'uint32',
-        name: 'color',
-        type: 'uint32'
-      }
+      { indexed: false, internalType: 'uint16', name: 'x', type: 'uint16' },
+      { indexed: false, internalType: 'uint16', name: 'y', type: 'uint16' },
+      { indexed: false, internalType: 'uint32', name: 'color', type: 'uint32' }
     ],
     name: 'PixelUpdated',
     type: 'event'
@@ -55,11 +40,7 @@ const abi = [
     ],
     name: 'getChunkColors',
     outputs: [
-      {
-        internalType: 'uint32[64][64]',
-        name: '',
-        type: 'uint32[64][64]'
-      }
+      { internalType: 'uint32[64][64]', name: '', type: 'uint32[64][64]' }
     ],
     stateMutability: 'view',
     type: 'function'
@@ -71,13 +52,6 @@ const abi = [
     ],
     name: 'getPixelColor',
     outputs: [{ internalType: 'uint32', name: 'color', type: 'uint32' }],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [{ internalType: 'address', name: '', type: 'address' }],
-    name: 'lastBlockModified',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function'
   },

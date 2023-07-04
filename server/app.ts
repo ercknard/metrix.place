@@ -31,15 +31,10 @@ app.prepare().then(() => {
   const srv = http.createServer(server);
   const io = new Server(srv);
   io.on('connection', (socket) => {
-    console.log('A client connected');
     serverSocket = socket;
     // Emit update signals or handle events based on your application's logic
     // For example:
     // socket.emit('update', { data: 'Some update data' });
-
-    socket.on('disconnect', () => {
-      console.log('A client disconnected');
-    });
   });
 
   server.use(cors(corsOptions));

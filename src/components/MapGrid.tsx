@@ -16,7 +16,6 @@ export default function MapGrid(props: MapGridProps): JSX.Element {
 
   const updateSectors = () => {
     // create a two dimensional array of Pixel components
-    console.log(`sector: ${JSON.stringify(props.sector)}`);
     const grid: typeof sectors = [];
 
     for (let x = 0; x < 16; x++) {
@@ -25,7 +24,6 @@ export default function MapGrid(props: MapGridProps): JSX.Element {
         if (props.sector && props.sector[0] === x && props.sector[1] === y) {
           color = '#111111';
         }
-        // TODO: get the chunk of the sector from the db cache and fit it into the sector
         grid.push(
           <MapSector
             x={x}

@@ -28,13 +28,6 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
       y: props.sector[1]
     });
     const data: Uint8ClampedArray = res.data.data;
-    console.log(`pixel: ${JSON.stringify(props.pixel)}`);
-    if (props.pixel)
-      console.log(
-        `actualPixel: [${props.pixel[0] + 64 * props.sector[0]}, ${
-          props.pixel[1] + 64 * props.sector[1]
-        }]`
-      );
     const grid: typeof pixels = [];
 
     for (let x = 0; x < 64; x++) {
@@ -45,8 +38,6 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
         const b = data[pixelIndex + 2]; // Blue value (0-255)
         const a = data[pixelIndex + 3] / 255; // Alpha value (0-255)
 
-        //console.log(`r: ${r} b: ${b} g:${g} a:${a}`);
-        // TODO: get the color of the pixel from the db cache
         let color: RGBColor = { r, g, b, a };
         if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) {
           color = props.color;

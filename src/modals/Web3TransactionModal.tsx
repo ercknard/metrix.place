@@ -46,7 +46,11 @@ export default function Web3TransactionModal(props: Web3TransactionModalProps) {
           hidden={!!!props.message}
           error={typeof props.message === 'string'}
           success={typeof props.message === 'object'}
-          content={<Container textAlign="center">{props.message}</Container>}
+          content={
+            <Container textAlign="center" style={{ fontSize: '1.7rem' }}>
+              {props.message}
+            </Container>
+          }
         />
       </Modal.Content>
     </Modal>

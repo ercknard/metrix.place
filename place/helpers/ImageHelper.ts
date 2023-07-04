@@ -64,7 +64,7 @@ export const cacheImages = async (
         height: 1024,
         channels: 4
       }
-    }) // TODO: this needs to be replaced with the current latest image.
+    })
       .raw()
       .ensureAlpha()
       .toBuffer({ resolveWithObject: true });
@@ -73,8 +73,6 @@ export const cacheImages = async (
     console.log(e);
     d = [];
   }
-
-  // TODO: tprocess the logs and set any needed pixels
 
   if (d.length == 0) {
     for (let y = 0; y < 1024; y++) {
@@ -144,7 +142,7 @@ export const cacheImages = async (
     }
   });
   const clone = image.clone().ensureAlpha();
-  await image.toFile(`${__dirname}/../../plc/latest.png`); // TODO: this needs to be replaced with the current latest image.
+  await image.toFile(`${__dirname}/../../plc/latest.png`);
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       await clone
@@ -156,31 +154,8 @@ export const cacheImages = async (
           width: 64,
           height: 64
         })
-        .toFile(`${__dirname}/../../plc/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
+        .toFile(`${__dirname}/../../plc/chunks/${x}-${y}.png`);
     }
   }
   return last;
 };
-/*
-const mrpc: MetrixRPC.MetrixRPCNode = new MetrixRPC.MetrixRPCNode(
-  process.env.RPC_SENDER as string,
-  `${process.env.RPC_HOST}:${process.env.RPC_PORT}`,
-  process.env.RPC_USER as string,
-  process.env.RPC_PASS as string
-);
-const provider = new RPCProvider(
-  'TestNet',
-  mrpc,
-  process.env.RPC_SENDER as string
-);*/
-
-//const doTest = async () => {
-//const lastBlock = await cacheImages('TestNet', provider, 900000);
-
-// TODO: save lastblock
-
-// last block storage
-// const chainstate = await ChainState.findOne();
-//};
-
-//doTest();

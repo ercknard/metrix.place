@@ -134,7 +134,7 @@ export default function Home() {
           </a>
         );
       } else {
-        setModalMessage('Tranaction failed');
+        setModalMessage('Transaction failed');
       }
     } else {
       setModalMessage('Login to a Metrix Web3 wallet to continue');

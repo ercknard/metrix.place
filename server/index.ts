@@ -40,7 +40,6 @@ async function init() {
       } else {
         loggerSetup.succ(`Worker ${w.threadId} starting successfully.`);
         w.on('update', () => {
-          console.log(`>>>on update ${typeof serverSocket}`);
           serverSocket?.emit('update');
         });
       }

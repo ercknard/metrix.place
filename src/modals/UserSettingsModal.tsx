@@ -3,6 +3,7 @@ import React from 'react';
 import { Modal, Image } from 'semantic-ui-react';
 
 interface UserSettingsModalProps {
+  colors: string[];
   trigger: JSX.Element;
 }
 
@@ -25,7 +26,7 @@ export default function UserSettingsModal(props: UserSettingsModalProps) {
       trigger={props.trigger}
     >
       <Modal.Content>
-        <PalettePicker />
+        <PalettePicker colors={props.colors} />
       </Modal.Content>
     </Modal>
   );

@@ -61,9 +61,6 @@ body {
   width: 35px !important;
   text-align: center;
 }
-.palette-grid-section .row .column .label {
-  margin: auto;
-}
 
 #palette-container {
   filter: none !important;

@@ -48,3 +48,23 @@ body {
 .footer {
   bottom: 0;
 }
+
+/* color palette picker */
+.palette-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.palette-grid-section .row .column {
+  margin: auto;
+  padding: 0px !important;
+  width: 35px !important;
+  text-align: center;
+}
+.palette-grid-section .row .column .label {
+  margin: auto;
+}
+
+#palette-container {
+  filter: none !important;
+}

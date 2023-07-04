@@ -75,24 +75,18 @@ export const signatureMessage =
 
 // palette
 // last sector
-export function createStorageToken(
-  id: string,
-  palette: string,
-  last_sector: string,
-  data?: string
-) {
+export function createStorageToken(id: string, palette: string, data?: string) {
   const timestamp = Math.floor(Date.now() / 1000);
   /* Create JWT Payload */
   const payload: JwtPayload = {
     id,
     usr: 'local',
     pal: palette,
-    sct: last_sector,
     dat: data ? data : '',
     iss: fqdn,
     sub: 'auth',
     nbs: timestamp - 20,
-    exp: timestamp + 21600, // 6 hours in seconds
+    exp: timestamp + 31536000, // 1 year hours in seconds
     iat: timestamp
   } as jwtPayload;
   /* Sign token */

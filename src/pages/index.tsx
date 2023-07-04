@@ -1,22 +1,28 @@
 import Head from 'next/head';
-import { Icon, Segment, Image, Container, Grid } from 'semantic-ui-react';
+import { Icon, Image, Container, Grid } from 'semantic-ui-react';
 import React from 'react';
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
 import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
-import ContractFunctions from '../components/ContractFunctions';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
-import { AlphaPicker, ColorResult, RGBColor, TwitterPicker } from 'react-color';
-import { getMetrixPlace, getMetrixPlaceAddress } from '@place/index';
-import ABI from '@place/abi';
-import { ZeroHash } from 'ethers';
+import {
+  AlphaPicker,
+  Color,
+  ColorResult,
+  RGBColor,
+  TwitterPicker
+} from 'react-color';
+import { getMetrixPlace } from '@place/index';
+import { decodeBase64, ZeroHash } from 'ethers';
 import Web3TransactionModal from '@src/modals/Web3TransactionModal';
 import PlaceViewModal from '@src/modals/PlaceViewModal';
 import UserSettingsModal from '@src/modals/UserSettingsModal';
 import { io } from 'socket.io-client';
 import DebugModal from '@src/modals/DebugModal';
+import { useCookies } from 'react-cookie';
+import isJson from '@src/utils/isJson';
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
 
@@ -37,11 +43,26 @@ export default function Home() {
     undefined as undefined | [x: number, y: number]
   );
 
+  // ['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF']
+  const [palette, setPalette] = React.useState([
+    '#FF6900',
+    '#FCB900',
+    '#7BDCB5',
+    '#00D084',
+    '#8ED1FC',
+    '#0693E3',
+    '#ABB8C3',
+    '#EB144C',
+    '#F78DA7',
+    '#9900EF'
+  ] as string[]);
+  const [cookie, setCookie] = useCookies(['metrix.place-palette']);
+
   const [color, setColor] = React.useState({
     r: 0,
     g: 0,
     b: 0,
-    a: 0
+    a: 1
   } as RGBColor);
   const reloadImages = () => {
     const images = document.getElementsByTagName('img');
@@ -55,12 +76,29 @@ export default function Home() {
   React.useEffect(() => {
     socket.on('update', () => {
       reloadImages();
+      setPixel(pixel);
     });
 
     return () => {
       socket.off('update');
     };
   }, []);
+
+  React.useEffect(() => {
+    if (cookie && cookie['metrix.place-palette']) {
+      const b = cookie['metrix.place-palette'];
+      const c = String.fromCharCode(...decodeBase64(b));
+      if (isJson(c)) {
+        const data = JSON.parse(c);
+        console.log(data);
+        let palet = [];
+        for (const cc of data) {
+          palet.push(cc.color);
+        }
+        setPalette(palet);
+      }
+    }
+  }, [cookie]);
 
   const doSetPixel = async () => {
     console.log(
@@ -261,6 +299,7 @@ export default function Home() {
                     }
                   />
                   <UserSettingsModal
+                    colors={palette}
                     trigger={
                       <div className={styles.eye_box}>
                         <Icon className={styles.eye_icon} name="cog" />
@@ -282,6 +321,7 @@ export default function Home() {
                     <TwitterPicker
                       color={color}
                       onChangeComplete={handleChange}
+                      colors={palette}
                       styles={{
                         default: {
                           card: {

@@ -78,8 +78,7 @@ const cacheImages = async (
           return log[0] === x && log[1] === y;
         });
         if (px) {
-          console.log(JSON.stringify(px));
-          console.log(`x: ${x} y: ${y}`);
+          if (px[3] > last) last = px[3];
           const hex =
             px[2].length === 8
               ? px[2]
@@ -109,8 +108,7 @@ const cacheImages = async (
           return log[0] === x && log[1] === y;
         });
         if (px) {
-          console.log(JSON.stringify(px));
-          console.log(`pixelIndex: ${pixelIndex} x: ${x} y: ${y}`);
+          if (px[3] > last) last = px[3];
 
           const hex =
             px[2].length === 8

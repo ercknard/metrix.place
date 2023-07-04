@@ -17,9 +17,9 @@ export const localCacheImages = async (
 
   try {
     const bestBlockHash = await rpc.promiseGetBestBlockHash();
-    const lastHeight = await rpc.promiseGetBlockCount();
+    const lastHeight = (await rpc.promiseGetBlockCount()) as number;
 
-    const chainState = await ChainState.findOne({ where: { id: 0 } });
+    const chainState = await ChainState.findOne({ where: { id: 1 } });
     if (chainState) {
       const state = chainState.get();
       lastBlock = state.blockNumber;
@@ -37,13 +37,14 @@ export const localCacheImages = async (
       process.env.RPC_SENDER as string
     );
 
+    loggerRunCache.info(`Updating Cached Images. Last Height: ${lastBlock}`);
     lastBlock = await cacheImages(NETWORK as NetworkType, provider, lastBlock);
 
     const blockhash = await rpc.promiseGetBlockHash(lastBlock);
 
     ChainState.update(
       { blockNumber: lastBlock, blockHash: blockhash },
-      { where: { id: 0 } }
+      { where: { id: 1 } }
     );
     parentPort?.postMessage({
       type: { group: 'info' },

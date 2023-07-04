@@ -14,6 +14,7 @@ class ChainState extends Model<
   declare id: CreationOptional<number>;
   declare blockHash: string;
   declare blockNumber: number;
+  declare blockNumberLastLog: number;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -36,7 +37,14 @@ ChainState.init(
     blockNumber: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      unique: false
+      unique: false,
+      defaultValue: 0
+    },
+    blockNumberLastLog: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      unique: false,
+      defaultValue: 0
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE

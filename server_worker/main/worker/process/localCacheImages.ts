@@ -14,6 +14,7 @@ export const localCacheImages = async (
   const loggerRunCache = logger.createSubLogger('cacheImages', 'green');
 
   let lastBlock = 0;
+  let lastBlockLog = 0;
 
   try {
     const bestBlockHash = await rpc.promiseGetBestBlockHash();
@@ -23,11 +24,17 @@ export const localCacheImages = async (
     if (chainState) {
       const state = chainState.get();
       lastBlock = state.blockNumber;
+      lastBlockLog = state.blockNumberLastLog;
     } else {
-      ChainState.create({ blockNumber: lastBlock, blockHash: bestBlockHash });
+      ChainState.create({
+        blockHash: bestBlockHash,
+        blockNumber: lastBlock,
+        blockNumberLastLog: 0
+      });
     }
 
-    if (lastBlock == lastHeight) {
+    if (lastBlockLog == lastHeight) {
+      loggerRunCache.debug('Log Height Matches Chain');
       return true;
     }
 
@@ -38,21 +45,31 @@ export const localCacheImages = async (
     );
 
     loggerRunCache.info(
-      `Updating Cached Images. Last Height: ${lastBlock}  Detected Height: ${lastHeight}`
+      `Updating Cached Images. Last Logs Height: ${lastBlockLog}  Detected Chain Height: ${lastHeight}`
     );
-    lastBlock = await cacheImages(NETWORK as NetworkType, provider, lastBlock);
-
-    const blockhash = await rpc.promiseGetBlockHash(lastBlock);
+    lastBlockLog = await cacheImages(
+      NETWORK as NetworkType,
+      provider,
+      lastBlockLog
+    );
 
     ChainState.update(
-      { blockNumber: lastBlock, blockHash: blockhash },
+      {
+        blockHash: bestBlockHash,
+        blockNumber: lastHeight,
+        blockNumberLastLog: lastBlockLog
+      },
       { where: { id: 1 } }
     );
+
     parentPort?.postMessage({
       type: { group: 'info' },
       content: { cmd: 'cache', msg: bestBlockHash }
     } as xMessageInterface);
-    loggerRunCache.succ(`Updated Cached Images. Block Height: ${lastBlock}`);
+
+    if (lastBlockLog != lastBlock) {
+      loggerRunCache.succ(`Updated Cached Images. Block Height: ${lastBlock}`);
+    }
 
     return true;
   } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ e: any) {

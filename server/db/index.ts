@@ -13,4 +13,6 @@ export const sequelize = new Sequelize(conf as Options);
 
 sequelize.authenticate();
 
+sequelize.sync({ alter: false });
+
 export * from './models';

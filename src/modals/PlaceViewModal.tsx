@@ -24,7 +24,11 @@ export default function PlaceViewModal(props: PlaceViewModalProps) {
     >
       <Modal.Content>
         <Image
-          style={{ minWidth: '70vh', minHeight: '70vh' }}
+          style={{
+            minWidth: '70vh',
+            minHeight: '70vh',
+            imageRendering: 'pixelated'
+          }}
           src="/plc/latest.png"
           alt="logo"
         />

@@ -108,7 +108,7 @@ export default function Home() {
     if (network && pixel && address && connected) {
       const r = BigInt(color.r).toString(16);
       const g = BigInt(color.g).toString(16);
-      const b = BigInt(color.g).toString(16);
+      const b = BigInt(color.b).toString(16);
       const a = BigInt(Math.floor((color.a ? color.a : 0) * 255)).toString(16);
       const provider = new Web3Provider(network);
       const place = getMetrixPlace(network, provider);
@@ -373,7 +373,12 @@ export default function Home() {
           </>
         ) : (
           <>
-            <Image size="massive" src="/plc/latest.png" alt="logo" />
+            <Image
+              size="massive"
+              src="/plc/latest.png"
+              alt="logo"
+              style={{ imageRendering: 'pixelated' }}
+            />
           </>
         )}
         <Container>

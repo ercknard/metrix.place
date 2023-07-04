@@ -53,7 +53,8 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
             backgroundSize: 'cover',
             //backgroundColor: ownColor[0],
             border: `ridge 1px ${ownColor[1]}`,
-            opacity: 1
+            opacity: 1,
+            imageRendering: 'pixelated'
           }}
           onClick={onClick}
           onContextMenu={onContextMenu}

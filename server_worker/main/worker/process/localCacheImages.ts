@@ -36,6 +36,9 @@ export const localCacheImages = async (
     if (lastBlockLog == lastHeight) {
       loggerRunCache.debug('Log Height Matches Chain');
       return true;
+    } else if (lastBlock == lastHeight) {
+      loggerRunCache.debug('Last Height Matches Chain');
+      return true;
     }
 
     const provider = new RPCProvider(
@@ -68,7 +71,9 @@ export const localCacheImages = async (
     } as xMessageInterface);
 
     if (lastBlockLog != lastBlock) {
-      loggerRunCache.succ(`Updated Cached Images. Block Height: ${lastBlock}`);
+      loggerRunCache.succ(
+        `Updated Cached Images. Logs Block Height: ${lastBlockLog}`
+      );
     }
 
     return true;

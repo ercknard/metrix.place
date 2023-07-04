@@ -54,7 +54,6 @@ export const cacheImages = async (
       // If block numbers are the same, compare transaction indexes
       return a[1] - b[1]; // Sort by lowest transaction index within the same block
     });
-
   const pixels: number[] = [];
   let d = undefined;
   try {

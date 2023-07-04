@@ -6,13 +6,14 @@ interface MapGridProps {
   sector: [x: number, y: number] | undefined;
   setSector(sector: [x: number, y: number]): void;
   setPixel(pixel: [x: number, y: number] | undefined): void;
+  updated: number;
 }
 export default function MapGrid(props: MapGridProps): JSX.Element {
   const ref = React.useRef<HTMLDivElement>(null);
   const [sectors, setSectors] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updateSectors();
-  }, [props.sector]);
+  }, [props.sector, props.updated]);
 
   const updateSectors = () => {
     // create a two dimensional array of Pixel components

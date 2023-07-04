@@ -66,19 +66,10 @@ export default function Home() {
     b: 0,
     a: 1
   } as RGBColor);
-  const reloadImages = () => {
-    const images = document.getElementsByTagName('img');
-    for (let i = 0; i < images.length; i++) {
-      const imageUrl = images[i].src;
-      images[i].src = '';
-      images[i].src = imageUrl;
-    }
-  };
 
   React.useEffect(() => {
     socket.on('update', () => {
       setUpdated(new Date().getTime());
-      reloadImages();
     });
 
     return () => {
@@ -123,7 +114,7 @@ export default function Home() {
           b.length == 2 ? b : `0${b}`
         }${a.length == 2 ? a : `0${a}`}`
       );
-      if (tx.txid && tx.txid != ZeroHash.replace('0x', '')) {
+      if (tx && tx.txid && tx.txid != ZeroHash.replace('0x', '')) {
         setModalMessage(
           <a
             className={styles.lavenderLink_css}
@@ -141,17 +132,6 @@ export default function Home() {
     } else {
       setModalMessage('Login to a Metrix Web3 wallet to continue');
     }
-  };
-
-  const setup = async () => {
-    /*
-    const provider = HandleProviderType(
-      network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
-    );
-    const place = getMetrixPlace(
-      network ? network : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType),
-      provider
-    );*/
   };
 
   const handleMessage = async (
@@ -207,7 +187,6 @@ export default function Home() {
       );
       setConnected(true);
       setError(false);
-      setup();
       setMessage('');
     } else {
       setNetwork(undefined);
@@ -317,6 +296,7 @@ export default function Home() {
                       sector={sector}
                       setSector={setSector}
                       setPixel={setPixel}
+                      updated={updated}
                     />
                   </div>
                 </div>

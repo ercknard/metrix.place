@@ -37,7 +37,9 @@ export const localCacheImages = async (
       process.env.RPC_SENDER as string
     );
 
-    loggerRunCache.info(`Updating Cached Images. Last Height: ${lastBlock}`);
+    loggerRunCache.info(
+      `Updating Cached Images. Last Height: ${lastBlock}  Detected Height: ${lastHeight}`
+    );
     lastBlock = await cacheImages(NETWORK as NetworkType, provider, lastBlock);
 
     const blockhash = await rpc.promiseGetBlockHash(lastBlock);

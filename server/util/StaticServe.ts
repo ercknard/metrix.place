@@ -10,6 +10,9 @@ export const staticServe = (req: any, res: any /* eslint-disable-line */) => {
   if (url.startsWith('../')) {
     url = url.replace('../', '/');
   }
+  if (url.split('?').length > 1) {
+    url = url.split('?')[0];
+  }
   fileLoc = path.join(fileLoc, url);
   const exts = ['.jpg', '.png', '.gif'];
 

@@ -377,7 +377,11 @@ export default function Home() {
               size="massive"
               src="/plc/latest.png"
               alt="logo"
-              style={{ imageRendering: 'pixelated' }}
+              style={{
+                imageRendering: 'pixelated',
+                minWidth: '75vh',
+                minHeight: '75vh'
+              }}
             />
           </>
         )}

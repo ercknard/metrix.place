@@ -292,7 +292,7 @@ export default function Home() {
                           },
                           input: {
                             fontFamily: 'vt323',
-                            fontSize: '1.8em'
+                            fontSize: '1.5em'
                           },
                           swatch: {
                             boxShadow:

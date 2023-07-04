@@ -15,6 +15,9 @@
   "references": [
     {
       "path": "../place"
+    },
+    {
+      "path": "../server"
     }
   ]
 }

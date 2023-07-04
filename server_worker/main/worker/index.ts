@@ -3,13 +3,15 @@ import { pingLocal } from './process/pingLocalNode';
 
 import Logger from '../util/logger';
 import { cacheFullPlace } from './process/cacheFullPlace';
+import { cacheImages } from 'place/helpers/ImageHelper';
+import { localCacheImages } from './process/localCacheImages';
 const logger = new Logger('worker', 'magenta');
 const loggerWorker = logger.createSubLogger('main', 'blue');
 const loggerRun = loggerWorker.createSubLogger('run', 'yellow');
 const loggerRunSetup = loggerRun.createSubLogger('setup', 'red');
 
 // default counter
-let counter = 30;
+let counter = 45;
 const counter_max = 60;
 
 // db init flag
@@ -69,6 +71,11 @@ export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
       rpc,
       loggerRun
     );
+
+    if (!(await localCacheImages(rpc, loggerRun))) {
+      loggerRun.error('localCacheImages Failed!');
+    }
+
     if (!cache) {
       return;
     }

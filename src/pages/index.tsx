@@ -90,7 +90,6 @@ export default function Home() {
       const c = String.fromCharCode(...decodeBase64(b));
       if (isJson(c)) {
         const data = JSON.parse(c);
-        console.log(data);
         let palet = [];
         for (const cc of data) {
           palet.push(cc.color);

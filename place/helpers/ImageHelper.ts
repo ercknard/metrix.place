@@ -58,7 +58,7 @@ export const cacheImages = async (
   const pixels: number[] = [];
   let d = undefined;
   try {
-    const { data } = await sharp(`${__dirname}/../../../plc/latest.png`, {
+    const { data } = await sharp(`${__dirname}/../../plc/latest.png`, {
       raw: {
         width: 1024,
         height: 1024,
@@ -144,7 +144,7 @@ export const cacheImages = async (
     }
   });
   const clone = image.clone().ensureAlpha();
-  await image.toFile(`${__dirname}/../../../plc/latest.png`); // TODO: this needs to be replaced with the current latest image.
+  await image.toFile(`${__dirname}/../../plc/latest.png`); // TODO: this needs to be replaced with the current latest image.
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       await clone
@@ -156,7 +156,7 @@ export const cacheImages = async (
           width: 64,
           height: 64
         })
-        .toFile(`${__dirname}/../../../plc/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
+        .toFile(`${__dirname}/../../plc/chunks/${x}-${y}.png`); // TODO: this needs to be replaced with the chunk storage location.
     }
   }
   return last;

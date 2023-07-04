@@ -128,7 +128,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           decoded && decoded.join(' ').length > 0
                             ? decoded.join(' ')
                             : 'No Response';
-                        sigMsg.innerHTML = `<div class="header">Response</div><p>${msg}</p>`;
+                        sigMsg.innerHTML = `<div class="header" style="font-family: VT323; font-size: 1.5rem;">Response</div><p style="font-size: 1.2rem; font-weight: normal;">${msg}</p>`;
                         sigMsg.classList.remove('hidden');
                       };
                     } else {
@@ -152,7 +152,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                             ? JSON.stringify(response)
                             : 'No Response';
                         sigMsg.classList.remove('negative');
-                        sigMsg.innerHTML = `<div class="header">Response</div><p>${msg}</p>`;
+                        sigMsg.innerHTML = `<div class="header" style="font-family: VT323; font-size: 1.5rem;">Response</div><p style="font-size: 1.2rem; font-weight: normal;">${msg}</p>`;
                         sigMsg.classList.remove('hidden');
                       };
                     }

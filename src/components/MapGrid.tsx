@@ -34,6 +34,7 @@ export default function MapGrid(props: MapGridProps): JSX.Element {
             sector={props.sector}
             setSector={props.setSector}
             setPixel={props.setPixel}
+            updated={props.updated}
           />
         );
       }

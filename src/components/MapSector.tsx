@@ -8,10 +8,14 @@ interface MapSectoProps {
   sector: number[] | undefined;
   setSector(sector: number[] | undefined): void;
   setPixel(pixel: number[] | undefined): void;
+  updated: number;
 }
 export default function MapSector(props: MapSectoProps): JSX.Element {
   const [opacity, setOpacity] = React.useState(0.18);
   const [ownColor, setOwnColor] = React.useState([props.color, '#f6a1ff']);
+  const [background, setBackground] = React.useState(
+    `url("/plc/chunks/${props.x}-${props.y}.png")`
+  );
 
   React.useEffect(() => {
     if (
@@ -21,7 +25,8 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
     )
       setOwnColor(['#92319d', '#f6a1ff']);
     else setOwnColor([props.color, '#000000']);
-  }, [props.sector]);
+    setBackground(`url("/plc/chunks/${props.x}-${props.y}.png")`);
+  }, [props.sector, props.updated]);
 
   const onClick = (e: any) => {
     e.preventDefault();
@@ -49,7 +54,7 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            background: `url("/plc/chunks/${props.x}-${props.y}.png")`,
+            background,
             backgroundSize: 'cover',
             //backgroundColor: ownColor[0],
             border: `ridge 1px ${ownColor[1]}`,

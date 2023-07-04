@@ -161,7 +161,7 @@ export const cacheImages = async (
   }
   return last;
 };
-
+/*
 const mrpc: MetrixRPC.MetrixRPCNode = new MetrixRPC.MetrixRPCNode(
   process.env.RPC_SENDER as string,
   `${process.env.RPC_HOST}:${process.env.RPC_PORT}`,
@@ -172,15 +172,15 @@ const provider = new RPCProvider(
   'TestNet',
   mrpc,
   process.env.RPC_SENDER as string
-);
+);*/
 
-const doTest = async () => {
-  const lastBlock = await cacheImages('TestNet', provider, 900000);
+//const doTest = async () => {
+//const lastBlock = await cacheImages('TestNet', provider, 900000);
 
-  // TODO: save lastblock
+// TODO: save lastblock
 
-  // last block storage
-  // const chainstate = await ChainState.findOne();
-};
+// last block storage
+// const chainstate = await ChainState.findOne();
+//};
 
-doTest();
+//doTest();

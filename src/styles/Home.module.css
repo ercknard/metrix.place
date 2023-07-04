@@ -464,3 +464,18 @@
   margin-right: auto;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1));
 }
+
+.colormodal {
+  border-radius: 5px !important;
+}
+
+.modalpicker {
+  border-radius: 5px !important;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.75) !important;
+  background: url('/images/metrix-bg-black-pixelated.png'),
+    url('/images/metrix-bg-pixelated-modal.png'),
+    url('/images/metrix-stars.png'),
+    linear-gradient(to bottom, rgb(28, 5, 41), rgb(48, 48, 48)) !important;
+  background-size: cover !important;
+  background-position: bottom right !important;
+}

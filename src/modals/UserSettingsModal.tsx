@@ -1,6 +1,7 @@
 import PalettePicker from '@src/components/PalettePicker';
 import React from 'react';
 import { Modal, Image } from 'semantic-ui-react';
+import styles from '../styles/Home.module.css'
 
 interface UserSettingsModalProps {
   colors: string[];
@@ -12,6 +13,7 @@ export default function UserSettingsModal(props: UserSettingsModalProps) {
 
   return (
     <Modal
+      className={styles.colormodal}
       closeIcon={true}
       closeOnEscape={true}
       closeOnDimmerClick={false}
@@ -25,7 +27,7 @@ export default function UserSettingsModal(props: UserSettingsModalProps) {
       size="small"
       trigger={props.trigger}
     >
-      <Modal.Content>
+      <Modal.Content className={styles.modalpicker}>
         <PalettePicker colors={props.colors} />
       </Modal.Content>
     </Modal>

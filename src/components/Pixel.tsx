@@ -34,9 +34,7 @@ export default function Pixel(props: PixelProps): JSX.Element {
     const pixel = e.target.id.replace('pixel_', '').split('_');
     const x = Number(pixel[0]);
     const y = Number(pixel[1]);
-    console.log(
-      `actualPixel: [${x + 64 * props.sector[0]}, ${y + 64 * props.sector[1]}]`
-    );
+
     // This is our pixel just return
     if (props.pixel && x === props.pixel[0] && y === props.pixel[1]) return;
 

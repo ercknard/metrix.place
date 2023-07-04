@@ -8,7 +8,7 @@ import { Grid, Header, Segment } from 'semantic-ui-react';
 
 interface ContractProps {
   network: NetworkType;
-  contract: 'AutoGovernor' | 'TokenBuyback';
+  contract: 'MetrixPlace';
   address: string;
   abi: any[];
 }
@@ -175,6 +175,8 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
             const label = document.createElement('label');
             label.innerHTML = key;
             label.className = `ui ${color} label`;
+            label.style.fontWeight = 'normal';
+            label.style.fontSize = '1.2rem';
             functionTitle.appendChild(label);
             form.appendChild(functionTitle);
             const msg = document.createElement('div');
@@ -187,7 +189,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
               field.className = 'field';
               const input = document.createElement('div');
               input.className = 'ui labeled input';
-              input.innerHTML = `<div class="ui label ${cs}">${finput.type}:${finput.name}</div><input type="text" name="${props.contract}_${finput.name}" />`;
+              input.innerHTML = `<div class="ui label ${cs}" style="font-size: 1.2rem;font-weight: normal;">${finput.type}:${finput.name}</div><input type="text" name="${props.contract}_${finput.name}" />`;
               field.appendChild(input);
               form.appendChild(field);
             }
@@ -203,6 +205,9 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
             const submit = document.createElement('button');
             submit.className = `ui button ${color} inverted`;
             submit.innerHTML = 'Call';
+            submit.style.fontFamily = 'VT323';
+            submit.style.fontWeight = 'normal';
+            submit.style.fontSize = '1.2rem';
             form.appendChild(submit);
             segment.appendChild(form);
             column.appendChild(segment);
@@ -233,7 +238,14 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
     <Grid>
       <Grid.Row>
         <Segment inverted>
-          <Header style={{ color: 'whitesmoke' }}>
+          <Header
+            style={{
+              color: 'whitesmoke',
+              fontWeight: 'normal',
+              fontSize: '2em',
+              fontFamily: 'VT323'
+            }}
+          >
             {`${props.contract}`}.sol
           </Header>
         </Segment>

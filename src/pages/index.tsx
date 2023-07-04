@@ -16,6 +16,7 @@ import Web3TransactionModal from '@src/modals/Web3TransactionModal';
 import PlaceViewModal from '@src/modals/PlaceViewModal';
 import UserSettingsModal from '@src/modals/UserSettingsModal';
 import { io } from 'socket.io-client';
+import DebugModal from '@src/modals/DebugModal';
 
 const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
 
@@ -170,14 +171,14 @@ export default function Home() {
       setup();
       setMessage('');
       setDebug([
-        <Segment inverted key={'SegmentTokenBuyback'}>
+        <Segment inverted key={'SegmentMetrixPlace'}>
           <ContractFunctions
             network={
               account.network
                 ? account.network
                 : (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType)
             }
-            contract={'TokenBuyback'}
+            contract={'MetrixPlace'}
             address={getMetrixPlaceAddress(
               account.network
                 ? account.network
@@ -264,6 +265,17 @@ export default function Home() {
                       />
                     </a>
                   </div>
+                  <DebugModal
+                    connected={connected}
+                    network={network}
+                    debugging={debugging}
+                    setDebugging={setDebugging}
+                    trigger={
+                      <div className={styles.eye_box}>
+                        <Icon className={styles.eye_icon} name="terminal" />
+                      </div>
+                    }
+                  />
                   <PlaceViewModal
                     trigger={
                       <div className={styles.eye_box}>

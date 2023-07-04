@@ -13,9 +13,7 @@ interface MapSectoProps {
 export default function MapSector(props: MapSectoProps): JSX.Element {
   const [opacity, setOpacity] = React.useState(0.18);
   const [ownColor, setOwnColor] = React.useState([props.color, '#f6a1ff']);
-  const [background, setBackground] = React.useState(
-    `url("/plc/chunks/${props.x}-${props.y}.png")`
-  );
+  const [randomParam, setRandomParam] = React.useState(Math.random());
 
   React.useEffect(() => {
     if (
@@ -25,7 +23,6 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
     )
       setOwnColor(['#92319d', '#f6a1ff']);
     else setOwnColor([props.color, '#000000']);
-    setBackground(`url("/plc/chunks/${props.x}-${props.y}.png")`);
   }, [props.sector, props.updated]);
 
   const onClick = (e: any) => {
@@ -49,12 +46,13 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
     <>
       <div className={styles.sector}>
         <div
+          key={`sector_${props.x}_${props.y}${Date.now()}`}
           id={`sector_${props.x}_${props.y}`}
           className={styles.sector}
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            background,
+            background: `url("/plc/chunks/${props.x}-${props.y}.png?${randomParam}")`,
             backgroundSize: 'cover',
             //backgroundColor: ownColor[0],
             border: `ridge 1px ${ownColor[1]}`,

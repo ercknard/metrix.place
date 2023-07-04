@@ -11,8 +11,9 @@ const loggerRun = loggerWorker.createSubLogger('run', 'yellow');
 const loggerRunSetup = loggerRun.createSubLogger('setup', 'red');
 
 // default counter
-let counter = 45;
-const counter_max = 60;
+let counter = 40;
+const check_interval = 15;
+const counter_max = 90;
 
 // db init flag
 let db = false;
@@ -45,7 +46,7 @@ export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
       if (counter > counter_max) {
         counter = 0;
       }
-      if (counter++ == 0) {
+      if (++counter % check_interval == 0) {
         try {
           // perform work
           await doWork();
@@ -60,12 +61,12 @@ export const run = async (rpc: MetrixRPC.MetrixRPCNode): Promise<boolean> => {
 
   /* Do Work */
   async function doWork() {
-    const ping = await pingLocal(rpc, loggerRun);
-    if (!ping) {
-      return;
+    if (counter == counter_max) {
+      const ping = await pingLocal(rpc, loggerRun);
+      if (!ping) {
+        return;
+      }
     }
-
-    // TODO: Do work here..
     /*
     const cache = await cacheFullPlace(
       process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType,

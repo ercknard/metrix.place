@@ -104,7 +104,7 @@ export default function Home() {
 
   const doSetPixel = async () => {
     if (
-      network === (process.env.NEXT_PUBLIC_APP_NETWORK as string) &&
+      network === (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType) &&
       pixel &&
       address &&
       connected
@@ -246,7 +246,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.h1}> metrix.place </h1>
-        {network && connected && address ? (
+        {network === (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType) &&
+        connected &&
+        address ? (
           <>
             <div className={styles.main_box}>
               <div className={styles.sample_box}>

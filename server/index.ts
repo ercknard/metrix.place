@@ -40,7 +40,7 @@ async function init() {
       } else {
         loggerSetup.succ(`Worker ${w.threadId} starting successfully.`);
         w.on('update', () => {
-          serverSocket?.emit('update');
+          serverSocket?.broadcast.emit('update');
         });
       }
     } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ err: any) {

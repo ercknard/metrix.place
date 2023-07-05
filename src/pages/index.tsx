@@ -229,7 +229,7 @@ export default function Home() {
         <title>metrix.place</title>
         <meta
           name="description"
-          content="A communal graffiti board which any address can set a single pixel per MetrixCoin block by paying the gas fee for the transaction."
+          content="A communal graffiti board which any address can set a single pixel per MetrixCoin transaction by paying the gas fee for the transaction."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.png" />

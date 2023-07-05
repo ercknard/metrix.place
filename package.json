@@ -14,7 +14,7 @@
     "build-dev": "npm run build-place && npm run build-server && npm run build-worker && npm run build-next",
     "build": "npm run build-dev && npm run postbuild",
     "start-dev": "cross-env NODE_ENV=development node .build/server/index.js",
-    "start": "cross-env NODE_ENV=production node .build/server/index.js",
+    "start": "cross-env NODE_ENV=production nodemon .build/server/index.js",
     "lint-server": "eslint \"./server/**/*\"",
     "lint-worker": "eslint \"./server_worker/**/*\"",
     "lint-next": "next lint",

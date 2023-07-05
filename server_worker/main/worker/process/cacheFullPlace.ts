@@ -40,6 +40,8 @@ export const cacheFullPlace = async (
         }
       }
     }
+    // TODO: cache full place from current state.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const buffer = Uint8Array.from(pixels);
 
     parentPort?.postMessage({

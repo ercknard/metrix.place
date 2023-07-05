@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export default {
+const config = {
   HOST: process.env.DB_HOST,
   USER: process.env.DB_USER,
   PASSWORD: process.env.DB_PASSWORD,
@@ -18,3 +18,5 @@ export default {
     idle: Number(process.env.DB_POOL_IDLE)
   }
 };
+
+export default config;

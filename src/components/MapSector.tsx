@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'semantic-ui-react';
 import styles from '../styles/Home.module.css';
 
 interface MapSectoProps {
@@ -11,19 +12,19 @@ interface MapSectoProps {
   updated: number;
 }
 export default function MapSector(props: MapSectoProps): JSX.Element {
-  const [opacity, setOpacity] = React.useState(0.18);
   const [ownColor, setOwnColor] = React.useState([props.color, '#f6a1ff']);
-  const [randomParam, setRandomParam] = React.useState(Math.random());
 
   React.useEffect(() => {
     if (
       props.sector &&
       props.sector[0] === props.x &&
       props.sector[1] === props.y
-    )
+    ) {
       setOwnColor(['#92319d', '#f6a1ff']);
-    else setOwnColor([props.color, '#000000']);
-  }, [props.sector, props.updated]);
+    } else {
+      setOwnColor([props.color, '#000000']);
+    }
+  }, [props.sector]);
 
   const onClick = (e: any) => {
     e.preventDefault();
@@ -45,15 +46,15 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
   return (
     <>
       <div className={styles.sector}>
-        <div
-          key={`sector_${props.x}_${props.y}${Date.now()}`}
+        <Image
           id={`sector_${props.x}_${props.y}`}
           className={styles.sector}
+          src={`/plc/chunks/${props.x}-${props.y}.png?v=${props.updated}`}
           style={{
             top: `${props.y + 1}rem`,
             left: `${props.x + 1}rem`,
-            background: `url("/plc/chunks/${props.x}-${props.y}.png?${randomParam}")`,
-            backgroundSize: 'cover',
+            //background: `url("/plc/chunks/${props.x}-${props.y}.png")`,
+            //backgroundSize: 'cover',
             //backgroundColor: ownColor[0],
             border: `ridge 1px ${ownColor[1]}`,
             opacity: 1,
@@ -62,10 +63,6 @@ export default function MapSector(props: MapSectoProps): JSX.Element {
           onClick={onClick}
           onContextMenu={onContextMenu}
           // prevent drag events
-          onDragStart={(e) => e.preventDefault()}
-          onDragEnd={(e) => e.preventDefault()}
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => e.preventDefault()}
         />
       </div>
     </>

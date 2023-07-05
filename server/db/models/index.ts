@@ -6,7 +6,7 @@ import { EventLog } from './event_log';
 import { PixelMap } from './pixelmap';
 
 export { Account, ChainState, EventLog, PixelMap };
-
+/*
 const sync = async () => {
   if ((await PixelMap.count()) < 1024) {
     await PixelMap.sync().then(async () => {
@@ -24,7 +24,7 @@ const sync = async () => {
       console.log('>>> Created default PixelMap <<<');
     });
   }
-};
+};*/
 
 // WARNING: This takes 10 minutes to run....
 //sync();

@@ -1,9 +1,7 @@
-import { MetrixRPC, NetworkType } from '@metrixcoin/metrilib';
+import { MetrixRPC } from '@metrixcoin/metrilib';
 import { pingLocal } from './process/pingLocalNode';
 
 import Logger from '../util/logger';
-import { cacheFullPlace } from './process/cacheFullPlace';
-import { cacheImages } from 'place/helpers/ImageHelper';
 import { localCacheImages } from './process/localCacheImages';
 const logger = new Logger('worker', 'magenta');
 const loggerWorker = logger.createSubLogger('main', 'blue');

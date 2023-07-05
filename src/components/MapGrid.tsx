@@ -13,7 +13,13 @@ export default function MapGrid(props: MapGridProps): JSX.Element {
   const [sectors, setSectors] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updateSectors();
-  }, [props.sector, props.updated]);
+  }, [props.sector]);
+
+  React.useEffect(() => {
+    if (props.updated > 0) {
+      updateSectors();
+    }
+  }, [props.updated]);
 
   const updateSectors = () => {
     // create a two dimensional array of Pixel components

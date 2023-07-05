@@ -9,7 +9,7 @@ dotenv.config();
 import { sequelize } from './db';
 import { Account } from './db/models';
 
-import { serverSocket } from './app';
+import { connectedSockets } from './app';
 
 const logger = new Logger('server', 'purple');
 const loggerInit = logger.createSubLogger('init', 'red');
@@ -40,7 +40,9 @@ async function init() {
       } else {
         loggerSetup.succ(`Worker ${w.threadId} starting successfully.`);
         w.on('update', () => {
-          serverSocket?.broadcast.emit('update');
+          Object.values(connectedSockets).forEach((socket) => {
+            if (socket.connected) socket.emit('update');
+          });
         });
       }
     } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ err: any) {

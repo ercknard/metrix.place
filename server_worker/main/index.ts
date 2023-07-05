@@ -57,7 +57,7 @@ const worker = async () => {
       } as xMessageInterface);
     }
   };
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   parentPort?.on('message', async (value: any) => {
     if (isJson(value) && value.type) {
       //loggerMsg.debug(`message from master: ${JSON.stringify(value)}`);
@@ -96,6 +96,7 @@ const worker = async () => {
             );
             try {
               callContract(msg.id, cont);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (e: any) {
               loggerWorker.error(e ? e.message : 'Worker Error!');
               console.log(e);

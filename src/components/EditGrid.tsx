@@ -19,7 +19,15 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
   const [pixels, setPixels] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updatePixels();
-  }, [props.pixel, props.color, props.sector, props.updated]);
+  }, [props.pixel, props.sector, props.updated, props.color]);
+
+  React.useEffect(() => {}, [props.color]);
+
+  React.useEffect(() => {
+    if (props.updated > 0) {
+      updatePixels();
+    }
+  }, [props.updated]);
 
   const updatePixels = async () => {
     // create a two dimensional array of Pixel components

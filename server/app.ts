@@ -15,10 +15,10 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev, dir: process.cwd() });
 
 const handle = app.getRequestHandler();
-
-export let serverSocket:
-  | undefined
-  | Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
+interface SocketIdToSocketMap {
+  [socketId: string]: Socket; // Assuming Socket is the type representing a socket object
+}
+export let connectedSockets: SocketIdToSocketMap = {};
 
 const corsOptions = {
   origin: `http://localhost:${port}`
@@ -31,7 +31,10 @@ app.prepare().then(() => {
   const srv = http.createServer(server);
   const io = new Server(srv);
   io.on('connection', (socket) => {
-    serverSocket = socket;
+    connectedSockets[socket.id] = socket;
+    socket.on('disconnect', () => {
+      delete connectedSockets[socket.id]; // Remove the disconnected socket from the storage
+    });
     // Emit update signals or handle events based on your application's logic
     // For example:
     // socket.emit('update', { data: 'Some update data' });

@@ -7,13 +7,7 @@ import { NetworkType, Web3Provider } from '@metrixcoin/metrilib';
 import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import EditGrid from '../components/EditGrid';
 import MapGrid from '../components/MapGrid';
-import {
-  AlphaPicker,
-  Color,
-  ColorResult,
-  RGBColor,
-  TwitterPicker
-} from 'react-color';
+import { AlphaPicker, ColorResult, RGBColor, TwitterPicker } from 'react-color';
 import { getMetrixPlace } from '@place/index';
 import { decodeBase64, ZeroHash } from 'ethers';
 import Web3TransactionModal from '@src/modals/Web3TransactionModal';
@@ -24,9 +18,10 @@ import DebugModal from '@src/modals/DebugModal';
 import { useCookies } from 'react-cookie';
 import isJson from '@src/utils/isJson';
 
-const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
-
 export default function Home() {
+  const [socket, setSocket] = React.useState(
+    io(process.env.NEXT_PUBLIC_SOCKET_URI as string)
+  );
   const [connected, setConnected] = React.useState(false);
   const [network, setNetwork] = React.useState(
     undefined as NetworkType | undefined
@@ -78,8 +73,8 @@ export default function Home() {
 
   React.useEffect(() => {
     socket.on('update', () => {
-      reloadImages();
       setUpdated(new Date().getTime());
+      reloadImages();
     });
 
     return () => {

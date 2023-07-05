@@ -67,8 +67,18 @@ export default function Home() {
     a: 1
   } as RGBColor);
 
+  const reloadImages = () => {
+    const images = document.getElementsByTagName('img');
+    for (let i = 0; i < images.length; i++) {
+      const imageUrl = images[i].src;
+      images[i].src = '';
+      images[i].src = imageUrl;
+    }
+  };
+
   React.useEffect(() => {
     socket.on('update', () => {
+      reloadImages();
       setUpdated(new Date().getTime());
     });
 

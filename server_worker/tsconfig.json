@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "isolatedModules": true,
+    "allowJs": true,
+    "noEmit": false,
+    "outDir": "../.build",
+    "baseUrl": "../",
+    "paths": {}
+  },
+  "include": ["**/*.ts"],
+  "exclude": [".build"],
+  "references": [
+    {
+      "path": "../place"
+    },
+    {
+      "path": "../server"
+    }
+  ]
+}

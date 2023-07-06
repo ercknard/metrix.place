@@ -1,22 +1,21 @@
-import {NetworkType} from '@metrixcoin/metrilib';
-import {ethers} from 'ethers';
+import { NetworkType } from '@metrixcoin/metrilib';
+import Deployment from '@place/interfaces/Deployment';
+import { contracts as MainNet } from '@place/network/MainNet/1.0.0';
+import { contracts as TestNet } from '@place/network/TestNet/1.0.0';
+import { ethers } from 'ethers';
 import React from 'react';
-import {Grid, Header, Segment} from 'semantic-ui-react';
-
-import {contracts as MainNet} from '../network/MainNet/1.0.0';
-import {contracts as TestNet} from '../network/TestNet/1.0.0';
-import Deployment from '../interfaces/Deployment';
+import { Grid, Header, Segment } from 'semantic-ui-react';
 
 interface ContractProps {
   network: NetworkType;
-  contract: 'AutoGovernor' | 'TokenBuyback';
+  contract: 'MetrixPlace';
   address: string;
   abi: any[];
 }
 
-const contracts: {MainNet: Deployment; TestNet: Deployment} = {
+const contracts: { MainNet: Deployment; TestNet: Deployment } = {
   MainNet: MainNet,
-  TestNet: TestNet,
+  TestNet: TestNet
 };
 
 export default function ContractFunctions(props: ContractProps): JSX.Element {
@@ -109,7 +108,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           window as any
                         ).metrimask.rpcProvider.rawCall('callcontract', [
                           getDeployedContract(props.network, props.contract),
-                          encoded.replace('0x', ''),
+                          encoded.replace('0x', '')
                         ]);
                         const result = call.executionResult;
                         let decoded;
@@ -129,7 +128,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           decoded && decoded.join(' ').length > 0
                             ? decoded.join(' ')
                             : 'No Response';
-                        sigMsg.innerHTML = `<div class="header">Response</div><p>${msg}</p>`;
+                        sigMsg.innerHTML = `<div class="header" style="font-family: VT323; font-size: 1.5rem;">Response</div><p style="font-size: 1.2rem; font-weight: normal;">${msg}</p>`;
                         sigMsg.classList.remove('hidden');
                       };
                     } else {
@@ -144,7 +143,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                           encoded.replace('0x', ''),
                           tmp.get(`${key}value`),
                           250000,
-                          5000,
+                          5000
                         ]);
 
                         const response = JSON.parse(JSON.stringify(call));
@@ -153,7 +152,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
                             ? JSON.stringify(response)
                             : 'No Response';
                         sigMsg.classList.remove('negative');
-                        sigMsg.innerHTML = `<div class="header">Response</div><p>${msg}</p>`;
+                        sigMsg.innerHTML = `<div class="header" style="font-family: VT323; font-size: 1.5rem;">Response</div><p style="font-size: 1.2rem; font-weight: normal;">${msg}</p>`;
                         sigMsg.classList.remove('hidden');
                       };
                     }
@@ -176,6 +175,8 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
             const label = document.createElement('label');
             label.innerHTML = key;
             label.className = `ui ${color} label`;
+            label.style.fontWeight = 'normal';
+            label.style.fontSize = '1.2rem';
             functionTitle.appendChild(label);
             form.appendChild(functionTitle);
             const msg = document.createElement('div');
@@ -188,7 +189,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
               field.className = 'field';
               const input = document.createElement('div');
               input.className = 'ui labeled input';
-              input.innerHTML = `<div class="ui label ${cs}">${finput.type}:${finput.name}</div><input type="text" name="${props.contract}_${finput.name}" />`;
+              input.innerHTML = `<div class="ui label ${cs}" style="font-size: 1.2rem;font-weight: normal;">${finput.type}:${finput.name}</div><input type="text" name="${props.contract}_${finput.name}" />`;
               field.appendChild(input);
               form.appendChild(field);
             }
@@ -204,6 +205,9 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
             const submit = document.createElement('button');
             submit.className = `ui button ${color} inverted`;
             submit.innerHTML = 'Call';
+            submit.style.fontFamily = 'VT323';
+            submit.style.fontWeight = 'normal';
+            submit.style.fontSize = '1.2rem';
             form.appendChild(submit);
             segment.appendChild(form);
             column.appendChild(segment);
@@ -234,7 +238,14 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
     <Grid>
       <Grid.Row>
         <Segment inverted>
-          <Header style={{color: 'whitesmoke'}}>
+          <Header
+            style={{
+              color: 'whitesmoke',
+              fontWeight: 'normal',
+              fontSize: '2em',
+              fontFamily: 'VT323'
+            }}
+          >
             {`${props.contract}`}.sol
           </Header>
         </Segment>

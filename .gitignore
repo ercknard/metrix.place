@@ -1,8 +1,16 @@
+data/**/*.sqlite
 dist
 build
 cache
 artifacts
+_cache
+_artifacts
 node_modules
 .vscode
 .next
+.build
 .env
+*.sqlite
+
+public/robots.txt
+public/sitemap.xml

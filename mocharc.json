@@ -1,9 +1,9 @@
 {
   "extension": ["ts"],
-  "spec": "src/**/*.spec.ts",
+  "spec": ["place/**/*.spec.ts"],
   "node-option": [
     "experimental-specifier-resolution=node",
     "loader=ts-node/esm"
   ],
-  "require": "ts-node/register"
+  "require": ["ts-node/register" ]
 }

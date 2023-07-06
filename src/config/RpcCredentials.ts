@@ -10,5 +10,5 @@ export const RpcCredentials: RpcCredentialProvider = {
     return `${process.env.RPC_HOST as string}:${
       process.env.RPC_PORT as string
     }`;
-  },
+  }
 };

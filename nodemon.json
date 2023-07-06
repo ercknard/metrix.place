@@ -1,0 +1,5 @@
+{
+  "watch": ["place", "server", "server_worker"],
+  "exec": "ts-node --project tsconfig.json server/index.ts",
+  "ext": "js ts"
+}

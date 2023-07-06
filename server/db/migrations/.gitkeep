@@ -1,0 +1,22 @@
+// example migration
+import { QueryInterface, Sequelize } from 'sequelize';
+
+async function up(queryInterface: QueryInterface, sequelize: Sequelize) {
+  /**
+   * Add altering commands here.
+   *
+   * Example:
+   * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+   */
+}
+
+async function down(queryInterface: QueryInterface, sequelize: Sequelize) {
+  /**
+   * Add reverting commands here.
+   *
+   * Example:
+   * await queryInterface.dropTable('users');
+   */
+}
+
+export { up, down };

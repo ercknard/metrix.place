@@ -1,0 +1,12 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {},
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "es2020": true
+  },
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["main/lib/**/*"]
+}

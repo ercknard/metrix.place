@@ -1,8 +1,8 @@
-import {RPCProvider, MetrixRPC, NetworkType} from '@metrixcoin/metrilib';
+import { RPCProvider, MetrixRPC, NetworkType } from '@metrixcoin/metrilib';
 
-import {NextApiRequest, NextApiResponse} from 'next';
-import {bnToHex} from '../../../../utils/Parsers';
-import {RpcCredentials} from '../../../../config/RpcCredentials';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { bnToHex } from '../../../../utils/Parsers';
+import { RpcCredentials } from '../../../../config/RpcCredentials';
 
 const getValues = (obj: any /* eslint-disable-line */) => {
   let values: any;
@@ -11,7 +11,7 @@ const getValues = (obj: any /* eslint-disable-line */) => {
     values.message = (obj as Error).message;
     values.stack = (obj as Error).stack;
   } else if (obj instanceof Function) {
-    values = `function: ${(obj as Function).name}` /* eslint-disable-line */;
+    values = `function: ${(obj as Function).name}` /* eslint-le-line */;
   } else if (typeof obj === 'bigint') {
     values = bnToHex(obj as bigint);
   } else if (typeof obj === 'object' && obj !== null) {

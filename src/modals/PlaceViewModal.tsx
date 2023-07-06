@@ -24,7 +24,7 @@ export default function PlaceViewModal(props: PlaceViewModalProps) {
       style={{ width: 'fit-content' }}
     >
       <Modal.Content className="place-view-image">
-        <Image src="/plc/latest.png" alt="logo" />
+        <Image className="mon" src="/plc/latest.png" alt="logo" />
       </Modal.Content>
     </Modal>
   );

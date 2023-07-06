@@ -51,22 +51,40 @@ body {
 
 /* view metrix.place image modal */
 .place-view-image {
+  display: flex !important;
   margin: auto;
-  height: 90vh;
-  width: 90vh !important;
+  width: 80vh !important;
   max-width: 90vw;
   max-height: 90vw;
-  background-color: rgb(1, 0, 1) !important;
+  /* background-color: rgba(1, 0, 1, 0.75) !important;
   border: 2.5px solid !important;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
-    10 !important;
-  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%) !important;
+    10 !important; */
+  align-items: center !important;
+  justify-content: center !important;
 }
-.place-view-image .image {
-  border: 1px solid rgb(255, 255, 255, 0.02);
-  min-width: '75vh' !important;
-  min-height: '75vh' !important;
+
+@media (max-width: 1366px) {
+  .place-view-image {
+    width: 90vh !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .place-view-image {
+    background-color: transparent !important;
+    border: none !important;
+  }
+}
+
+.mon {
+  border: 2px solid !important;
+  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
+    10 !important;
+  width: 70vh !important;
   image-rendering: pixelated !important;
+  background-color: rgb(1, 0, 1) !important;
+  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%) !important;
 }
 
 /* color palette picker */

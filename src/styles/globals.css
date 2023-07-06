@@ -52,39 +52,66 @@ body {
 /* view metrix.place image modal */
 .place-view-image {
   display: flex !important;
-  margin: auto;
+  margin: auto !important;
   width: 80vh !important;
+  height: 80vh !important;
   max-width: 90vw;
   max-height: 90vw;
-  /* background-color: rgba(1, 0, 1, 0.75) !important;
-  border: 2.5px solid !important;
+  background: url('/images/metrix-bg-black-pixelated.png'),
+    url('/images/metrix-bg-pixelated-modal.png'),
+    url('/images/metrix-stars.png'),
+    linear-gradient(to bottom, rgb(28, 5, 41), rgb(48, 48, 48)) !important;
+  background-size: cover !important;
+  background-position: bottom right !important;
+  /* border: 2px solid !important;
   border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
     10 !important; */
+  border-radius: 5px !important;
+  box-shadow: 10px 10px 5px rgb(0 0 0 / 75%) !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-@media (max-width: 1366px) {
+.mon {
+  width: 70vh !important;
+  max-width: 75vw !important;
+  max-height: 75vw !important;
+  image-rendering: pixelated !important;
+  background-color: rgb(1, 0, 1) !important;
+  border: 1px solid rgb(255, 255, 255, 0.25) !important;
+}
+
+@media (max-height: 750px) {
   .place-view-image {
-    width: 90vh !important;
+    width: 100vh !important;
+    height: 80vh !important;
+    max-width: 95vw;
+    max-height: 90vw;
   }
+}
+
+.ui.basic.modal > .close {
+  top: 2rem !important;
+  right: 2rem !important;
 }
 
 @media (max-width: 768px) {
-  .place-view-image {
-    background-color: transparent !important;
-    border: none !important;
+  .ui.basic.modal > .close {
+    top: 1rem !important;
+    right: 1.5rem !important;
   }
 }
 
-.mon {
-  border: 2px solid !important;
-  border-image: linear-gradient(to bottom, rgb(68, 10, 103), rgb(147, 50, 158))
-    10 !important;
-  width: 70vh !important;
-  image-rendering: pixelated !important;
-  background-color: rgb(1, 0, 1) !important;
-  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%) !important;
+.debug-contract {
+  background: url('/images/metrix-bg-black-pixelated.png'),
+    url('/images/metrix-bg-pixelated-modal.png'),
+    url('/images/metrix-stars.png'),
+    linear-gradient(to bottom, rgb(28, 5, 41), rgb(48, 48, 48)) !important;
+  background-size: cover !important;
+  background-position: bottom right !important;
+  padding: 1rem !important;
+  border-radius: 5px !important;
+  box-shadow: 10px 10px 5px rgb(0 0 0 / 75%) !important;
 }
 
 /* color palette picker */

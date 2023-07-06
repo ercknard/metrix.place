@@ -271,6 +271,7 @@
     margin-top: 5rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 5rem;
   }
 }
 
@@ -423,6 +424,12 @@
 
   100% {
     transform: translateY(-5px) scaleX(0.9);
+  }
+}
+
+@media (max-width: 1366px) {
+  .to_flex {
+    flex-direction: column-reverse;
   }
 }
 

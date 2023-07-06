@@ -6,7 +6,6 @@ import { Server, Socket } from 'socket.io';
 
 import Logger from './util/logger';
 import { staticServe } from './util/StaticServe';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 const logger = new Logger('server', 'purple');
 const loggerApp = logger.createSubLogger('app', 'green');
 

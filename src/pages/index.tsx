@@ -59,7 +59,7 @@ export default function Home() {
     r: 0,
     g: 0,
     b: 0,
-    a: 1
+    a: 0
   } as RGBColor);
 
   const reloadImages = () => {

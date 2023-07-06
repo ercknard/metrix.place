@@ -1,7 +1,7 @@
 import PalettePicker from '@src/components/PalettePicker';
 import React from 'react';
-import { Modal, Image } from 'semantic-ui-react';
-import styles from '../styles/Home.module.css'
+import { Modal } from 'semantic-ui-react';
+import styles from '../styles/Home.module.css';
 
 interface UserSettingsModalProps {
   colors: string[];

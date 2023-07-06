@@ -19,9 +19,7 @@ export default function EditGrid(props: EditGridProps): JSX.Element {
   const [pixels, setPixels] = React.useState<Array<JSX.Element>>([]);
   React.useEffect(() => {
     updatePixels();
-  }, [props.pixel, props.sector, props.updated, props.color]);
-
-  React.useEffect(() => {}, [props.color]);
+  }, [props.pixel, props.sector, props.color]);
 
   React.useEffect(() => {
     if (props.updated > 0) {

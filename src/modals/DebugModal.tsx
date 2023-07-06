@@ -14,17 +14,6 @@ interface DebugModalProps {
 
 export default function DebugModal(props: DebugModalProps) {
   const [open, setOpen] = React.useState(false);
-  const [debug, setDebug] = React.useState([
-    <Segment inverted key={'SegmentMetrixPlace'}>
-      <ContractFunctions
-        network={props.network}
-        contract={'MetrixPlace'}
-        address={getMetrixPlaceAddress(props.network)}
-        abi={ABI.MetrixPlace}
-        key={0}
-      />
-    </Segment>
-  ]);
 
   return (
     <Modal
@@ -41,7 +30,20 @@ export default function DebugModal(props: DebugModalProps) {
       trigger={props.trigger}
     >
       <Modal.Content>
-        <DebugContracts connected={props.connected} debug={debug} />
+        <DebugContracts
+          connected={props.connected}
+          debug={[
+            <Segment inverted key={'SegmentMetrixPlace'}>
+              <ContractFunctions
+                network={props.network}
+                contract={'MetrixPlace'}
+                address={getMetrixPlaceAddress(props.network)}
+                abi={ABI.MetrixPlace}
+                key={0}
+              />
+            </Segment>
+          ]}
+        />
       </Modal.Content>
     </Modal>
   );

@@ -98,9 +98,12 @@ export default function Home() {
   }, [cookie]);
 
   const doSetPixel = async () => {
+    if (!pixel) {
+      setModalMessage('No Pixel selected');
+      return;
+    }
     if (
       network === (process.env.NEXT_PUBLIC_APP_NETWORK as NetworkType) &&
-      pixel &&
       address &&
       connected
     ) {
@@ -344,12 +347,7 @@ export default function Home() {
                     message={modalMessage}
                     setMessage={setModalMessage}
                     trigger={
-                      <div
-                        className={styles.color_submit}
-                        onClick={() => {
-                          if (network && address) doSetPixel();
-                        }}
-                      >
+                      <div className={styles.color_submit} onClick={doSetPixel}>
                         {' '}
                         Submit{' '}
                       </div>

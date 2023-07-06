@@ -18,10 +18,9 @@ import DebugModal from '@src/modals/DebugModal';
 import { useCookies } from 'react-cookie';
 import isJson from '@src/utils/isJson';
 
+const socket = io(process.env.NEXT_PUBLIC_SOCKET_URI as string);
+
 export default function Home() {
-  const [socket, setSocket] = React.useState(
-    io(process.env.NEXT_PUBLIC_SOCKET_URI as string)
-  );
   const [connected, setConnected] = React.useState(false);
   const [network, setNetwork] = React.useState(
     undefined as NetworkType | undefined

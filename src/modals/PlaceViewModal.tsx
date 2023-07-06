@@ -10,7 +10,7 @@ export default function PlaceViewModal(props: PlaceViewModalProps) {
 
   return (
     <Modal
-      closeIcon={false}
+      closeIcon={true}
       closeOnEscape={true}
       basic
       dimmer="blurring"

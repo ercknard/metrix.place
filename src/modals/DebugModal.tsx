@@ -17,7 +17,7 @@ export default function DebugModal(props: DebugModalProps) {
 
   return (
     <Modal
-      closeIcon={false}
+      closeIcon={true}
       closeOnEscape={true}
       basic
       dimmer="blurring"

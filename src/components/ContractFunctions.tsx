@@ -235,7 +235,7 @@ export default function ContractFunctions(props: ContractProps): JSX.Element {
     setupFunctions();
   }, []);
   return props.abi.length > 0 ? (
-    <Grid>
+    <Grid className='debug-contract'>
       <Grid.Row>
         <Segment inverted>
           <Header

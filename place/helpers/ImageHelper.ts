@@ -20,6 +20,8 @@ export const cacheImages = async (
   let last = lastBlock;
   const place = getMetrixPlace(network, provider);
   const allLogs = (await place.getEventLogs()) as RPCEventLogs;
+
+  console.log(`>>>> ${allLogs.length}`);
   const logs = allLogs
 
     .filter((log) => {
@@ -27,32 +29,37 @@ export const cacheImages = async (
     })
 
     .map((log) => {
-      const iface = new Interface(ABI.MetrixPlace);
-      const encoded = `0x${log.log[0].data.replace('0x', '')}`;
-      const decoded = iface.decodeEventLog('PixelUpdated', encoded);
+      const tups = [];
+      for (const l of log.log) {
+        const iface = new Interface(ABI.MetrixPlace);
+        const encoded = `0x${l.data.replace('0x', '')}`;
+        const decoded = iface.decodeEventLog('PixelUpdated', encoded);
 
-      const tup: readonly [
-        x: number,
-        y: number,
-        color: string,
-        nBlock: number,
-        nTransaction: number
-      ] = [
-        Number(decoded[0].toString()),
-        Number(decoded[1].toString()),
-        BigInt(decoded[2].toString()).toString(16),
-        log.blockNumber,
-        log.transactionIndex
-      ];
-      return tup;
+        const tup: readonly [
+          x: number,
+          y: number,
+          color: string,
+          nBlock: number,
+          nTransaction: number
+        ] = [
+          Number(decoded[0].toString()),
+          Number(decoded[1].toString()),
+          BigInt(decoded[2].toString()).toString(16),
+          log.blockNumber,
+          log.transactionIndex
+        ];
+        tups.push(tup);
+      }
+
+      return tups;
     })
     .sort((a, b) => {
-      if (a[0] !== b[0]) {
-        return a[0] - b[0]; // Sort by lowest block number first
+      if (a[0][0] !== b[0][0]) {
+        return a[0][3] - b[0][3]; // Sort by lowest block number first
       }
 
       // If block numbers are the same, compare transaction indexes
-      return a[1] - b[1]; // Sort by lowest transaction index within the same block
+      return a[0][4] - b[0][4]; // Sort by lowest transaction index within the same block
     });
   const pixels: number[] = [];
   let d = undefined;
@@ -80,17 +87,19 @@ export const cacheImages = async (
         let g = 0; // Green value (0-255)
         let b = 0; // Blue value (0-255)
         let a = 0; // Alpha value (0-255)
-        for (const log of logs.filter((log) => log[0] === x && log[1] === y)) {
-          if (log[3] > last) last = log[3];
-          const hex =
-            log[2].length === 8
-              ? log[2]
-              : `${'0'.repeat(8 - log[2].length)}${log[2]}`;
+        for (const log of logs) {
+          for (const event of log.filter((l) => l[0] === x && l[1] === y)) {
+            if (event[3] > last) last = event[3];
+            const hex =
+              event[2].length === 8
+                ? event[2]
+                : `${'0'.repeat(8 - event[2].length)}${event[2]}`;
 
-          r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
-          g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
-          b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
-          a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+            r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
+            g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
+            b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
+            a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+          }
         }
 
         pixels.push(r);
@@ -107,19 +116,21 @@ export const cacheImages = async (
         let g = d[pixelIndex + 1]; // Green value (0-255)
         let b = d[pixelIndex + 2]; // Blue value (0-255)
         let a = d[pixelIndex + 3]; // Alpha value (0-255)
-        for (const log of logs.filter(
-          (log) => log[0] === x && log[1] === y && log[3] >= last
-        )) {
-          if (log[3] > last) last = log[3];
-          const hex =
-            log[2].length === 8
-              ? log[2]
-              : `${'0'.repeat(8 - log[2].length)}${log[2]}`;
+        for (const log of logs) {
+          for (const event of log.filter(
+            (l) => l[0] === x && l[1] === y && l[3] >= last
+          )) {
+            if (event[3] > last) last = event[3];
+            const hex =
+              event[2].length === 8
+                ? event[2]
+                : `${'0'.repeat(8 - event[2].length)}${event[2]}`;
 
-          r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
-          g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
-          b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
-          a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+            r = Number(`0x${hex.slice(0, 2)}`); // Red value (0-255)
+            g = Number(`0x${hex.slice(2, 4)}`); // Green value (0-255)
+            b = Number(`0x${hex.slice(4, 6)}`); // Blue value (0-255)
+            a = Number(`0x${hex.slice(6, 8)}`); // Alpha value (0-255)
+          }
         }
 
         pixels.push(r);
